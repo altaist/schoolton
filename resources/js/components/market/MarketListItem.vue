@@ -2,7 +2,7 @@
     <block text-color="text-black" bg-color="bg-secondary" margin="q-my-sm">
         <div class="row q-col-gutter-lg">
             <div class="col-6 text-center">
-                <i class="text-white fa-solid fa-landmark" style="font-size: 150px;"></i>
+                <i class="text-white fa-solid fa-landmark" style="font-size: 120px;"></i>
                 <block padding="q-pa-none" margin="q-mt-md" bg-color="bg-grey">{{ item.title }}</block>
                 <div class="q-my-md text-white text-h4">{{ item.price }} </div>
             </div>

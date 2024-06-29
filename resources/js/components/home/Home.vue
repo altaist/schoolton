@@ -23,10 +23,21 @@
         <div class="text-h5 q-my-sm">Active quiz</div>
         <div class="text-h6 q-my-md q-pa-lg border-1 rounded-1" style="min-height: 200px;">
             Last quiz description...
-        </div>
-        <div>
+            <div></div>
+            <div class="q-my-md q-mt-lg">
             <Button icon="fa-solid fa-rocket" label="Start quiz" @click="onQuizClick" :color="getBgColor('')"></Button>
         </div>
+        </div>
+    </div>
+    <div class="q-my-md">
+        <block rounded="rounded-1" border="" bg-color="bg-negative" class="shadow-3">
+            <div class="text-h5 q-my-mb">Congratulations!</div>
+            <div>You have a gift: 50 STDNT!</div>
+            <div class="q-my-md">
+                <Button label="Got it!" @click="onChangeBallance" color="white" text-color="black"></Button>
+            </div>
+
+        </block>
     </div>
     <q-dialog v-model="dialogWallet" full-width>
         <div>
@@ -95,4 +106,8 @@ const onQuizClick = () => {
     window.location = route('quiz');
 
 };
+
+const onChangeBallance = () => {
+    
+}
 </script>

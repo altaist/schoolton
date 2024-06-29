@@ -15,18 +15,18 @@
             </q-item-section>
         </q-item-->
 
-        <div class="row">
+        <div class="row q-col-gutter-sm">
             <div class="col-2 text-center"><q-icon :name="item.icon" size="xl"/></div>
-            <div class="col-4">
+            <div class="col-6">
                 <div class="text-h6">{{ item.title }}</div>
                 <div class="text-subtitle text-grey">{{ item.subTitle }}</div>
             </div>
-            <div class="col-3 text-center">
+            <!--div class="col-3 text-center">
                 <q-chip clickable color="secondary" text-color="white" v-for="tag in item.tags" >
                     {{ tag }}
                 </q-chip>
-            </div>
-            <div class="col-3 text-right">
+            </div-->
+            <div class="col-4 text-right">
                 <div>
                     <div>{{ item.price }} {{ item.currency || 'STDNT' }}</div>
                     <div><Button label="Join" @click="emit('click:join', item)" :color="getBgColor()" /></div>
