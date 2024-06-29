@@ -6,8 +6,11 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
-    return Inertia::render('Main', []);
+    return Inertia::render('Start', []);
 });
+Route::get('/main', function () {
+    return Inertia::render('Main', []);
+})->name('main');
 
     // course
     //      get course/

@@ -24,9 +24,10 @@ export default defineConfig({
     ],
     resolve: {
         alias: {
-          '@shared': path.resolve(__dirname, './resources/shared/'),
-          '@composables': path.resolve(__dirname, './resources/js/Composables'),
-          '@components': path.resolve(__dirname, './resources/js/Components'),
+          '@shared': path.resolve(__dirname, './resources/js/shared/'),
+          '@composables': path.resolve(__dirname, './resources/js/composables'),
+          '@components': path.resolve(__dirname, './resources/js/components'),
+          '@components': path.resolve(__dirname, './resources/js/pages'),
         },
     }
 });
