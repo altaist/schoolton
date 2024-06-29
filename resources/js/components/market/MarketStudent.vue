@@ -1,12 +1,21 @@
 <template>
-    <div class="text-h6">Market</div>
+    <PageTitle title="Marketplace"/>
 
+    <div>
+        <MarketList :items="markets" @market:clicked="onClick"></MarketList>
+    </div>
 </template>
 <script setup>
-import { ref, toRefs } from 'vue'
+import { ref, computed } from 'vue'
+import useMarkets from '@/composables/markets';
+import useUi from '@/composables/ui';
+
 import Block from '@shared/Block.vue';
 import Button from '@shared/Button.vue';
 import LProgress from '@shared/LProgress.vue';
+import PageTitle from '@shared/PageTitle.vue';
+
+import MarketList from './MarketList.vue'
 
 defineProps({
     visibility: {
@@ -19,5 +28,18 @@ defineProps({
     },
 });
 
-const onClick = () => alert('Button');
-</script>
+const {
+    getMarkets
+} = useMarkets  ();
+
+const {
+    getMode,
+    getBgColor
+} = useUi();
+
+const markets = computed( () => getMarkets(getMode()));
+
+const onClick = (data) => {
+    alert('Joined');
+}
+    </script>

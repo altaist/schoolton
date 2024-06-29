@@ -4,12 +4,12 @@ const currentMode = ref('student');
 
 const useUi = () => {
 
-    const getMode = () => currentMode;
+    const getMode = () => currentMode.value;
     const changeMode = (m) => {
         currentMode.value = m;
     }
 
-    const getBgColor = (prefix = 'bg-') => {
+    const getBgColor = (prefix = '') => {
         return currentMode.value === 'expert' ? prefix + 'negative' : prefix + 'primary';
     }
 

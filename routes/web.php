@@ -11,6 +11,9 @@ Route::get('/', function () {
 Route::get('/main', function () {
     return Inertia::render('Main', []);
 })->name('main');
+Route::get('/quiz', function () {
+    return Inertia::render('Quiz', []);
+})->name('quiz');
 
     // course
     //      get course/

@@ -1,14 +1,14 @@
 <template>
     <div>
         <slot name="header">
-            <div class="text-h4 q-my-md">Результаты прохождения теста</div>
+            <div class="text-h4 q-my-md">Quiz results</div>
         </slot>
         <slot name="results" :results="results" :isSuccess="isSuccess" :onClose="onClose" :onRepeat="onRepeat">
             <div class="q-my-xl text-center text-positive text-h5" v-if="results.isSuccess">
-                Тест пройден! :)
+                Test completed! :)
             </div>
             <div class="q-my-xl text-center text-negative text-h5" v-else>
-                Тест не пройден (:
+                Test failed (:
             </div>
             <div class="q-my-xl q-pa-lg shadow-2">
                 <div class="row">
@@ -22,13 +22,13 @@
                     <div class="col-6 text-right">{{ results.skipped }}</div>
                 </div>
             </div>
-            <div class="q-mt-xl q-pa-sm fixed-bottom bg-white">
+            <div class="q-my-md q-pa-sm fixed-bottom bg-white">
                 <div class="row q-col-gutter-md">
-                    <div class="col-6">
-                        <q-btn label="Повторить" icon="repeat" @click="onRepeat" class="full-width"></q-btn>
+                    <div class="col-6 text-center">
+                        <Button label="Repeat" @click="onRepeat" class="full-width"></Button>
                     </div>
-                    <div class="col-6">
-                        <q-btn label="Завершить" icon="stop" @click="onClose" class="full-width"></q-btn>
+                    <div class="col-6 text-center">
+                        <Button label="Close" @click="onClose" color="negative" class="full-width"></Button>
                     </div>
                 </div>
             </div>
@@ -38,6 +38,8 @@
 
 <script setup>
 import { ref, toRefs, computed } from 'vue'
+import Block from '@shared/Block.vue';
+import Button from '@shared/Button.vue';
 
 const props = defineProps({
     quiz: {
@@ -60,8 +62,9 @@ const variants = computed(() => {
 });
 
 const onClose = () => {
-    emit('quiz:close');
+    window.location = route('main');
 };
+
 
 const onRepeat = () => {
     emit('quiz:repeat');

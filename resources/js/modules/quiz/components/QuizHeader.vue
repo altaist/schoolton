@@ -2,7 +2,7 @@
     <div class="q-pa-md q-mb-lg fixed-top bg-white shadow-1">
         <div class="row q-col-gutter-md">
             <div class="col-6">
-                <q-btn @click="emit('quiz:home')" icon="arrow_back"></q-btn>
+                <Button @click="emit('quiz:home')" icon="arrow_back" ></Button>
             </div>
             <div class="col-6 text-right">
                 <b>{{ currentQuestionIndex }}</b> / {{ totalQuestionsNum }}
@@ -13,6 +13,7 @@
 
 <script setup>
 import { useQuizApp } from '../composables/quizapp'
+import Button from '@shared/Button.vue';
 
 const props = defineProps({
     quiz: {

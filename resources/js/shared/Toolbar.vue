@@ -1,5 +1,5 @@
 <template>
-    <block class="q-ma-sm fixed-bottom" :bg-color="useUi().getBgColor()" padding="q-pa-sm">
+    <block class="q-ma-sm fixed-bottom" :bg-color="useUi().getBgColor('bg-')" padding="q-pa-sm">
         <div class="row q-col-gutter-sm">
             <div class="col" v-for="option in options">
                 <q-btn :label="option.label" @click="emit('click', option)" rounded class="full-width" flat :icon="option.icon || undefined" stack />

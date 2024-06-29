@@ -4,10 +4,10 @@
             <div class="q-mt-xl"><div class="q-mt-xl q-pa-md">{{ questionContent }}</div></div>
         </slot>
         <slot name="answers">
-            <div class="q-mt-xl q-pa-sm fixed-bottom bg-white">
+            <div class="q-my-md q-pa-sm fixed-bottom bg-white">
                 <div class="row q-col-gutter-sm">
-                    <div :class="getColClass(variants)" v-for="variant in variants">
-                        <q-btn :label="variant.txt" @click="setAnswer(variant)" class="full-width" />
+                    <div :class="[getColClass(variants), 'text-center']" v-for="variant in variants">
+                        <Button :label="variant.txt" @click="setAnswer(variant)" class="full-width"></Button>
                     </div>
                 </div>
             </div>
@@ -17,6 +17,8 @@
 
 <script setup>
 import { computed } from 'vue'
+import Block from '@shared/Block.vue';
+import Button from '@shared/Button.vue';
 
 const props = defineProps({
     question: {

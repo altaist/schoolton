@@ -1,8 +1,7 @@
 <template>
-
-    <div>
-        <q-tab-panels v-model="screen" animated>
-            <q-tab-panel name="quiz">
+    <div class="fit">
+        <q-tab-panels v-model="screen" class="q-pa-none" animated>
+            <q-tab-panel name="quiz" >
                 <PageTitle title="Quiz"/>
                 <Quiz></Quiz>
             </q-tab-panel>
@@ -12,7 +11,7 @@
             <q-tab-panel name="wallet">
                 <PageTitle title="Wallet"/>
             </q-tab-panel>
-            <q-tab-panel name="main">
+            <q-tab-panel name="main" class="q-pa-none">
                 <q-tab-panels v-model="tab" animated>
                     <q-tab-panel name="study">
                         <Courses :mode="mode"/>

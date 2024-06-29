@@ -6,7 +6,7 @@
         {{ quiz.title }}
     </div>
     <div class="q-my-lg">
-        <q-btn label="Начать" @click="onStart"></q-btn>
+        <q-btn label="Start" @click="onStart"></q-btn>
     </div>
 </template>
 
