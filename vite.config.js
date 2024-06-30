@@ -27,7 +27,7 @@ export default defineConfig({
           '@shared': path.resolve(__dirname, './resources/js/shared/'),
           '@composables': path.resolve(__dirname, './resources/js/composables'),
           '@components': path.resolve(__dirname, './resources/js/components'),
-          '@components': path.resolve(__dirname, './resources/js/pages'),
+          '@pages': path.resolve(__dirname, './resources/js/pages'),
         },
     }
 });

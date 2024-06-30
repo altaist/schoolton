@@ -22,8 +22,8 @@ import Button from '@shared/Button.vue';
 import Block from '@shared/Block.vue';
 import PageTitle from '@shared/PageTitle.vue';
 import Home from '@/components/home/Home.vue'
-import Market from '@/components/market/MarketStudent.vue'
-import Courses from '@/components/edu/CoursesStudent.vue'
+import Market from '@/components/market/Market.vue'
+import Courses from '@/components/edu/Courses.vue'
 import Quiz from './Main.vue'
 
 const onStartClick = (m) => {
