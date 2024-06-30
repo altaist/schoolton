@@ -1,8 +1,12 @@
 <template>
     <PageTitle title="Marketplace"/>
 
-    <div>
+    <div v-if="false">
         <MarketList :items="markets" @market:clicked="onClick"></MarketList>
+    </div>
+
+    <div class="q-my-xl">
+        <div class="q-my-xl text-h4">Coming soon...</div>
     </div>
 </template>
 <script setup>

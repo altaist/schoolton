@@ -1,7 +1,7 @@
 <template>
 
         <q-list>
-            <ListItem v-for="item in items" :item="item" @click:join="onClick"></ListItem>
+            <ListItem v-for="item in items" :item="item" @click:join="onClick" :action-join="actionJoin"></ListItem>
         </q-list>
 
 </template>
@@ -18,6 +18,10 @@ defineProps({
     },
     items: {
         type: Object
+    },
+    actionJoin: {
+        type: Boolean,
+        default: true
     }
 });
 

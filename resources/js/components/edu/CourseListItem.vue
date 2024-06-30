@@ -29,12 +29,12 @@
             <div class="col-4 text-right">
                 <div>
                     <div>{{ item.price }} {{ item.currency || 'STDNT' }}</div>
-                    <div><Button label="Join" @click="emit('click:join', item)" :color="getBgColor()" /></div>
+                    <div v-if="actionJoin"><Button label="Join" @click="emit('click:join', item)" :color="getBgColor()" /></div>
                 </div>
             </div>
 
         </div>
-
+{{ actionJoin }}
 
     </block>
 </template>
@@ -52,6 +52,10 @@ defineProps({
     },
     item: {
         type: Object
+    },
+    actionJoin: {
+        type: Boolean,
+        default: true
     }
 });
 

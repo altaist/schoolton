@@ -14,14 +14,14 @@
     </div>
     <div class="q-my-xl">
 
-        <LProgress :val="10" label="Life: 10" :color="getBgColor('')"></LProgress>
+        <LProgress :val="100" label="Energy: 100%" :color="getBgColor('')"></LProgress>
     </div>
     <div>
 
     </div>
     <div>
         <div class="text-h5 q-my-sm">Active quiz</div>
-        <div class="text-h6 q-my-md q-pa-lg border-1 rounded-1" style="min-height: 200px;">
+        <div class="text-h6 text-center q-my-md q-pa-lg border-1 rounded-1" style="min-height: 200px;">
             Last quiz description...
             <div></div>
             <div class="q-my-md q-mt-lg">
@@ -30,7 +30,7 @@
         </div>
     </div>
     <div class="q-my-md">
-        <block rounded="rounded-1" border="" bg-color="bg-negative" class="shadow-3" v-if="updateAmountVisibility">
+        <block rounded="rounded-2" padding="q-pa-lg" border="" bg-color="bg-negative" class="shadow-3" v-if="updateAmountVisibility">
             <div class="text-h5 q-my-mb">Congratulations!</div>
             <div>You have a gift: 50 STDNT!</div>
             <div class="q-my-md">

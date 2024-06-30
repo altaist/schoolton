@@ -1,6 +1,4 @@
 <template>
-
-
     <div class="row">
         <div class="col">
             <PageTitle title="Courses" titleRight="balanceComputed" />
@@ -12,9 +10,9 @@
     </div>
     <div class="q-my-md" v-if="userCourses.length>0">
         <div class="q-my-md">My courses</div>
-        <CourseList :items="userCourses" @course:joined="onClick"></CourseList>
+        <CourseList :items="userCourses" :action-join="false"></CourseList>
     </div>
-    <div class="q-my-md">
+    <div class="q-my-md" v-if="courses.length>0">
         <div class="q-my-md">Market</div>
         <CourseList :items="courses" @course:joined="onClick"></CourseList>
     </div>
@@ -54,15 +52,16 @@ const {
 } = useUi();
 
 const userCourses = ref([]);
+// console.log(getCourses(getMode()).filter(item => undefined == userCourses.value.find((i) => i.id == item.id)));
+
 
 const { getWallet, getBalance, buyCourse, balanceComputed} = useWallet(getCurrency());
 
-const courses = computed(() => getCourses(getMode()));
+const courses = computed(() => getCourses(getMode()).filter(item => undefined == userCourses.value.find((i) => i.id == item.id)));
 // const courses = computed(() => getCourses(getMode()).filter(item => userCourses.value.find(item)==-1));
 
 const onClick = (course) => {
     buyCourse({}, course.price, course.id)
     userCourses.value.push(course)
-    alert('Submitted!');
 }
 </script>
