@@ -2,9 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-.html {
+.body {
     background-color: white;
 }
+
+.full-filled {
+    height: 1vh;
+    background-color: white;
+}
+
 .rounded-1 {
     border-radius: 10px;
 }

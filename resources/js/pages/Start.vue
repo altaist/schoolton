@@ -1,5 +1,5 @@
 <template>
-    <div class="q-ma-xl">
+    <div class="q-ma-xl full-filled">
         <div class="q-my-lg">SchoolTon Service</div>
         <block text-color="text-white" margin="q-my-sm" border="" rounded="rounded-1">
             <div>Learn...</div>

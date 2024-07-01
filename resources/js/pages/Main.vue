@@ -1,5 +1,5 @@
 <template>
-    <div class="fit">
+    <div class="fit full-filled">
         <q-tab-panels v-model="screen" class="q-pa-none" animated>
             <q-tab-panel name="quiz" >
                 <PageTitle title="Quiz"/>

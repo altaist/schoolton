@@ -1,5 +1,5 @@
 <template>
-    <div class="fit">
+    <div class="fit full-filled">
         <div v-if="!loading">
             <QuizPage></QuizPage>
         </div>
