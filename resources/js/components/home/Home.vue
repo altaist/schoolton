@@ -13,7 +13,6 @@
 
     </div>
     <div class="q-my-xl">
-
         <LProgress :val="100" label="Energy: 100%" :color="getBgColor('')"></LProgress>
     </div>
     <div>
@@ -29,8 +28,8 @@
         </div>
         </div>
     </div>
-    <div class="q-my-md">
-        <block rounded="rounded-2" padding="q-pa-lg" border="" bg-color="bg-negative" class="shadow-3" v-if="updateAmountVisibility">
+    <div class="q-my-md" v-if="firstLoadVisibility && updateAmountVisibility">
+        <block rounded="rounded-2" padding="q-pa-lg" border="" bg-color="bg-negative" class="shadow-3" >
             <div class="text-h5 q-my-mb">Congratulations!</div>
             <div>You have a gift: 50 STDNT!</div>
             <div class="q-my-md">
@@ -92,7 +91,7 @@ const props = defineProps({
         default: 'student'
     },
 });
-const emit = defineEmits(['mode:changed', 'wallet:clicked']);
+const emit = defineEmits(['mode:changed', 'wallet:clicked', 'quiz:clicked']);
 
 const { getMode, getCurrency, getBgColor, changeMode } = useUi();
 const { getWallet, getBalance, updateBalance, balanceComputed } = useWallet(getCurrency());
@@ -100,6 +99,8 @@ const { getWallet, getBalance, updateBalance, balanceComputed } = useWallet(getC
 const modeModel = ref(getMode());
 const dialogWalletVisibility = ref(false);
 const updateAmountVisibility = ref(true);
+const firstLoadVisibility = !(localStorage.getItem('loaded') || false);
+localStorage.setItem('loaded', true);
 
 const onModeUpdated = (val) => changeMode(val);
 const onWalletClick = () => {

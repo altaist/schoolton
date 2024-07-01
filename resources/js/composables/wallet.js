@@ -13,17 +13,32 @@ const currentWallet = ref({
 
 });
 
+const saveToLocalStorage = () => {
+    localStorage.setItem("wallet", JSON.stringify(currentWallet.value))
+}
+
+const loadFromLocalStorage = () => {
+    const storedValue = JSON.parse(localStorage.getItem("wallet"));
+    if(!storedValue){
+        return;
+    }
+    currentWallet.value = storedValue;
+}
+
+
 const useWallet = (cur=STDNT) => {
     const currency = cur;
+    loadFromLocalStorage();
+
 
     const getWallet = () => currentWallet;
     const getBalance = (currency) => getWallet().value[currency] || 0;
     const balanceComputed = computed(() => "" + getBalance(currency));
 
-    const updateBalance = (val, currency) => {
+    const updateBalance = (val, currency = STDNT) => {
         const wallet = getWallet();
         wallet.value[currency] += val;
-
+        saveToLocalStorage();
     }
 
     const buy = async (price, currency, user, userFrom, itemId, itemType) => {
@@ -34,7 +49,7 @@ const useWallet = (cur=STDNT) => {
             return null;
         }
 
-        wallet.value[currency] -= price;
+        updateBalance(-price, currency);
         return
     }
 

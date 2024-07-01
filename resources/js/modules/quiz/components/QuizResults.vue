@@ -12,14 +12,16 @@
             </div>
             <div class="q-my-xl q-pa-lg shadow-2">
                 <div class="row">
-                    <div class="col-6">Всего вопросов:</div>
+                    <div class="col-6">Questions num:</div>
                     <div class="col-6 text-right">{{ results.total }}</div>
-                    <div class="col-6 text-positive">Правильные:</div>
+                    <div class="col-6 text-positive">Correct:</div>
                     <div class="col-6 text-right text-positive">{{ results.passed }}</div>
-                    <div class="col-6 text-negative">Ошибки:</div>
+                    <div class="col-6 text-negative">Errors:</div>
                     <div class="col-6 text-right text-negative">{{ results.wrong }}</div>
-                    <div class="col-6">Пропущено:</div>
+                    <div class="col-6">Skipped:</div>
                     <div class="col-6 text-right">{{ results.skipped }}</div>
+                    <div class="col-6">STDNT:</div>
+                    <div class="col-6 text-right">{{ results.isSuccess ? 10 : -10 }}</div>
                 </div>
             </div>
             <div class="q-my-md q-pa-sm fixed-bottom bg-white">
@@ -62,7 +64,7 @@ const variants = computed(() => {
 });
 
 const onClose = () => {
-    window.location = route('main');
+    emit('quiz:close');
 };
 
 

@@ -19,6 +19,7 @@ import { useQuizApp } from '../composables/quizapp'
 import QuizStart from './QuizStart.vue'
 import QuizView from './QuizView.vue'
 import QuizResults from './QuizResults.vue'
+import { useWallet } from '@/composables/wallet';
 
 const props = defineProps({
     template: {
@@ -27,13 +28,13 @@ const props = defineProps({
     },
 });
 
-const emit = defineEmits(['quiz:completed', 'quiz:canceled']);
+const emit = defineEmits(['quiz:completed', 'quiz:canceled', 'quiz:close']);
 
 const quizManager = useQuizApp().getCurrentQuiz();
 const results = ref(null);
 const currentState = ref(0);
 
-
+const { updateBalance } = useWallet();
 const quizData = quizManager.getQuizData();
 
 const activeQuestion = computed(() => {
@@ -45,7 +46,7 @@ const onQuizStart = () => {
 }
 
 const onQuizClose = () => {
-    onQuizHome();
+    // onQuizHome();
     emit('quiz:completed');
 }
 
@@ -62,8 +63,9 @@ const onQuizHome = () => {
 const onQuizCompleted = () => {
     results.value = quizManager.calculateResult();
     currentState.value = 2;
+    updateBalance(results.value.isSuccess ? 10 : -10);
     console.log(results.value);
-    return emit('quiz:completed', results.value);
+    // return emit('quiz:completed', results.value);
 }
 
 </script>

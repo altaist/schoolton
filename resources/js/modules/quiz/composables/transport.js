@@ -3,32 +3,32 @@
 
 const fetchQuiz = () => {
     return {
-        title: "Название задания",
+        title: "Quiz title",
         qs: [
             {
-                txt: 'Вопрос 1',
+                txt: 'Question 1',
                 vs: [
                     {
                         idx: 0,
-                        txt: 'Вариант1',
+                        txt: 'Variant 1',
                     },
                     {
                         idx: 1,
-                        txt: 'Вариант2',
+                        txt: 'Variant 2',
                     },
                     {
                         idx: 3,
-                        txt: 'Вариант3',
+                        txt: 'Variant 3',
                     },
                     {
                         idx: 4,
-                        txt: 'Вариант4',
+                        txt: 'Variant 4',
                     },
                 ],
                 as: [1]
             },
             {
-                txt: 'Сколько десятков в числе 300?',
+                txt: 'How many 10 in 300?',
                 vs: [
                     {
                         idx: 0,

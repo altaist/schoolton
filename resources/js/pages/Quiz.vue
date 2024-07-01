@@ -1,7 +1,7 @@
 <template>
     <div class="fit">
         <div v-if="!loading">
-            <QuizPage></QuizPage>
+            <QuizPage @quiz:completed="onQuizCompleted"></QuizPage>
         </div>
         <div v-else>
             Quiz loading...
@@ -13,6 +13,7 @@
 import { ref, toRefs } from 'vue'
 import QuizPage from '@/modules/quiz/components/QuizPage.vue';
 import { useQuizApp } from '@/modules/quiz/composables/quizapp'
+import { useWallet } from '@/composables/wallet';
 
 defineProps({
     visibility: {
@@ -31,6 +32,8 @@ defineProps({
 });
 
 const emit = defineEmits(['question:completed', 'question:canceled']);
+
+const { updateBalance } = useWallet();
 const loading = ref(false);
 const loadQuiz = async () => {
     const quizApp = useQuizApp();
@@ -39,6 +42,12 @@ const loadQuiz = async () => {
     console.log(quiz)
     loading.value = false;
     return quiz;
+}
+
+const onQuizCompleted = () => {
+    // onQuizHome();
+    emit('quiz:completed');
+    window.location = route('main');
 }
 
 const quizManager = loadQuiz();
