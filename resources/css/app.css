@@ -2,13 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-.body {
+html, body {
     background-color: white;
-}
-
-.full-filled {
-    height: 1vh;
-    background-color: white;
+    background-size: 100%;
 }
 
 .rounded-1 {
