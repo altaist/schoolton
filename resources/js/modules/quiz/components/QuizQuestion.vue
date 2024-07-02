@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div >&nbsp;
         <slot name="content">
-            <div class="q-mt-xl"><div class="q-mt-xl q-pa-md">{{ questionContent }}</div></div>
+            <div class="q-mt-xl"><div class="q-mt-xl q-pa-md text-h5">{{ questionContent }}</div></div>
         </slot>
         <slot name="answers">
             <div class="q-my-md q-pa-sm fixed-bottom bg-white">
@@ -45,7 +45,7 @@ const getColClass = (variants) => {
     let cssClass = 'col-6';
 
     variants.forEach(element => {
-        if (element.txt.length > 100) {
+        if (element.txt.length > 8) {
             cssClass = 'col-12';
         }
     });
