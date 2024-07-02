@@ -3,41 +3,77 @@
         <div class="col">
             <q-btn-toggle v-model="modeModel" @update:model-value="onModeUpdated" no-caps rounded unelevated :toggle-color="getBgColor('')" color="white" text-color="black"
                 :options="[
-                    { label: 'STUDENT', value: 'student' },
-                    { label: 'EXPERT', value: 'expert' }
+                    { label: 'STDNT', value: 'student' },
+                    { label: 'EXPRT', value: 'expert' }
                 ]" />
         </div>
         <div class="col text-right">
-            <Button icon="fa-solid fa-wallet" :label="balanceComputed" @click="onWalletClick" :color="getBgColor('')"></Button>
+            <Button icon="fa-solid fa-wallet" :label="''+getBalance(getCurrency())" @click="onWalletClick" :color="getBgColor('')"></Button>
         </div>
 
-    </div>
-    <div class="q-my-xl">
-        <LProgress :val="100" label="Energy: 100%" :color="getBgColor('')"></LProgress>
-    </div>
-    <div>
 
     </div>
     <div>
-        <div class="text-h5 q-my-sm">Active quiz</div>
-        <div class="text-h6 text-center q-my-md q-pa-lg border-1 rounded-1" style="min-height: 200px;">
-            Last quiz description...
-            <div></div>
-            <div class="q-my-md q-mt-lg">
-            <Button icon="fa-solid fa-rocket" label="Start quiz" @click="onQuizClick" :color="getBgColor('')"></Button>
-        </div>
+        <div class="q-my-xl">
+            <LProgress :val="100" label="Energy: 100%" :color="getBgColor('')"></LProgress>
         </div>
     </div>
-    <div class="q-my-md" v-if="firstLoadVisibility && updateAmountVisibility">
-        <block rounded="rounded-2" padding="q-pa-lg" border="" bg-color="bg-negative" class="shadow-3" >
-            <div class="text-h5 q-my-mb">Congratulations!</div>
-            <div>You have a gift: 50 STDNT!</div>
-            <div class="q-my-md">
-                <Button label="Got it!" @click="onChangeAmoount(50)" color="white" text-color="black"></Button>
+    <div v-if="getMode() == 'student'">
+
+        <div>
+
+        </div>
+        <div>
+            <div class="text-h5 q-my-sm">Active quiz</div>
+            <div class="text-h6 text-center q-my-md q-pa-lg border-1 rounded-1" style="min-height: 200px;">
+                Open last quiz and earn STND
+                <div></div>
+                <div class="q-my-md q-mt-lg">
+                    <Button icon="fa-solid fa-rocket" label="Make it" @click="onQuizClick" :color="getBgColor('')"></Button>
+                </div>
             </div>
+        </div>
+        <div class="q-my-md text-center" v-if="updateAmountVisibility">
+            <block rounded="rounded-2" padding="q-pa-lg" border="" bg-color="bg-negative" class="shadow-3">
+                <div class="text-h5 q-my-mb">Congratulations!</div>
+                <div>You have a gift: 50 STDNT!</div>
+                <div class="q-my-md">
+                    <Button label="Got it!" @click="onChangeAmoount(50)" color="white" text-color="black"></Button>
+                </div>
 
-        </block>
+            </block>
+        </div>
+        <div class="q-my-lg">
+            <div class="text-h5">How it works</div>
+            <block>
+                <div class="text-h6">Get a course</div>
+            </block>
+            <block>
+                <div class="text-h6">Pass tasks and receive STNDs</div>
+            </block>
+            <block>
+                <div class="text-h6">Convert STND to new knoledges or MONEY</div>
+            </block>
+        </div>
+
+
     </div>
+    <div v-else>
+        <div class="q-my-lg">
+            <div class="text-h5">How it works</div>
+            <block :bg-color="getBgColor('bg-')">
+                <div class="text-h6">Became a master! Make your expert capital passing a quizes</div>
+            </block>
+            <block :bg-color="getBgColor('bg-')">
+                <div class="text-h6">Create your own onlline school in 1 click</div>
+            </block>
+            <block :bg-color="getBgColor('bg-')">
+                <div class="text-h6">Sell courses and earn money!</div>
+            </block>
+        </div>
+
+    </div>
+
     <q-dialog v-model="dialogWalletVisibility" full-width>
         <div>
             <q-card>
@@ -46,21 +82,21 @@
                 </q-card-section>
 
                 <q-card-section>
-                    <div class="text-h6">Amoount</div>
+                    <div class="text-h5">Amount</div>
                 </q-card-section>
 
                 <q-card-section class="q-pt-none">
                     <div>
-                        <block text-left="37" text-right="STDNT"></block>
-                        <block text-left="102" text-right="EXPRT" bg-color="bg-negative"></block>
+                        <block :text-left="getBalance('stdnt')" text-right="STDNT"></block>
+                        <block :text-left="getBalance('exprt')" text-right="EXPRT" bg-color="bg-negative"></block>
                     </div>
                 </q-card-section>
 
                 <q-card-section>
-                    <div class="text-h6">History</div>
+                    <div class="text-h5">History</div>
                 </q-card-section>
                 <q-card-section>
-                    <div class="text-h6">...</div>
+                    <div class="text-h6">Comming soon</div>
                 </q-card-section>
 
                 <q-card-actions align="right" class="bg-white text-teal">

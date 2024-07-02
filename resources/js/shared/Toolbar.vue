@@ -1,11 +1,13 @@
 <template>
-    <block class="q-ma-sm fixed-bottom" :bg-color="useUi().getBgColor('bg-')" padding="q-pa-sm">
-        <div class="row q-col-gutter-sm">
-            <div class="col" v-for="option in options">
-                <q-btn :label="option.label" @click="emit('click', option)" rounded class="full-width" flat :icon="option.icon || undefined" stack />
+    <div class="bg-white fixed-bottom">
+        <block class="q-mx-sm" :bg-color="useUi().getBgColor('bg-')" padding="q-pa-sm" rounded="rounded-1">
+            <div class="row q-col-gutter-sm">
+                <div class="col" v-for="option in options">
+                    <q-btn :label="option.label" @click="emit('click', option)" rounded class="full-width" flat :icon="option.icon || undefined" stack />
+                </div>
             </div>
-        </div>
-    </block>
+        </block>
+    </div>
 </template>
 
 <script setup>

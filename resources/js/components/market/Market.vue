@@ -6,7 +6,7 @@
     </div>
 
     <div class="q-my-xl">
-        <div class="q-my-xl text-h4">Coming soon...</div>
+        <div class="q-my-xl text-h5">Coming soon...</div>
     </div>
 </template>
 <script setup>

@@ -8,13 +8,23 @@
         </div>
 
     </div>
-    <div class="q-my-md" v-if="userCourses.length>0">
+    <div v-if="getMode()=='student'">
+        <div class="q-my-md" v-if="userCourses.length>0">
         <div class="q-my-md">My courses</div>
         <CourseList :items="userCourses" :action-join="false"></CourseList>
     </div>
     <div class="q-my-md" v-if="courses.length>0">
         <div class="q-my-md">Market</div>
         <CourseList :items="courses" @course:joined="onBuyClick"></CourseList>
+    </div>
+
+    </div>
+    <div v-else>
+        <div class="q-my-md" v-if="courses.length>0">
+        <div class="q-my-md">Market</div>
+        <CourseList :items="courses" :action-join="false"></CourseList>
+    </div>
+
     </div>
 </template>
 <script setup>

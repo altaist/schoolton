@@ -17,7 +17,7 @@ const useUi = () => {
     }
 
     const getBgColor = (prefix = '') => {
-        return currentMode.value === 'expert' ? prefix + 'negative' : prefix + 'primary';
+        return currentMode.value === 'expert' ? prefix + 'secondary' : prefix + 'primary';
     }
 
     return {
