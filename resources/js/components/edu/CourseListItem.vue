@@ -34,7 +34,6 @@
             </div>
 
         </div>
-{{ actionJoin }}
 
     </block>
 </template>

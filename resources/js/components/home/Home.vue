@@ -33,12 +33,12 @@
                 </div>
             </div>
         </div>
-        <div class="q-my-md text-center" v-if="updateAmountVisibility">
+        <div class="q-my-md text-center" v-if="firstLoadVisibility && updateAmountVisibility">
             <block rounded="rounded-2" padding="q-pa-lg" border="" bg-color="bg-negative" class="shadow-3">
                 <div class="text-h5 q-my-mb">Congratulations!</div>
-                <div>You have a gift: 50 STDNT!</div>
+                <div>You have a gift: 20 STDNTs!</div>
                 <div class="q-my-md">
-                    <Button label="Got it!" @click="onChangeAmoount(50)" color="white" text-color="black"></Button>
+                    <Button label="Got it!" @click="onChangeAmoount(20)" color="white" text-color="black"></Button>
                 </div>
 
             </block>
@@ -49,12 +49,13 @@
                 <div class="text-h6">Get a course</div>
             </block>
             <block>
-                <div class="text-h6">Pass tasks and receive STNDs</div>
+                <div class="text-h6">Pass tests and receive STNDs</div>
             </block>
             <block>
                 <div class="text-h6">Convert STND to new knoledges or MONEY</div>
             </block>
         </div>
+        <div class="q-mb-xl">&nbsp;</div>
 
 
     </div>
