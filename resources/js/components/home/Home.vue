@@ -89,16 +89,16 @@
                 <q-card-section class="q-pt-none">
                     <div>
                         <block :text-left="getBalance('stdnt')" text-right="STDNT"></block>
-                        <block :text-left="getBalance('exprt')" text-right="EXPRT" bg-color="bg-negative"></block>
+                        <block :text-left="getBalance('exprt')" text-right="EXPRT" bg-color="bg-secondary"></block>
                     </div>
                 </q-card-section>
 
-                <q-card-section>
+                <!--q-card-section>
                     <div class="text-h5">History</div>
                 </q-card-section>
                 <q-card-section>
                     <div class="text-h6">Comming soon</div>
-                </q-card-section>
+                </q-card-section-->
 
                 <q-card-actions align="right" class="bg-white text-teal">
                     <q-btn flat label="OK" v-close-popup :color="getBgColor('')" rounded />
