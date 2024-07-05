@@ -18,3 +18,4 @@ SchoolTon is a TMA service for completing mini-courses and receiving rewards. Th
 
 - Token creation
 - Open market of courses
+
