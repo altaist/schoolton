@@ -1,7 +1,7 @@
 <template>
 
         <q-list>
-            <ListItem v-for="item in items" :item="item" @click:join="onClick" :action-join="actionJoin"></ListItem>
+            <ListItem v-for="item in items" :item="item" @click:join="onJoinClick" @click:details="onDetailsClick" :action-join="actionJoin"></ListItem>
         </q-list>
 
 </template>
@@ -25,10 +25,14 @@ defineProps({
     }
 });
 
-const emit = defineEmits(['course:joined']);
+const emit = defineEmits(['course:joined', 'course:details']);
 
-const onClick = (data) => {
+const onJoinClick = (data) => {
     emit('course:joined', data);
+}
+
+const onDetailsClick = (data) => {
+    emit('course:details', data);
 }
 
 </script>

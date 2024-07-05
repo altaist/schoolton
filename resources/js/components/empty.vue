@@ -1,4 +1,5 @@
 <template>
+    <div class="q-my-sm"></div>
 </template>
 <script setup>
 import { ref, toRefs } from 'vue'

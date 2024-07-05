@@ -52,7 +52,7 @@
                 <div class="text-h6">Pass tests and receive STNDs</div>
             </block>
             <block>
-                <div class="text-h6">Convert STND to new knoledges or MONEY</div>
+                <div class="text-h6">Convert STND to new knoledges or money</div>
             </block>
         </div>
         <div class="q-mb-xl">&nbsp;</div>

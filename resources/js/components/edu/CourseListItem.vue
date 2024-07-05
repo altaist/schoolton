@@ -15,7 +15,7 @@
             </q-item-section>
         </q-item-->
 
-        <div class="row q-col-gutter-sm">
+        <div class="row q-col-gutter-sm"    >
             <div class="col-2 text-center"><q-icon :name="item.icon" size="xl"/></div>
             <div class="col-6">
                 <div class="text-h6">{{ item.title }}</div>
@@ -30,6 +30,7 @@
                 <div>
                     <div>{{ item.price }} {{ item.currency || 'STDNT' }}</div>
                     <div v-if="actionJoin"><Button label="Join" @click="emit('click:join', item)" :color="getBgColor()" /></div>
+                    <div class="q-my-sm"><Button label="Details" @click="emit('click:details', item)" :color="getBgColor()" /></div>
                 </div>
             </div>
 
@@ -58,7 +59,7 @@ defineProps({
     }
 });
 
-const emit = defineEmits(['click:join']);
+const emit = defineEmits(['click:join', 'click:details']);
 
 const { getMode, getBgColor } = useUi();
 

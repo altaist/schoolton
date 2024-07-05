@@ -15,7 +15,7 @@
     </div>
     <div class="q-my-md" v-if="courses.length>0">
         <div class="q-my-md">Market</div>
-        <CourseList :items="courses" @course:joined="onBuyClick"></CourseList>
+        <CourseList :items="courses" @course:joined="onBuyClick" @course:details="onDetailsClick"></CourseList>
     </div>
 
     </div>
@@ -71,5 +71,8 @@ const courses = computed(() => getCourses(getMode()).filter(item => undefined ==
 const onBuyClick = (course) => {
     buyCourse({}, course.price, course.id)
     userCourses.value.push(course)
+}
+
+const onDetailsClick = (data) => {
 }
 </script>
