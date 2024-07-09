@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -14,6 +15,15 @@ Route::get('/main', function () {
 Route::get('/quiz', function () {
     return Inertia::render('Quiz', []);
 })->name('quiz');
+
+Route::get('/examen', function () {
+    return Inertia::render('Generator', []);
+})->name('examen.generator');
+
+
+Route::post('/api/gpt', [CourseController::class, 'createGpt'])->name('gpt');
+
+
 
     // course
     //      get course/
