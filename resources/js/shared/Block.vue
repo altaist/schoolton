@@ -17,7 +17,6 @@ const props = defineProps({
         default: false
     },
     textLeft: {
-        type: String
     },
     textRight: {
         type: String
@@ -51,7 +50,7 @@ const props = defineProps({
 
     rounded: {
         type: String,
-        default: 'rounded-2'
+        default: 'rounded-1'
     },
 });
 

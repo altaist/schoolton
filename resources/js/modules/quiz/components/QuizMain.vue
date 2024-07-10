@@ -26,11 +26,19 @@ const props = defineProps({
         type: String,
         default: "default"
     },
+    quiz: {
+        type: Object,
+    }
 });
 
 const emit = defineEmits(['quiz:completed', 'quiz:canceled', 'quiz:close']);
 
-const quizManager = useQuizApp().getCurrentQuiz();
+const {setQuiz, getCurrentQuiz } = useQuizApp();
+if(props.quiz) {
+    setQuiz(props.quiz);
+}
+
+const quizManager = getCurrentQuiz();
 const results = ref(null);
 const currentState = ref(0);
 

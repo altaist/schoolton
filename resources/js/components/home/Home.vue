@@ -1,5 +1,5 @@
 <template>
-    <div class="row">
+    <!--div class="row">
         <div class="col">
             <q-btn-toggle v-model="modeModel" @update:model-value="onModeUpdated" no-caps rounded unelevated :toggle-color="getBgColor('')" color="white" text-color="black"
                 :options="[
@@ -17,14 +17,15 @@
         <div class="q-my-xl">
             <LProgress :val="100" label="Energy: 100%" :color="getBgColor('')"></LProgress>
         </div>
-    </div>
+    </div-->
+    <Header/>
     <div v-if="getMode() == 'student'">
 
         <div>
 
         </div>
         <div>
-            <div class="text-h5 q-my-sm">Active quiz</div>
+            <div class="text-h5 q-my-lg">Active quiz</div>
             <div class="text-h6 text-center q-my-md q-pa-lg border-1 rounded-1" style="min-height: 200px;">
                 Open last quiz and earn STND
                 <div></div>
@@ -116,6 +117,7 @@ import Block from '@shared/Block.vue';
 import Button from '@shared/Button.vue';
 import LProgress from '@shared/LProgress.vue';
 import PageTitle from '@shared/PageTitle.vue';
+import Header from '@/components/layouts/Header.vue';
 
 
 const props = defineProps({

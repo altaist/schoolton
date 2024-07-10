@@ -24,10 +24,12 @@ const useQuizApp = () => {
     }
 
     const loadQuiz = async () => {
-
         const data = await fetchQuiz();
         return createLoadedQuiz(data);
+    }
 
+    const setQuiz = (quiz) => {
+        return createLoadedQuiz(quiz);
     }
 
     const saveQuizResults = () => {
@@ -36,6 +38,7 @@ const useQuizApp = () => {
 
     return {
         loadQuiz,
+        setQuiz,
         getCurrentQuiz
     }
 

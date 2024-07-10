@@ -8,6 +8,8 @@ const currencies = {
 
 }
 
+const loading = ref(false);
+
 const useUi = () => {
 
     const getMode = () => currentMode.value;
@@ -24,7 +26,8 @@ const useUi = () => {
         getMode,
         getCurrency,
         changeMode,
-        getBgColor
+        getBgColor,
+        loading
     }
 }
 

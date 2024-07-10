@@ -1,7 +1,7 @@
 <template>
     <div class="fit">
         <div v-if="!loading">
-            <QuizPage @quiz:completed="onQuizCompleted"></QuizPage>
+            <QuizMain @quiz:completed="onQuizCompleted"></QuizMain>
         </div>
         <div v-else>
             Quiz loading...
@@ -11,7 +11,7 @@
 
 <script setup>
 import { ref, toRefs } from 'vue'
-import QuizPage from '@/modules/quiz/components/QuizPage.vue';
+import QuizMain from '@/modules/quiz/components/QuizMain.vue';
 import { useQuizApp } from '@/modules/quiz/composables/quizapp'
 import { useWallet } from '@/composables/wallet';
 

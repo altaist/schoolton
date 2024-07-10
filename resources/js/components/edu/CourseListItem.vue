@@ -30,7 +30,7 @@
                 <div>
                     <div>{{ item.price }} {{ item.currency || 'STDNT' }}</div>
                     <div v-if="actionJoin"><Button label="Join" @click="emit('click:join', item)" :color="getBgColor()" /></div>
-                    <div class="q-my-sm"><Button label="Details" @click="emit('click:details', item)" :color="getBgColor()" /></div>
+                    <!--div class="q-my-sm"><Button label="Details" @click="emit('click:details', item)" :color="getBgColor()" /></div-->
                 </div>
             </div>
 
