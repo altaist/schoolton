@@ -1,5 +1,5 @@
 import { computed, ref } from 'vue'
-import { systemUser } from './users'
+import { useProfile } from './users'
 
 const STDNT = 'stdnt';
 const EXPRT = 'exprt';

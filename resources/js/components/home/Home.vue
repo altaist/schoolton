@@ -4,7 +4,7 @@
     <div v-if="getMode() == 'student'">
 
         <div>
-
+            <User/>
         </div>
         <div>
             <div class="text-h5 q-my-lg">Active quiz</div>
@@ -12,7 +12,7 @@
                 Open last quiz and earn STND
                 <div></div>
                 <div class="q-my-md q-mt-lg">
-                    <Button icon="fa-solid fa-rocket" label="Make it" @click="onQuizClick" :color="getBgColor('')"></Button>
+                    <Button icon="fa-solid fa-rocket" label="START" @click="onQuizClick" :color="getBgColor('')"></Button>
                 </div>
             </div>
         </div>
@@ -68,7 +68,7 @@ import Button from '@shared/Button.vue';
 import LProgress from '@shared/LProgress.vue';
 import PageTitle from '@shared/PageTitle.vue';
 import Header from '@/components/layouts/Header.vue';
-
+import User from '@/components/user/User.vue'
 
 const props = defineProps({
     visibility: {
