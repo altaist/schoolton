@@ -19,6 +19,7 @@
         </div>
     </div-->
     <Header/>
+    {{ TWA }}
     <div v-if="getMode() == 'student'">
 
         <div>

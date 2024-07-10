@@ -11,6 +11,8 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet">
 
+        <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
         <!-- Scripts -->
         @routes
         @vite(['resources/js/app.js', "resources/js/pages/{$page['component']}.vue"])
