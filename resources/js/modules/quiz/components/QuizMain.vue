@@ -1,5 +1,4 @@
 <template>
-    {{ quiz }}
     <div class="q-pa-lg">
         <div v-if="currentState == 0">
             <QuizStart :quiz="quizData" @quiz:start="onQuizStart" />
