@@ -16,7 +16,6 @@ const useMarkets = () => {
     const loadMarkets = async () => tmpMarkets;
 
     const getMarkets = (mode = 'student') => {
-        console.log(tmpMarkets[mode], mode)
         return tmpMarkets[mode];
     }
 

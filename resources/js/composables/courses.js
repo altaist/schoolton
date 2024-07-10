@@ -16,7 +16,6 @@ const useCourses = () => {
     const loadCourses = async () => tmpCourses;
 
     const getCourses = (mode = 'student') => {
-        console.log(tmpCourses[mode], mode)
         return tmpCourses[mode];
     }
 
