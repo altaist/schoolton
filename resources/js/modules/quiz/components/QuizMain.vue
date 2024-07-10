@@ -1,4 +1,5 @@
 <template>
+    {{ quiz }}
     <div class="q-pa-lg">
         <div v-if="currentState == 0">
             <QuizStart :quiz="quizData" @quiz:start="onQuizStart" />
@@ -9,7 +10,6 @@
         <div v-if="currentState == 2">
             <QuizResults :results="results" @quiz:repeat="onQuizRepeat" @quiz:close="onQuizClose" />
         </div>
-
     </div>
 </template>
 

@@ -16,9 +16,9 @@ Route::get('/quiz', function () {
     return Inertia::render('Quiz', []);
 })->name('quiz');
 
-Route::get('/examen', function () {
+Route::get('/generator', function () {
     return Inertia::render('Generator', []);
-})->name('examen.generator');
+})->name('generator');
 
 
 Route::post('/api/gpt', [CourseController::class, 'createGpt'])->name('gpt');

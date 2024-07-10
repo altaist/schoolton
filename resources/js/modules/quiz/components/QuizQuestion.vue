@@ -1,4 +1,5 @@
 <template>
+    {{ question }}
     <div >&nbsp;
         <slot name="content">
             <div class="q-mt-xl"><div class="q-mt-xl q-pa-md text-h5">{{ questionContent }}</div></div>

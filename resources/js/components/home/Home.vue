@@ -21,7 +21,7 @@
                 <div class="text-h5 q-my-mb">Congratulations!</div>
                 <div>You have a gift: 20 STDNTs!</div>
                 <div class="q-my-md">
-                    <Button label="Got it!" @click="onChangeAmoount(20)" color="white" text-color="black"></Button>
+                    <Button label="Got it!" @click="onChangeAmount(20)" color="white" text-color="black"></Button>
                 </div>
 
             </block>
@@ -44,9 +44,19 @@
     </div>
     <div v-else>
         <div class="q-my-lg">
+            <block rounded="rounded-2" padding="q-pa-lg" border="" bg-color="bg-negative" class="shadow-3">
+                <div class="text-h5 q-my-mb">Course Creator</div>
+                <div>Make you own course in 1 min</div>
+                <div class="q-my-md">
+                    <Button label="Start!" @click="onStartCreator" color="white" text-color="black"></Button>
+                </div>
+
+            </block>
+        </div>
+        <div class="q-my-lg">
             <div class="text-h5">How it works</div>
             <block :bg-color="getBgColor('bg-')">
-                <div class="text-h6">Became a master! Make your expert capital passing a quizes</div>
+                <div class="text-h6">Become a master! Make your expert capital passing a quizes</div>
             </block>
             <block :bg-color="getBgColor('bg-')">
                 <div class="text-h6">Create your own onlline school in 1 click</div>
@@ -97,7 +107,12 @@ const onQuizClick = () => {
     window.location = route('quiz');
 };
 
-const onChangeAmoount = (val) => {
+const onStartCreator = () => {
+    dialogWalletVisibility.value = false;
+    window.location = route('generator');
+};
+
+const onChangeAmount = (val) => {
     updateBalance(val, getCurrency());
     updateAmountVisibility.value = false;
 }
