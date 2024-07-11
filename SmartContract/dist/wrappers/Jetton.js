@@ -1,11 +1,12 @@
-import { Address, Contract, ContractProvider } from 'ton-core';
-
-export class Jetton extends Contract {
-    constructor(provider: ContractProvider) {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Jetton = void 0;
+class Jetton extends ton_core_1.Contract {
+    constructor(provider) {
         super(provider);
     }
-
-    async deploy(args: { value: bigint }) {
+    async deploy(args) {
+        // Логика деплоя контракта
         await this.provider.deployContract(this, {
             value: args.value,
             initState: {
@@ -13,13 +14,12 @@ export class Jetton extends Contract {
             }
         });
     }
-
-    async getBalance(address: Address): Promise<number> {
+    async getBalance(address) {
         const result = await this.provider.runMethod(this, 'get_balance', [address]);
         return result.stack.readNumber();
     }
-
-    async transfer(from: Address, to: Address, amount: number) {
+    async transfer(from, to, amount) {
         await this.provider.runMethod(this, 'transfer', [from, to, amount]);
     }
 }
+exports.Jetton = Jetton;
