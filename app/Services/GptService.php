@@ -15,7 +15,7 @@ class GptService extends BaseService
     {
         $messages = [
             ['role' => 'system', 'content' => 'прочитай текст и создай для него список тем для учебного курса.'],
-            ['role' => 'system', 'content' => 'Результат дай в виде json объекта с полем title - нвзание курса и полем topics - массив, каждый элемент которого является объект с полем title и полем quiz которое содержит тест с 3 вопросами в поле qs, для каждого из которых в поле txt содержится текст вопроса и  даются 4 варианта ответа в поле vs, каждый вариант это объект с полем idx - номер варианта от 0 и поле txt - текст варианта, номер правильного варианта хранится как элемент массива в поле as'],
+            ['role' => 'system', 'content' => 'Результат дай в виде json объекта с полем title - нвзание курса и полем topics - массив из первых двух тем, каждый элемент которого является объект с полем title и полем quiz которое содержит тест с 3 вопросами в поле qs, для каждого из которых в поле txt содержится текст вопроса и  даются 4 варианта ответа в поле vs, каждый вариант это объект с полем idx - номер варианта от 0 и поле txt - текст варианта, номер правильного варианта хранится как элемент массива в поле as'],
             ['role' => 'system', 'content' => 'Не добавляй в результат ничего кроме json. Ответ должен быть валидным json объектом'],
             ['role' => 'user', 'content' => $message],
         ];
@@ -50,7 +50,7 @@ class GptService extends BaseService
             ],
             'json' => [
                 'model' => 'gpt-4o',
-                'max_tokens' => 1000, // Adjust the max tokens as needed
+                'max_tokens' => 4000, // Adjust the max tokens as needed
                 'messages' => $messages,
             ],
             'proxy' => 'http://user156811:eb49hn@45.159.182.77:5442/',
@@ -60,7 +60,6 @@ class GptService extends BaseService
         if(!$response->getBody()) return null;
 
         try {
-            //dd(json_decode($response->getBody(), true));
             return $this->processResult(json_decode($response->getBody(), true));
         } catch (\Throwable $th) {
             Log::error("result");
@@ -71,9 +70,11 @@ class GptService extends BaseService
 
     private function processResult($data)
     {
-        if(!$data || !data_get($data, 'choices')) return null;
+        if(!$data || !data_get($data, 'choices')) {
+            return null;
+        }
         $result = $data['choices'][0]['message']['content'];
-        // dd($result);
+
         Log::debug($result);
         return $result;
     }

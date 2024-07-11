@@ -7,13 +7,18 @@
             </div>
         </q-tab-panel>
         <q-tab-panel name="course">
-            <Header title="Course generator" :back-url="route('main')"/>
+            <!--Header title="Course generator" :back-url="route('main')"/-->
+            <div><q-btn icon="fa-solid fa-chevron-left" @click="onBackClick" /></div>
+            <div class="q-my-md text-h5">Course generator</div>
             <div class="q-my-lg">
                 <div class="row q-col-gutter-md">
                     <div class="col-sm-12 col-lg-12">
-                        <GptGenerator @gpt:completed="onContentUpdated"/>
+                        <GptGenerator @gpt:completed="onContentUpdated" />
                     </div>
-                    <div class="col-sm-12 col-lg-12">
+                    <div v-if="error">
+                        <div>{{ error }}</div>
+                    </div>
+                    <div class="col-sm-12 col-lg-12" v-else>
                         <CourseContent mode="full" :course="courseContent" @click:quiz="onShowQuiz" @click:content="onShowContent"></CourseContent>
                     </div>
                 </div>
@@ -68,9 +73,13 @@ const courseContent = ref({});
 const currentQuiz = ref({});
 const screen = ref('course');
 const dialogContent = ref(false);
-
+const error = ref('');
 
 const onContentUpdated = (data) => {
+    if(data) {
+        error.value = "Something went wrong";
+    }
+    error.value = '';
     courseContent.value = data;
 }
 
@@ -88,4 +97,7 @@ const onQuizFinished = () => {
     screen.value = 'course';
 }
 
+const onBackClick = () => {
+    window.location = route('main');
+}
 </script>
