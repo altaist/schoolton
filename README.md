@@ -1,8 +1,23 @@
 # SchoolTon
 
+<img src="https://domiji.ru/imgs/longlogo.png" alt="Logo">
+
 [TMA](http://t.me/schoolton_bot/quizapp)
 
-The smart contract and tests are located in the "SmartContract" folder
+[Video](https://domiji.ru/video/SchoolTon.mp4)
+
+<div style="display: flex; justify-content: space-around;">
+<img src="https://domiji.ru/imgs/1.jpg" alt="Screenshot" width="164">
+<img src="https://domiji.ru/imgs/2.jpg" alt="Screenshot" width="164">
+<img src="https://domiji.ru/imgs/5.jpg" alt="Screenshot" width="164">
+<img src="https://domiji.ru/imgs/4.jpg" alt="Screenshot" width="164">
+<img src="https://domiji.ru/imgs/6.jpg" alt="Screenshot" width="164">
+<img src="https://domiji.ru/imgs/3.jpg" alt="Screenshot" width="164">
+</div>
+
+<br>
+
+<b> The smart contract and tests are located in the "SmartContract" folder </b>
 
 ## About
 
