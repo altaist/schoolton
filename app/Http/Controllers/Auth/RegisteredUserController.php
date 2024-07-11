@@ -61,14 +61,15 @@ class RegisteredUserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
             'tg_id' => 'required|string',
+            'custom_token' => 'required|string',
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'tg_id' => $request->tg_id,
+            'custom_token' => $request->custom_token,
             'password' => Hash::make(Str::random(9)),
-            'custom_token' => Hash::make(Str::random(9)),
         ]);
 
         event(new Registered($user));

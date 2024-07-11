@@ -22,16 +22,18 @@ class CustomLoginRequest extends LoginRequest
     public function rules(): array
     {
         return [
-            'token' => ['required', 'string'],
+            'tg_id' => ['required'],
+            'custom_token' => ['required', 'string'],
         ];
     }
 
     public function authenticate(): void
     {
-        $token = $this->only(['token']);
-        $user = User::byCustomToken($token);
-
         $this->ensureIsNotRateLimited();
+
+        $tgId = $this->get('tg_id');
+        $token = $this->get('custom_token');
+        $user = User::byCustomToken($token)->where('tg_id', $tgId)->first();
 
         if (!$user) {
             RateLimiter::hit($this->throttleKey());
