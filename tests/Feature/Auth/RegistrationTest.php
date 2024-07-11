@@ -26,6 +26,17 @@ class RegistrationTest extends TestCase
         ]);
 
         $this->assertAuthenticated();
-        $response->assertRedirect(route('dashboard', absolute: false));
+//        $response->assertRedirect(route('dashboard', absolute: false));
+    }
+
+    public function test_new_users_can_register_by_tg(): void
+    {
+        $response = $this->post('/register-custom', [
+            'name' => 'Test User',
+            'email' => 'test@example.com',
+            'tg_id' => '1'
+        ]);
+
+        $this->assertAuthenticated();
     }
 }

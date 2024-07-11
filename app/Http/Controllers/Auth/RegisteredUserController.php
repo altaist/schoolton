@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Inertia\Inertia;
 use Inertia\Response;
+use Illuminate\Support\Str;
 
 class RegisteredUserController extends Controller
 {
@@ -47,5 +48,33 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
         return redirect(route('dashboard', absolute: false));
+    }
+
+    /**
+     * Handle custom registration request.
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function storeCustom(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
+            'tg_id' => 'required|string',
+        ]);
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'tg_id' => $request->tg_id,
+            'password' => Hash::make(Str::random(9)),
+            'custom_token' => Hash::make(Str::random(9)),
+        ]);
+
+        event(new Registered($user));
+
+        Auth::login($user);
+
+        return response()->json(['user' => $user]);
     }
 }
