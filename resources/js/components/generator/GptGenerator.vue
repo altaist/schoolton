@@ -1,7 +1,7 @@
 <template>
-    <div class="q-my-sm">
+    <div class="q-my-sm full-width">
         <div class="q-my-md">
-            <q-input v-model="queryText" filled type="textarea" class="full-width" :loading="loading"></q-input>
+            <q-input v-model="queryText" filled type="textarea" class="full-width"/>
         </div>
         <div class="q-my-md">
             <q-btn label="Create a course" @click="onCreateClick" />
