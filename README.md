@@ -10,7 +10,7 @@
 <img src="https://domiji.ru/imgs/1.jpg" alt="Screenshot" width="164">
 <img src="https://domiji.ru/imgs/2.jpg" alt="Screenshot" width="164">
 <img src="https://domiji.ru/imgs/5.jpg" alt="Screenshot" width="164">
-<img src="https://domiji.ru/imgs/4.jpg" alt="Screenshot" width="164">
+<img src="https://domiji.ru/imgs/7.jpg" alt="Screenshot" width="164">
 <img src="https://domiji.ru/imgs/6.jpg" alt="Screenshot" width="164">
 <img src="https://domiji.ru/imgs/3.jpg" alt="Screenshot" width="164">
 </div>
@@ -19,20 +19,32 @@
 
 <b> The smart contract and tests are located in the "SmartContract" folder </b>
 
-## About
+# New update!
+
+<img src="https://domiji.ru/imgs/aiupdate.gif" alt="Screenshot" width="164">
+
+We are excited to introduce a powerful new feature in SchoolTon: <b> the AI Course Generation System</b>. This innovative tool leverages artificial intelligence to create educational courses automatically, providing users with fresh and relevant content tailored to their learning needs.
+
+### Key Features
+- Automated Course Creation: Using advanced AI algorithms, the system generates comprehensive courses on a variety of subjects, ensuring high-quality and engaging educational content.
+- Simplicity: Users need only to input a topic or provide a text, and the AI will handle the rest, generating complete courses and quizzes based on the provided information.
+- Personalization: The AI customizes courses based on user preferences and learning history, making the learning experience more effective and enjoyable.
+- Efficiency: Save time and resources by automating the course development process, allowing educators to focus on other important tasks.
+
+# About
 
 SchoolTon is a TMA service for completing mini-courses and receiving rewards. The main concept is to create an accessible, flexible and beneficial educational ecosystem using Telegram.
 
 Any existing offline educational center can join the project with one click and offer their courses. This allows the attraction of the audience from major educational centers.
 
-## How to earn?
+# How to earn?
 Users can earn money in several ways, making the platform attractive to both learners and educators. Learners can earn by completing courses on the platform. After successfully finishing a course with a certain score, users can receive a reward. This incentivizes students to study more diligently and achieve high results.
 
 Users who have successfully completed courses and achieved a high score can apply to become instructors. Upon approval by the course creator, they can take part in editing courses or in educational activities. Instructors earn money for each course they conduct, motivating them to provide quality teaching and maintain high educational standards.
 
 Course creators can also earn money by offering their courses on the platform. They receive a portion of the revenue from each student who successfully completes their course. This encourages the creation of high-quality content and attracts a larger number of students.
 
-## Get started
+# Get started
 Each user is given a free skin - a "Bookshelf of knowledge". By taking courses, buying power-ups, you can develop it and after reaching a certain level, you can make it a full-fledged NFT. Earnings can be withdrawn only if the user has an NFT. Each completed course is attached to it.
 
 A separate skin is also created for teachers and course creators, which can also be developed. With a free skin, you can only create courses that are open to everyone, for paid courses you need to have an NFT. When switching from Student status to Master status, all completed courses are transferred.
@@ -41,7 +53,7 @@ Any user who has earned a sufficient number of coins can create their own course
 
 All courses and digital assets within the service are bought and sold on the internal marketplace.
 
-## Tokenomics
+# Tokenomics
 SchoolTon implements a systematized concept of paying users for studying and paying for the use of digital knowledge carriers. This creates a balanced flow of liquidity within the service. The influx of liquidity into the service comes from payments for the use of unique educational content.
 
 The system provides 2 tokens: StudentCoin is credited for completing the course, and MasterCoin is credited for participating in moderation or the learning process.
