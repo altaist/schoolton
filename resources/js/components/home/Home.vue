@@ -8,10 +8,10 @@
         </div>
         <div>
             <div class="text-h5 q-my-lg">Active quiz</div>
-            <div class="text-h6 text-center q-my-md q-pa-lg border-1 rounded-1" style="min-height: 200px;">
+            <div class="text-h6 text-center q-my-md q-pa-lg border-1 rounded-1" style="min-height: 180px;">
                 Open last quiz and earn STND
                 <div></div>
-                <div class="q-my-md q-mt-lg">
+                <div class="q-mt-lg">
                     <Button icon="fa-solid fa-rocket" label="START" @click="onQuizClick" :color="getBgColor('')"></Button>
                 </div>
             </div>
@@ -21,9 +21,18 @@
                 <div class="text-h5 q-my-mb">Congratulations!</div>
                 <div>You have a gift: 20 STDNTs!</div>
                 <div class="q-my-md">
-                    <Button label="Got it!" @click="onChangeAmount(20)" color="white" text-color="black"></Button>
+                    <Button label="Get paid!" @click="onChangeAmount(20)" color="white" text-color="black"></Button>
                 </div>
 
+            </block>
+        </div>
+        <div class="q-my-lg">
+            <block rounded="rounded-2" padding="q-pa-lg" border="" bg-color="bg-secondary" class="shadow-3">
+                <div class="text-h5 q-my-mb">Course Creator</div>
+                <div>Create your own course in 1 click!</div>
+                <div class="q-my-md">
+                    <Button label="Start!" @click="onStartCreator" color="white" text-color="black"></Button>
+                </div>
             </block>
         </div>
         <div class="q-my-lg">
@@ -46,11 +55,10 @@
         <div class="q-my-lg">
             <block rounded="rounded-2" padding="q-pa-lg" border="" bg-color="bg-negative" class="shadow-3">
                 <div class="text-h5 q-my-mb">Course Creator</div>
-                <div>Make you own course in 1 min</div>
+                <div>Create your own course in 1 click!</div>
                 <div class="q-my-md">
                     <Button label="Start!" @click="onStartCreator" color="white" text-color="black"></Button>
                 </div>
-
             </block>
         </div>
         <div class="q-my-lg">
