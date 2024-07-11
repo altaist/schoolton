@@ -1,7 +1,7 @@
 import { Jetton } from '../wrappers/Jetton';
 import { ContractProvider, Address } from 'ton-core';
 
-describe('Jetton Contract', () => {
+describe('Jetton Contract - Basic Initialization and Transfer', () => {
     let provider: ContractProvider;
     let jetton: Jetton;
 
