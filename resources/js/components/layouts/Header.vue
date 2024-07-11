@@ -4,7 +4,14 @@
             <div class="col">
                 <slot>
                     <div v-if="title">
-                        <PageTitle>{{ title }}</PageTitle>
+                        <div class="row">
+                            <div class="col-2" v-if="backUrl">
+                                <Button icon="fa-solid fa-chevron-left" @click="onBackClick"/>
+                            </div>
+                            <div class="col-10 text-center">
+                                <PageTitle>{{ title }}</PageTitle>
+                            </div>
+                        </div>
                     </div>
                     <div v-else>
                     <q-btn-toggle v-model="modeModel" @update:model-value="onModeUpdated" no-caps rounded unelevated :toggle-color="getBgColor('')" color="white" text-color="black"
@@ -15,7 +22,7 @@
                     </div>
                 </slot>
             </div>
-            <div class="col text-right">
+            <div class="col text-right" v-if="!backUrl">
                 <WalletButton />
             </div>
 
@@ -33,8 +40,11 @@ import useUi from '@/composables/ui';
 import { useWallet } from '@/composables/wallet';
 import PageTitle from '@/shared/PageTitle.vue';
 
-defineProps({
+const props = defineProps({
     title: {
+        type: String
+    },
+    backUrl: {
         type: String
     },
 });
@@ -51,4 +61,9 @@ const onModeUpdated = (val) => changeMode(val);
 const onWalletClick = () => {
     dialogWalletVisibility.value = true;
 };
+
+const onBackClick = () => {
+    window.location = props.backUrl;
+}
+
 </script>

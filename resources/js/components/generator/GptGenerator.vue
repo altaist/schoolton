@@ -26,7 +26,7 @@ defineProps({
 const emit = defineEmits(['gpt:completed']);
 
 const { loading } = useUi();
-const queryText = ref('Ардуино - это микроконтроллер. У него есть 13 портов: четыре аналоговых и 14 цифровых');
+const queryText = ref(`The Open Network (TON) is a decentralized and open internet platform made up of several components. These include: TON Blockchain, TON DNS, TON Storage, and TON Sites. TON Blockchain is the core protocol that connects TON’s underlying infrastructure together to form the greater TON Ecosystem`);
 
 const processTextRequest = async (message) => {
     loading.value = true;

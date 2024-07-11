@@ -7,7 +7,7 @@
             </div>
         </q-tab-panel>
         <q-tab-panel name="course">
-            <div class="text-h5">Course generator</div>
+            <Header title="Course generator" :back-url="route('main')"/>
             <div class="q-my-lg">
                 <div class="row q-col-gutter-md">
                     <div class="col-sm-12 col-lg-12">
@@ -50,6 +50,7 @@
 <script setup>
 import { ref, toRefs } from 'vue'
 import Block from '@shared/Block.vue';
+import Header from '@/components/layouts/Header.vue';
 import QuizMain from '@/modules/quiz/components/QuizMain.vue';
 import PageTitle from '@shared/PageTitle.vue';
 import GptGenerator from '@/components/generator/GptGenerator.vue'
