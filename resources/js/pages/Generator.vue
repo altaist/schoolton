@@ -8,20 +8,25 @@
         </q-tab-panel>
         <q-tab-panel name="course">
             <!--Header title="Course generator" :back-url="route('main')"/-->
-            <div><q-btn icon="fa-solid fa-chevron-left" @click="onBackClick" /></div>
-            <div class="q-my-md text-h5">Course generator</div>
-            <div class="q-my-lg">
-                <div class="row q-col-gutter-md">
-                    <div class="col-sm-12 col-lg-12">
+            <div class="full-width">
+                <div><q-btn icon="fa-solid fa-chevron-left" @click="onBackClick" /></div>
+                <div class="q-my-md text-h5">Course generator</div>
+                <div class="q-my-lg">
+                    <div class="q-my-lg full-width">
                         <GptGenerator @gpt:completed="onContentUpdated" />
                     </div>
-                    <div v-if="error">
-                        <div>{{ error }}</div>
+                    <div class="q-my-lg">
+                        <div v-if="error">
+                            <div>{{ error }}</div>
+                        </div>
+                        <div class="q-my-lg" v-else>
+                            <CourseContent mode="full" :course="courseContent" @click:quiz="onShowQuiz" @click:content="onShowContent"></CourseContent>
+                        </div>
                     </div>
-                    <div class="col-sm-12 col-lg-12" v-else>
-                        <CourseContent mode="full" :course="courseContent" @click:quiz="onShowQuiz" @click:content="onShowContent"></CourseContent>
-                    </div>
+
+
                 </div>
+
             </div>
         </q-tab-panel>
     </q-tab-panels>
@@ -34,13 +39,6 @@
                     <q-card-section class="q-pt-none">
                         <div>{{ currentContent }}</div>
                     </q-card-section>
-
-                    <!--q-card-section>
-                    <div class="text-h5">History</div>
-                </q-card-section>
-                <q-card-section>
-                    <div class="text-h6">Comming soon</div>
-                </q-card-section-->
 
                     <q-card-actions align="right" class="bg-white text-teal">
                         <q-btn flat label="OK" v-close-popup rounded />
@@ -76,8 +74,10 @@ const dialogContent = ref(false);
 const error = ref('');
 
 const onContentUpdated = (data) => {
-    if(data) {
+    console.log(data);
+    if (!data || !data.title) {
         error.value = "Something went wrong";
+        return;
     }
     error.value = '';
     courseContent.value = data;

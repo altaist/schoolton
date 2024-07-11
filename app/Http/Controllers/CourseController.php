@@ -18,7 +18,7 @@ class CourseController extends Controller
         ]);
         $message = $validated['message'];
 
-        $generatedText = GptService::make()->getCourses($message);
-        return response()->json(json_decode($generatedText));
+        $generatedData = GptService::make()->getCourses($message);
+        return response()->json([$generatedData]);
     }
 }

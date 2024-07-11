@@ -73,7 +73,7 @@ class GptService extends BaseService
         if(!$data || !data_get($data, 'choices')) {
             return null;
         }
-        $result = $data['choices'][0]['message']['content'];
+        $result = json_decode($data['choices'][0]['message']['content'], true);
 
         Log::debug($result);
         return $result;
