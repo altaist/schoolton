@@ -21,7 +21,7 @@
 
 # New update!
 
-<img src="https://domiji.ru/imgs/aiupdate.gif" alt="Screenshot" width="164">
+<img src="https://domiji.ru/imgs/ai.gif" alt="New update!" width="400">
 
 We are excited to introduce a powerful new feature in SchoolTon: <b> the AI Course Generation System</b>. This innovative tool leverages artificial intelligence to create educational courses automatically, providing users with fresh and relevant content tailored to their learning needs.
 
