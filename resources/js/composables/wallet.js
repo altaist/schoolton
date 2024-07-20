@@ -1,5 +1,4 @@
 import { computed, ref } from 'vue'
-import { useProfile } from './users'
 
 const STDNT = 'stdnt';
 const EXPRT = 'exprt';

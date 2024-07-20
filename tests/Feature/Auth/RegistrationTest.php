@@ -32,18 +32,18 @@ class RegistrationTest extends TestCase
 
     public function test_new_users_can_register_and_login_by_tg(): void
     {
-        $response = $this->post('/register-custom', [
+        $response = $this->post('/register-auto', [
             'name' => 'Test User',
             'email' => 'test@example.com',
-            'tg_id' => '1',
-            'custom_token' => '123456789'
+            'social_id' => '1',
+            'auth_token' => '123456789'
         ]);
 
         $this->assertAuthenticated();
         $response = $this->post('/logout');
-        $response = $this->post('/login-custom', [
-            'tg_id' => '1',
-            'custom_token' => '123456789',
+        $response = $this->post('/login-auto', [
+            'social_id' => '1',
+            'auth_token' => '123456789',
         ]);
 
         $this->assertAuthenticated();

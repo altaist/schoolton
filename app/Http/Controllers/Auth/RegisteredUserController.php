@@ -58,17 +58,19 @@ class RegisteredUserController extends Controller
     public function storeCustom(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
-            'tg_id' => 'required|string',
-            'custom_token' => 'required|string',
+            'name' => 'string|max:255',
+            'email' => 'string|lowercase|email|max:255|unique:'.User::class,
+            'social_id' => 'string',
+            'social_type' => 'string',
+            'auth_token' => 'required|string',
         ]);
 
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'tg_id' => $request->tg_id,
-            'custom_token' => $request->custom_token,
+            'name' => $request->name ?? 'auto_user',
+            'email' => $request->email ?? $request->auth_token . "@",
+            'auth_token' => $request->auth_token,
+            'social_id' => $request->social_id,
+            'social_type' => $request->social_type,
             'password' => Hash::make(Str::random(9)),
         ]);
 

@@ -1,14 +1,14 @@
 <template>
-    <div class="q-my-lg" v-if="user">
+    <div class="q-my-lg" v-if="userComputed">
         <block bg-color="bg-white">
             <div class="q-my-md text-h5 text-black">Profile</div>
-            <div class="text-h6 text-grey">Hello, {{ user.name }}!</div>
+            <div class="text-h6 text-grey">Hello, {{ userComputed.name }}!</div>
         </block>
     </div>
 </template>
 <script setup>
 import { ref, computed  } from 'vue'
-import { useProfile } from '@/composables/users';
+import { auth, userComputed } from '@/composables/users';
 import Block from '@shared/Block.vue';
 
 defineProps({
@@ -17,10 +17,8 @@ defineProps({
         default: false
     },
 });
-const emit = defineEmits(['click']);
+const emit = defineEmits(['click:profile']);
 
-const { getUser } = useProfile();
-
-const user = getUser();
+auth();
 
 </script>

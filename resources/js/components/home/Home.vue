@@ -1,6 +1,5 @@
 <template>
     <Header/>
-
     <div v-if="getMode() == 'student'">
 
         <div>

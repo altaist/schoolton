@@ -22,8 +22,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'tg_id',
-        'custom_token',
+        'user_id',
+        'auth_token',
     ];
 
     /**
@@ -34,7 +34,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
-        'custom_token',
+        'auth_token',
     ];
 
     /**
@@ -52,6 +52,6 @@ class User extends Authenticatable
 
     public function scopeByCustomToken(Builder $query, string $token): Builder
     {
-        return $query->where('custom_token', $token);
+        return $query->where('auth_token', $token);
     }
 }

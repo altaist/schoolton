@@ -22,8 +22,8 @@ Route::middleware('guest')->group(function () {
 
     Route::post('login', [AuthenticatedSessionController::class, 'store']);
 
-    Route::post('login-custom', [AuthenticatedSessionController::class, 'storeCustom'])->name('login.custom');
-    Route::post('register-custom', [RegisteredUserController::class, 'storeCustom'])->name('register.custom');
+    Route::post('login-auto', [AuthenticatedSessionController::class, 'storeCustom'])->name('login.auto');
+    Route::post('register-auto', [RegisteredUserController::class, 'storeCustom'])->name('register.auto');
 
     Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
                 ->name('password.request');

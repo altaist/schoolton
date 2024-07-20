@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('custom_token')->nullable();
-            $table->string('tg_id')->nullable();
+            $table->string('auth_token')->nullable();
+            $table->nullableMorphs('social');
         });
     }
 
@@ -23,8 +23,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('custom_token');
-            $table->dropColumn('tg_id');
+            $table->dropColumn('auth_token');
+            $table->dropMorphs('social');
         });
     }
 };

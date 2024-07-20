@@ -29,7 +29,6 @@
 
         <Toolbar :val="70" :options="menu" @click="onToolbarClick" :mode="mode" />
     </div>
-
 </template>
 
 <script setup>

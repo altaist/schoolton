@@ -22,8 +22,7 @@ class CustomLoginRequest extends LoginRequest
     public function rules(): array
     {
         return [
-            'tg_id' => ['required'],
-            'custom_token' => ['required', 'string'],
+            'auth_token' => ['required', 'string'],
         ];
     }
 
@@ -31,15 +30,14 @@ class CustomLoginRequest extends LoginRequest
     {
         $this->ensureIsNotRateLimited();
 
-        $tgId = $this->get('tg_id');
-        $token = $this->get('custom_token');
-        $user = User::byCustomToken($token)->where('tg_id', $tgId)->first();
+        $token = $this->get('auth_token');
+        $user = User::byCustomToken($token)->first();
 
         if (!$user) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
-                'email' => trans('auth.failed'),
+                'auth_token' => trans('auth.failed'),
             ]);
         }
 
