@@ -1,7 +1,6 @@
 <template>
     <Header/>
     <div v-if="getMode() == 'student'">
-
         <div>
             <User/>
         </div>
@@ -97,6 +96,7 @@ const props = defineProps({
         default: 'student'
     },
 });
+
 const emit = defineEmits(['mode:changed', 'wallet:clicked', 'quiz:clicked']);
 
 const { getMode, getCurrency, getBgColor, changeMode } = useUi();

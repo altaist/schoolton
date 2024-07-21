@@ -36,6 +36,7 @@ const currentLang = {
     'comming_soon': 'Comming soon'
 }
 
-const t = (key) => {
+window.TWA = window.Telegram.WebApp;
+window.t = (key) => {
     return currentLang[key] || key;
 }
