@@ -1,0 +1,10 @@
+user_id;journalable_type;journalable_id
+11;course;1
+11;course;2
+12;course;1
+11;lesson;1
+12;lesson;1
+15;lesson;1
+11;lesson;2
+11;lesson;3
+
