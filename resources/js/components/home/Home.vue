@@ -1,8 +1,8 @@
 <template>
-    <Header/>
+    <Header />
     <div v-if="getMode() == 'student'">
         <div>
-            <User/>
+            <User />
         </div>
         <div>
             <div class="text-h5 q-my-lg">Active quiz</div>
@@ -60,6 +60,9 @@
             </block>
         </div>
         <div class="q-my-lg">
+            <div>
+                <Qr />
+            </div>
             <div class="text-h5">How it works</div>
             <block :bg-color="getBgColor('bg-')">
                 <div class="text-h6">Become a master! Make your expert capital passing a quizes</div>
@@ -71,9 +74,7 @@
                 <div class="text-h6">Sell courses and earn money!</div>
             </block>
         </div>
-        <div>
-            <Qr/>
-        </div>
+
 
     </div>
 
