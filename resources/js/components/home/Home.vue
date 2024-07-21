@@ -71,6 +71,9 @@
                 <div class="text-h6">Sell courses and earn money!</div>
             </block>
         </div>
+        <div>
+            <Qr/>
+        </div>
 
     </div>
 
@@ -85,6 +88,7 @@ import LProgress from '@shared/LProgress.vue';
 import PageTitle from '@shared/PageTitle.vue';
 import Header from '@/components/layouts/Header.vue';
 import User from '@/components/user/User.vue'
+import Qr from '@/pages/Qr/Qr.vue';
 
 const props = defineProps({
     visibility: {
