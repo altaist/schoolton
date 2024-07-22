@@ -17,7 +17,7 @@ export const useCrud = (configData) => {
     }
 
     const url = (action, id, parentId) => {
-        return route('crud.' + action, [type, id, parentId])
+        return route('crud.create', { type, id})
     }
 
     const loadList = (filter) => {

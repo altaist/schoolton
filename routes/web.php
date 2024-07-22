@@ -28,14 +28,14 @@ Route::get('/crud', function () {
     return Inertia::render('Crud/Crud', [
         'crudConfig' => config('crud.qr')
     ]);
-})->name('crud');
+})->name('crud.qr');
 
 Route::get('/api/crud/{type}', [CrudController::class, 'index'])->name('crud.list');
 Route::get('/api/crud/{type}/{id}', [CrudController::class, 'show'])->name('crud.item');
 Route::get('/api/crud/{type}/{id}/childs/{childs_type}', [CrudController::class, 'childs'])->name('crud.childs');
 Route::get('/api/crud/{type}/{id}/parent', [CrudController::class, 'parent'])->name('crud.parent');
 Route::get('/api/crud/{type}/{id}/user', [CrudController::class, 'user'])->name('crud.user');
-Route::post('/api/crud/{type}/{id}', [CrudController::class, 'store'])->name('crud.create');
+Route::post('/api/crud/{type}/', [CrudController::class, 'store'])->name('crud.create');
 Route::patch('/api/crud/{type}/{id}', [CrudController::class, 'update'])->name('crud.update');
 Route::post('/api/crud/{type}/{id}', [CrudController::class, 'detroy'])->name('crud.delete');
 

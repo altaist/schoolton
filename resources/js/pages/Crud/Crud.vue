@@ -24,6 +24,7 @@ const props = defineProps({
 const emit = defineEmits(['click']);
 
 const crudManager = useCrud(props.crudConfig);
+crudManager.create({title: 'Sample qr'})
 
 </script>
 
