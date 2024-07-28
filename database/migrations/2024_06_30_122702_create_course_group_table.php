@@ -23,7 +23,6 @@ return new class extends Migration
             $table->date('date_sign_to')->nullable();
             $table->json('schedule')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

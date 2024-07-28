@@ -17,11 +17,10 @@ return new class extends Migration
             $table->unsignedInteger('product_id')->nullable();
             $table->unsignedInteger('parent_id')->nullable();
             $table->string('title');
+            $table->string('description')->nullable();
             $table->string('img')->nullable();
             $table->string('json_content')->nullable();
-            $table->decimal('price',8,2)->default(0);
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
