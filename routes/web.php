@@ -1,7 +1,6 @@
 <?php
 
-use App\Http\Controllers\CourseController;
-use App\Http\Controllers\CrudController;
+use App\Http\Controllers\Crud\CrudController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -21,7 +20,7 @@ Route::get('/generator', function () {
 })->name('generator');
 
 Route::get('/qr', function () {
-    return Inertia::render('Qr/Qr', []);
+    return Inertia::render('Qr', []);
 })->name('qr');
 
 Route::get('/crud', function () {
@@ -30,17 +29,15 @@ Route::get('/crud', function () {
     ]);
 })->name('crud.qr');
 
-Route::get('/api/crud/{type}', [CrudController::class, 'index'])->name('crud.list');
-Route::get('/api/crud/{type}/{id}', [CrudController::class, 'show'])->name('crud.item');
-Route::get('/api/crud/{type}/{id}/childs/{childs_type}', [CrudController::class, 'childs'])->name('crud.childs');
-Route::get('/api/crud/{type}/{id}/parent', [CrudController::class, 'parent'])->name('crud.parent');
-Route::get('/api/crud/{type}/{id}/user', [CrudController::class, 'user'])->name('crud.user');
-Route::post('/api/crud/{type}/', [CrudController::class, 'store'])->name('crud.create');
-Route::patch('/api/crud/{type}/{id}', [CrudController::class, 'update'])->name('crud.update');
-Route::post('/api/crud/{type}/{id}', [CrudController::class, 'detroy'])->name('crud.delete');
-
-
-Route::post('/api/gpt', [CourseController::class, 'createGpt'])->name('gpt');
+Route::prefix('lk')->group(function () {
+    Route::get('student/{type}/{id}', [CrudController::class, 'show'])->name('crud.student.show');
+    Route::get('student/{type}', [CrudController::class, 'index'])->name('crud.student.index');
+    /*
+    Route::get('/{type}/create', [CrudController::class, 'create'])->name('crud.create');
+    Route::get('/{type}/edit', [CrudController::class, 'edit'])->name('crud.edit');
+    Route::get('/{type}/{id}/{child_type}', [CrudController::class, 'childs'])->name('crud.childs');
+    */
+});
 
 
 

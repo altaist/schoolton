@@ -1,4 +1,4 @@
-import { loading, get, post } from './requests';
+import { loading, requestGet, requestPost, requestPut, requestDelete } from './requests';
 
 const defaultConfig = {
     type: 'default',
@@ -10,45 +10,69 @@ const defaultConfig = {
     text_remove: 'Remove'
 }
 
+const makeUrl = (prefix, type, action, id) => {
+    return route('crud.' + (prefix ? prefix + "." : '') + action, { type, id })
+}
 
-export const useCrud = (configData) => {
+
+export const useCrud = (configData, routePrefix = 'api') => {
     const getConfig = (key, def) => {
         return configData[key] || defaultConfig[key] || def;
     }
 
     const url = (action, id, parentId) => {
-        return route('crud.create', { type, id})
-    }
-
-    const loadList = (filter) => {
-        return get(url('list'), filter);
-    }
-
-    const loadChilds = (id, filter) => {
-        return get(url('childs', id), filter);
-    }
-
-    const loadParent = (id, parentId) => {
-        return get(url('parent', id, parentId));
+        const prefix = routePrefix  || getConfig('route_prefix');
+        return makeUrl(prefix, type, action, id, parentId);
+        //return route('crud.' + prefix + (prefix ? '.' : '') + action, { type, id })
     }
 
     const loadItem = (id) => {
-        return get(url('item', id));
+        return requestGet(url('show', id));
     }
 
-    const create = (data) => {
-        return post(url('create'), data);
+    const loadList = (filter) => {
+        return requestGet(url('index'), filter);
+    }
+
+    const loadChilds = (id, filter) => {
+        return requestGet(url('childs', id), filter);
+    }
+
+    const loadParent = (id, parentId) => {
+        return requestGet(url('parent', id, parentId));
+    }
+
+    const store = (data) => {
+        return requestPost(url('store'), data);
     }
 
     const update = (id, data) => {
-        return patch(url('store', id), data);
+        return requestPut(url('update', id), data);
     }
 
     const del = (id) => {
-        return post(url('delete', id), filter);
+        return requestDelete(url('destroy', id));
     }
 
-    const onCrud = (action, data) => {
+    const onCrud = (action, data, id) => {
+        switch (action) {
+            case 'store':
+                return store(data);
+            case 'list':
+                return loadList(data);
+            case 'item':
+                return loadItem(id);
+            case 'childs':
+                return loadChilds(data);
+            case 'parent':
+                return loadParent(data);
+            case 'update':
+                return update(id, data);
+            case 'delete':
+                return del(id);
+            default:
+                break;
+        }
     }
 
     const config = (key, def) => {
@@ -68,10 +92,20 @@ export const useCrud = (configData) => {
         loadChilds,
         loadItem,
         loadParent,
-        create,
+        store,
         update,
         del
     }
+}
+
+export const redirectToItem = (type, id, prefix = null) => {
+    const url = makeUrl(prefix, type, 'show', id);
+    window.location = url;
+}
+
+export const redirectToList = (type, prefix = null) => {
+    const url = makeUrl(prefix, type, 'index');
+    window.location = url;
 }
 
 

@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Qr extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'code',
+        'user_id',
+    ];
 }

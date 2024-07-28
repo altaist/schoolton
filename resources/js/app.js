@@ -15,6 +15,7 @@ import '@quasar/extras/material-icons/material-icons.css'
 import 'quasar/src/css/index.sass'
 
 const appName = import.meta.env.VITE_APP_NAME || 'Schoolton';
+window.TWA = window.Telegram ? window.Telegram.WebApp : null;
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
@@ -24,7 +25,7 @@ createInertiaApp({
             .use(plugin)
             .use(ZiggyVue)
             .use(Quasar, quasarOptions)
-        app.config.globalProperties.TWA = window.Telegram.WebApp
+        app.config.globalProperties.TWA = window.TWA
         return app.mount(el);
     },
     progress: {
@@ -36,7 +37,7 @@ const currentLang = {
     'comming_soon': 'Comming soon'
 }
 
-window.TWA = window.Telegram.WebApp;
+
 window.t = (key) => {
     return currentLang[key] || key;
 }

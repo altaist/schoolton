@@ -21,10 +21,10 @@ export const request = async (url, data, method = 'post', onError = (err) => con
         loading.value = false;
     }
 }
-export const post = (url, data = {}) =>  request(url, data);
-export const patch = (url, data = {}) =>  request(url, data, 'patch');
-export const del = (url, data = {}) =>  request(url, data, 'delete');
-export const get = (url, data = {}) =>  request(url, data, 'get');
+export const requestPost = (url, data = {}) =>  request(url, data);
+export const requestPut = (url, data = {}) =>  request(url, data, 'put');
+export const requestDelete = (url, data = {}) =>  request(url, data, 'delete');
+export const requestGet = (url, data = {}) =>  request(url, data, 'get');
 
 
 
