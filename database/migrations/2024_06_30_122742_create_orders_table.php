@@ -14,11 +14,13 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('user_id');
-            $table->morphs('productable');
+            $table->morphs('orderable');
+            $table->unsignedSmallInteger('price_id')->nullable();
             $table->decimal('price');
-            $table->tinyInteger('quantity');
-            $table->tinyInteger('state');
-            $table->json('json_content');
+            $table->tinyInteger('quantity')->nullable();
+            $table->tinyInteger('state')->default(0);
+            $table->json('json_data')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
