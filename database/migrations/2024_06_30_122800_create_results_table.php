@@ -14,11 +14,10 @@ return new class extends Migration
         Schema::create('results', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('user_id');
-            $table->morphs('taskable');
-            $table->tinyInteger('rate');
-            $table->integer('coins');
-            $table->tinyInteger('currency');
-            $table->json('json_content');
+            $table->morphs('resultable');
+            $table->string('answer');
+            $table->json('json_data');
+            $table->tinyInteger('rating');
             $table->timestamps();
         });
     }
