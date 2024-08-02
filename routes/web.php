@@ -30,8 +30,8 @@ Route::get('/crud', function () {
 })->name('crud.qr');
 
 Route::prefix('lk')->group(function () {
-    Route::get('student/{type}/{id}', [CrudController::class, 'show'])->name('crud.student.show');
-    Route::get('student/{type}', [CrudController::class, 'index'])->name('crud.student.index');
+    Route::get('student/{type}/{id}', [CrudController::class, 'show'])->name('crud.show');
+    Route::get('student/{type}', [CrudController::class, 'index'])->name('crud.index');
     /*
     Route::get('/{type}/create', [CrudController::class, 'create'])->name('crud.create');
     Route::get('/{type}/edit', [CrudController::class, 'edit'])->name('crud.edit');

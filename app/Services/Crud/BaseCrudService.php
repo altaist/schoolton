@@ -10,13 +10,13 @@ class BaseCrudService extends BaseService
 {
     protected $crudConfig = null;
     protected $type = null;
-    protected $model = null;
+    protected $modelClass = null;
 
     public function __construct($crudConfig)
     {
         $this->crudConfig = $crudConfig;
         $this->type = $crudConfig['type'];
-        $this->model = $this->getModel($this->type);
+        $this->modelClass = $this->getModelClass($this->type);
     }
 
     protected function getConfig(string $type)
@@ -29,23 +29,41 @@ class BaseCrudService extends BaseService
         return data_get($this->crudConfig, $key, $def);
     }
 
-    protected function convertTypeToModelName()
+    protected function convertTypeToComponentName()
     {
         return Str::ucfirst($this->type);
     }
 
-
-    protected function getModel(string $type)
+    protected function convertTypeToModelClass()
     {
-        $config = $this->getConfig($type);
-        $className = 'App\\Models\\' . $config['model'];
-        return app($className);
+        return 'App\\Models\\' . Str::ucfirst($this->type);
     }
 
-    protected function getModelInstance($id)
+    protected function convertTypeToModelResourceClass()
     {
-        $model = $this->model->find($id);
-        throw_if(!$model, 'Wrong item id');
+        return 'App\\Http\\Resources\\' . Str::ucfirst($this->type) . "Resource";
+    }
+
+    protected function convertTypeToModelResourceCollectionClass()
+    {
+        return 'App\\Http\\Resources\\' . Str::ucfirst($this->type) . "Collection";
+    }
+
+    protected function getModelClass(string $type)
+    {
+        $config = $this->getConfig($type);
+        $className = data_get($config, 'model', $this->convertTypeToModelClass());
+        return $className;
+    }
+
+    protected function getModelInstance($id = null, array $with = [])
+    {
+        if($id === null) {
+            return app($this->modelClass);
+        }
+
+        $model = $this->modelClass::with($with)->findOrFail($id);
+        // throw_if(!$model, 'Wrong item id for type ' . $this->type);
         return $model;
     }
 
@@ -56,13 +74,13 @@ class BaseCrudService extends BaseService
 
     public function getItemsCollection($filter)
     {
-        $model = $this->model;
-        return $model->query()->get();
+        $model = $this->modelClass;
+        return $model::query()->get();
     }
 
     public function store($request)
     {
-        $model = $this->model;
+        $model = $this->getModelInstance(null);
         $model->fill($request->all());
         $model->save();
         return $model;
@@ -71,7 +89,6 @@ class BaseCrudService extends BaseService
     public function update($id, $request)
     {
         $model = $this->getModelInstance($id);
-        throw_if(!$model);
         $model->fill($request->all());
         $model->save();
         return $model;

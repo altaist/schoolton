@@ -8,14 +8,17 @@ class BaseCrudInertiaService extends BaseCrudService
 {
     public function show($id)
     {
-        $componentName = $this->getConfigValue('vue_component_item', $this->convertTypeToModelName());
+        $componentName = $this->getConfigValue('component', $this->convertTypeToComponentName());
         $item = $this->getModelInstance($id);
-        return Inertia::render($componentName, ["item" => $item]);
+        $resourceClass = $this->convertTypeToModelResourceClass();
+        $resultData = class_exists($resourceClass) ? (new $resourceClass($item))->toArray(request()) : $item;
+
+        return Inertia::render($componentName, ["item" => $resultData]);
     }
 
     public function index($filter = null)
     {
-        $componentName = $this->getConfigValue('vue_component_list', $this->convertTypeToModelName().'List');
+        $componentName = $this->getConfigValue('component_list', $this->convertTypeToComponentName().'List');
         $items = $this->getItemsCollection($filter);
         return Inertia::render($componentName, ["items" => $items]);
     }
