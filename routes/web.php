@@ -1,13 +1,16 @@
 <?php
 
 use App\Http\Controllers\Crud\CrudController;
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', [HomeController::class, 'index']);
+
 Route::get('/main', function () {
     return Inertia::render('Main', []);
 })->name('main');
@@ -28,6 +31,12 @@ Route::get('/crud', function () {
         'crudConfig' => config('crud.qr')
     ]);
 })->name('crud.qr');
+
+Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.store');
+
+Route::prefix('orders')->group(function () {
+    Route::post('/', [OrderController::class, 'store'])->name('orders.store');
+});
 
 Route::prefix('lk')->group(function () {
     Route::get('student/{type}/{id}', [CrudController::class, 'show'])->name('crud.show');
