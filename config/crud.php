@@ -8,6 +8,14 @@ return [
         'rules' => [
             'user_id' => 'required',
             'code' => 'required'
+        ],
+    ],
+
+    'course' => [
+        'type' => 'course',
+        'model' => 'Course',
+        'relations' => [
+            'topic' => []
         ]
     ]
 ];
