@@ -1,4 +1,4 @@
-import { loading, requestGet, requestPost, requestPut, requestDelete } from './requests';
+import { loading, requestGet, requestPost, requestPut, requestDelete } from '../utils/requests';
 
 const defaultConfig = {
     type: 'default',

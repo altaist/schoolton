@@ -32,7 +32,7 @@
 import { ref, computed} from 'vue'
 import Block from '@shared/Block.vue';
 import Section from '@shared/Section.vue';
-import { useCrud, redirectToItem, redirectToList } from '@/utils/crud.js'
+import { useCrud, redirectToItem, redirectToList } from '@/composables/crud.js'
 
 const props = defineProps({
     title: {

@@ -13,9 +13,14 @@ return [
 
     'course' => [
         'type' => 'course',
-        'model' => 'Course',
+        'component' => 'edu/Course',
         'relations' => [
             'topic' => []
         ]
+    ],
+    'topic' => [
+        'type' => 'topic',
+        'component' => 'edu/Topic',
+        'group' => 'edu',
     ]
 ];
