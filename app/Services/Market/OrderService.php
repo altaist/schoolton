@@ -53,7 +53,8 @@ class OrderService extends BaseService
 
 
         //$data = array_combine(['orderable_type', 'orderable_id', 'price_id', 'price'], [$orderableType, $orderableId, $priceId, $price]);
-        $data = $request->only(['user_id', 'orderable_type', 'orderable_id', 'price_id', 'price']);
+        $data = $request->only(['user_id', 'orderable_id', 'price_id', 'price']);
+        $data['orderable_type'] = $orderableType;
         //dd($data);
         return $this->createOrder($data);
     }

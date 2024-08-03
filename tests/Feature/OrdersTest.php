@@ -6,6 +6,7 @@ namespace Tests\Feature;
 
 use App\Models\Course;
 use App\Models\Feedback;
+use App\Models\Order;
 use App\Models\User;
 use Tests\TestCase;
 
@@ -33,9 +34,24 @@ class OrdersTest extends TestCase
         $response = $this->post(route('orders.store'), [
             'user_id' => $user->id,
             'orderable_id' => $course->id,
-            'orderable_type' => 'orders',
             'price' => '123',
         ]);
+        $response
+            ->assertStatus(200)
+            ->assertJsonIsObject()
+            ->assertJson([
+                'id' => 1,
+                'user_id' => $user->id,
+                'price' => '123',
+                'orderable_type' => 'course',
+                'orderable_id' => $course->id
+            ]);
+
+        $this->assertCount(1, Order::all());
+        $order = Order::first();
+
+        $response = $this->get(route('orders.item', $order->id));
         $response->assertStatus(200);
+
     }
 }
