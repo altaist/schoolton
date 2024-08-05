@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('auth_token')->nullable();
+            $table->string('contact_email')->nullable();
+            $table->string('contact_tel')->nullable();
             $table->nullableMorphs('social');
         });
     }
@@ -25,6 +27,8 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('auth_token');
             $table->dropMorphs('social');
+            $table->dropMorphs('contact_email');
+            $table->dropMorphs('contact_tel');
         });
     }
 };

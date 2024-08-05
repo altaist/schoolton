@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('feedback', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
+            /*
             $table->string('name')->nullable();
             $table->string('firstName')->nullable();
             $table->string('lastName')->nullable();
@@ -21,7 +21,10 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->string('tg_id')->nullable();
             $table->string('ref_id')->nullable();
-            $table->json('form_data')->nullable();
+            */
+            $table->string('type')->nullable();
+            $table->tinyInteger('state')->default(0);
+            $table->json('form_data');
             $table->timestamps();
         });
     }
