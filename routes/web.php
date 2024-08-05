@@ -4,6 +4,7 @@ use App\Http\Controllers\Crud\CrudController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -46,17 +47,15 @@ Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.s
 Route::prefix('orders')->group(function () {
     Route::post('/', [OrderController::class, 'store'])->name('order.store');
     Route::get('/item/{id}', [OrderController::class, 'getItem'])->name('order.item');
+    Route::get('/user/{user}', [OrderController::class, 'getOrdersForUser'])->name('order.user');
+});
+Route::prefix('payments')->group(function () {
+    Route::post('/', [PaymentController::class, 'store'])->name('payment.store');
+    Route::put('/{payment}', [PaymentController::class, 'update'])->name('payment.update.state');
+    Route::put('/{payment}/state', [PaymentController::class, 'updateState'])->name('payment.update.state');
+    Route::delete('/{payment}', [PaymentController::class, 'destroy'])->name('payment.update.state');
 });
 
-Route::prefix('lk')->group(function () {
-    Route::get('student/{type}/{id}', [CrudController::class, 'show'])->name('crud.show');
-    Route::get('student/{type}', [CrudController::class, 'index'])->name('crud.index');
-    /*
-    Route::get('/{type}/create', [CrudController::class, 'create'])->name('crud.create');
-    Route::get('/{type}/edit', [CrudController::class, 'edit'])->name('crud.edit');
-    Route::get('/{type}/{id}/{child_type}', [CrudController::class, 'childs'])->name('crud.childs');
-    */
-});
 
 
 
@@ -93,7 +92,20 @@ Route::prefix('task')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/lk', function () {
+    Route::prefix('lk')->group(function () {
+
+        Route::get('/', [ProfileController::class, 'showLk'])->name('lk');
+
+        Route::get('student/{type}/{id}', [CrudController::class, 'show'])->name('crud.show');
+        Route::get('student/{type}', [CrudController::class, 'index'])->name('crud.index');
+        /*
+        Route::get('/{type}/create', [CrudController::class, 'create'])->name('crud.create');
+        Route::get('/{type}/edit', [CrudController::class, 'edit'])->name('crud.edit');
+        Route::get('/{type}/{id}/{child_type}', [CrudController::class, 'childs'])->name('crud.childs');
+        */
+    });
+
+    Route::get('/authlk', function () {
         return Inertia::render('Dashboard');
     })->middleware(['auth', 'verified'])->name('dashboard');
 
