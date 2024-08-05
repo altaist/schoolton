@@ -48,6 +48,9 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'created_at' => 'datetime:Y-m-d H:i',
+            'updated_at' => 'datetime',
+
         ];
     }
 
@@ -55,4 +58,10 @@ class User extends Authenticatable
     {
         return $query->where('auth_token', $token);
     }
+/*
+    public function orders()
+    {
+        return $this->hasMany(Order::class)->with('Orderable');
+    }
+*/
 }

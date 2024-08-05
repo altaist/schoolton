@@ -2,6 +2,7 @@
 
 namespace App\Services\Market;
 
+use App\Constants\OrderState;
 use App\Models\Order;
 use App\Models\User;
 use App\Services\BaseService;
@@ -17,9 +18,9 @@ class OrderService extends BaseService
         return Order::findOrFail($orderId);
     }
 
-    public function getOrdersForUser(int $userId)
+    public function getOrdersForUser(User $user, OrderState $state = null)
     {
-        return Order::forUser($userId)->get();
+        return Order::forUser($user->id)->forState($state)->get();
     }
 
     public function getOrdersForState(int $state)
@@ -62,6 +63,7 @@ class OrderService extends BaseService
             'product.type' => 'string',
             'priceId' => 'sometimes|numeric',
             'price' => 'sometimes|numeric',
+            'state' => 'sometimes|numeric',
             'json_data' => 'nullable|array'
         ], [
             'product.id' => "Неверный код товара"
@@ -73,42 +75,39 @@ class OrderService extends BaseService
             'orderable_type' => data_get($validated, 'product.type'),
             'price_id' => data_get($validated, 'product.priceId'),
             'price' => data_get($validated, 'product.price', 0),
+            'state' => data_get($validated, 'state', 0),
             'json_data' => data_get($validated, 'json_data', 0),
         ];
 
         return Order::create($fields);
     }
 
-    public function createFromRequest1()
+    public function updateFromArray(Order $order, $requestData)
     {
-        $request = request();
-        dd($request->all());
 
-        $userId = $request->input('user.user_id');
-        if($userId === null && $request->input('autocreate')){
-            $user = UserService::make()->createUserFromRequest($request->user ?? [], true);
-            $request->merge(['user_id'=>$user->id]);
-        }
+        $validated = Validator::make($requestData, [
+            'user.id' => 'required|exists:users,id',
+            'product.id' => 'required|numeric|poly_exists:product.type',
+            'product.type' => 'string',
+            'priceId' => 'sometimes|numeric',
+            'price' => 'sometimes|numeric',
+            'state' => 'sometimes|numeric',
+            'json_data' => 'nullable|array'
+        ], [
+            'product.id' => "Неверный код товара"
+        ])->validate();
 
-        $request->validate([
-            'user.user_id' => 'required|exists:users,id',
-            'product.orderable_id' => 'required|numeric',
-            'product.orderable_type' => 'string',
-            'price_id' => 'sometimes|numeric',
-            'price' => 'required|numeric'
-        ]);
-
-        $data = [
-            'user_id' => $request->user->id
+        $fields = [
+            'user_id' => data_get($validated, 'user.id'),
+            'orderable_id' => data_get($validated, 'product.id'),
+            'orderable_type' => data_get($validated, 'product.type'),
+            'price_id' => data_get($validated, 'product.priceId'),
+            'price' => data_get($validated, 'product.price', 0),
+            'state' => data_get($validated, 'state', 0),
+            'json_data' => data_get($validated, 'json_data', 0),
         ];
 
-        $orderableType = $request->input('orderable_type', 'course');
-
-        //$data = array_combine(['orderable_type', 'orderable_id', 'price_id', 'price'], [$orderableType, $orderableId, $priceId, $price]);
-        $data = $request->only(['user_id', 'orderable_id', 'price_id', 'price']);
-        $data['orderable_type'] = $orderableType;
-        //dd($data);
-        return $this->createOrder($data);
+        return $order->update($fields);
     }
 
     public function createOrder(array $data)

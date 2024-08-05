@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Services\Market\OrderService;
 use Illuminate\Http\Request;
 
@@ -28,6 +29,12 @@ class OrderController extends BaseController
     {
         $orderService = OrderService::make();
         return $orderService->getOrderCollection($request);
+    }
+
+    public function getOrdersForUser(Request $request, User $user)
+    {
+        $orderService = OrderService::make();
+        return $orderService->getOrdersForUser($user);
     }
 
     public function store()

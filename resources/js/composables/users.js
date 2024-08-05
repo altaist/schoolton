@@ -33,7 +33,7 @@ const setUser = (user) => {
     });
 }
 
-const auth = async () => {
+const auth = async (autoreg = false) => {
     const userFromParam = usePage().props.auth.user;
     console.log('User from session', userFromParam);
 
@@ -41,21 +41,28 @@ const auth = async () => {
         return setUser(userFromParam);
     }
 
-    const token = loadFromLocalStorage('auth_token') || createUserToken();
-    saveToLocalStorage('auth_token', token);
-    console.log('LocalToken', token);
-
-    const loginUser = await autoLogin(token)
-    console.log('Login user', loginUser);
-    if(loginUser) {
-        loginUser.token = token;
-        return setUser(loginUser);
+    let token = loadFromLocalStorage('auth_token');
+    if(token) {
+        const loginUser = await autoLogin(token)
+        console.log('Login user', loginUser);
+        if(loginUser) {
+            loginUser.token = token;
+            return setUser(loginUser);
+        }
+    }else{
+        token = createUserToken();
+        saveToLocalStorage('auth_token', token);
+        console.log('Local token created: ', token);
     }
 
-    const newUser = await autoRegister(token) || {};
-    console.log('Registered user', newUser);
+    if(autoreg) {
+        const newUser = await autoRegister(token) || {};
+        console.log('Registered user: ', newUser);
 
-    return setUser(newUser);
+        return setUser(newUser);
+    }
+
+    return null;
 }
 
 const autoLogin = async (auth_token) => {

@@ -1,6 +1,7 @@
 <template>
     <div class="q-my-sm q-pa-sm">
-
+        <div>{{ order.id }}</div>
+        <div>{{ order.json_data }}</div>
     </div>
 </template>
 <script setup>
@@ -9,9 +10,8 @@ import Block from '@shared/Block.vue';
 import Section from '@shared/Section.vue';
 
 const props = defineProps({
-    title: {
-        type: String,
-        default: ''
+    order: {
+        type: Object,
     },
 });
 const emit = defineEmits(['click']);
