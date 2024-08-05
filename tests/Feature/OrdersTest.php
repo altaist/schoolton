@@ -31,7 +31,7 @@ class OrdersTest extends TestCase
         $user = User::factory()->create();
         $course = Course::factory()->create();
 
-        $response = $this->post(route('orders.store'), [
+        $response = $this->post(route('order.store'), [
             'user_id' => $user->id,
             'orderable_id' => $course->id,
             'price' => '123',
@@ -50,7 +50,7 @@ class OrdersTest extends TestCase
         $this->assertCount(1, Order::all());
         $order = Order::first();
 
-        $response = $this->get(route('orders.item', $order->id));
+        $response = $this->get(route('order.item', $order->id));
         $response->assertStatus(200);
 
     }

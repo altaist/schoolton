@@ -16,10 +16,13 @@ class Order extends BaseModel
         'orderable_id',
         'orderable_type',
         'price',
+        'price_id',
+        'json_data',
+        'state',
     ];
 
     protected $casts = [
-        'form_data' => 'array'
+        'json_data' => 'array'
     ];
 
     public function orderable()

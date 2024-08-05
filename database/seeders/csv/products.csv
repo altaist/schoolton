@@ -1,4 +1,4 @@
-id;title;summary;info;author_id
+id;title;description;json_data;price
 1;Робототехника 6+;Lego WeDo, тренажеры и другие конструкторы для начинающих инеженеров;{"hours":"2", "power":1};1
 2;Робототехника 9-12;Lego Mindstorms Ev3 и Arduino;{};1
 3;Робототехника 2 год;Lego Mindstorms Ev3 и Arduino;{};1
