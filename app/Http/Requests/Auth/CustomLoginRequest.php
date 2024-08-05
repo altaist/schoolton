@@ -28,6 +28,10 @@ class CustomLoginRequest extends LoginRequest
 
     public function authenticate(): void
     {
+        if(Auth::user()) {
+            return;
+        }
+
         $this->ensureIsNotRateLimited();
 
         $token = $this->get('auth_token');

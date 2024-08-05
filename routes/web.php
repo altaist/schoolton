@@ -9,7 +9,11 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('root');
+
+Route::get('/bye', function () {
+    return Inertia::render('Logout', []);
+})->name('logouted');
 
 Route::get('/main', function () {
     return Inertia::render('Main', []);
@@ -22,8 +26,13 @@ Route::get('/generator', function () {
     return Inertia::render('Generator', []);
 })->name('generator');
 
+
 Route::get('/qr', function () {
     return Inertia::render('Qr', []);
+})->name('qr');
+
+Route::get('/astro', function () {
+    return Inertia::render('astro/Astro', []);
 })->name('qr');
 
 Route::get('/crud', function () {
@@ -35,7 +44,8 @@ Route::get('/crud', function () {
 Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.store');
 
 Route::prefix('orders')->group(function () {
-    Route::post('/', [OrderController::class, 'store'])->name('orders.store');
+    Route::post('/', [OrderController::class, 'store'])->name('order.store');
+    Route::get('/item/{id}', [OrderController::class, 'getItem'])->name('order.item');
 });
 
 Route::prefix('lk')->group(function () {

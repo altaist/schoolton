@@ -11,6 +11,9 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
+Route::post('login-auto', [AuthenticatedSessionController::class, 'storeCustom'])->name('login.auto');
+Route::post('register-auto', [RegisteredUserController::class, 'storeCustom'])->name('register.auto');
+
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
                 ->name('register');
@@ -22,8 +25,7 @@ Route::middleware('guest')->group(function () {
 
     Route::post('login', [AuthenticatedSessionController::class, 'store']);
 
-    Route::post('login-auto', [AuthenticatedSessionController::class, 'storeCustom'])->name('login.auto');
-    Route::post('register-auto', [RegisteredUserController::class, 'storeCustom'])->name('register.auto');
+
 
     Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
                 ->name('password.request');
@@ -57,6 +59,12 @@ Route::middleware('auth')->group(function () {
 
     Route::put('password', [PasswordController::class, 'update'])->name('password.update');
 
-    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
-                ->name('logout');
+    Route::post('logout', [AuthenticatedSessionController::class, 'logout'])
+            ->name('logout');
+
+    Route::get('logout', [AuthenticatedSessionController::class, 'logoutWeb'])
+            ->name('logout.web');
+
+    Route::get('logout/to/{route}', [AuthenticatedSessionController::class, 'logoutWeb'])
+        ->name('logout.to');
 });

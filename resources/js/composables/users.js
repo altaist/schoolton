@@ -1,6 +1,6 @@
 import { ref, computed, getCurrentInstance } from 'vue'
 import { usePage } from '@inertiajs/vue3'
-import { get, post, loading } from '@/utils/requests';
+import { requestGet, requestPost, loading } from '@/utils/requests';
 
 let currentUser = null;
 const userComputed = computed(() => currentUser);
@@ -27,26 +27,61 @@ const setUser = (user) => {
     currentUser = user;
     saveToLocalStorage('user', currentUser);
     return currentUser;
+
+    return new Promise((resolve) => {
+        resolve(currentUser);
+    });
 }
 
 const auth = async () => {
     const userFromParam = usePage().props.auth.user;
+    console.log('User from session', userFromParam);
+
     if (userFromParam) {
         return setUser(userFromParam);
     }
 
     const token = loadFromLocalStorage('auth_token') || createUserToken();
     saveToLocalStorage('auth_token', token);
+    console.log('LocalToken', token);
+
     const loginUser = await autoLogin(token)
-    console.log(loginUser);
+    console.log('Login user', loginUser);
     if(loginUser) {
         loginUser.token = token;
         return setUser(loginUser);
     }
 
-    const newUser = autoRegister(token) || {};
+    const newUser = await autoRegister(token) || {};
+    console.log('Registered user', newUser);
 
     return setUser(newUser);
+}
+
+const autoLogin = async (auth_token) => {
+    return await requestPost(route('login.auto'), {
+        auth_token
+    });
+}
+const autoRegister = async (auth_token, user_id, name) => {
+    const user = await requestPost(route('register.auto'), {
+        auth_token,
+        user_id,
+        name,
+    });
+    return user;
+}
+
+const logout = () => {
+    logoutLocal();
+    return requestPost(route('logout'));
+}
+
+const logoutLocal = (removeToken = false) => {
+    localStorage.removeItem('user');
+    if(removeToken) {
+        localStorage.removeItem('auth_token');
+    }
 }
 
 const createUserToken = () => {
@@ -57,33 +92,6 @@ const createUserToken = () => {
     return '' + (new Date()).getTime() + Math.random() * 1000;
 }
 
-const autoLogin = async (auth_token) => {
-    return await post(route('login.auto'), {
-        auth_token
-    });
-
-    try {
-        const result = await axios.post(route('login.auto'), {
-            auth_token
-        });
-        if(!result.status == 200) {
-            return null;
-        }
-        const resultData = result.data ? result.data : null;
-        return resultData;
-    } catch (error) {
-        console.log(error);
-    } finally {
-
-    }
-}
-const autoRegister = async (auth_token, user_id, name) => {
-    return await post(route('register.auto'), {
-        auth_token,
-        user_id,
-        name,
-    });
-}
 
 const getTwaUser = () => {
     const TWA = getCurrentInstance().appContext.config.globalProperties.TWA;
@@ -129,6 +137,8 @@ const useProfile123 = () => {
 
 export {
     auth,
+    logout,
+    logoutLocal,
     userComputed
 }
 
