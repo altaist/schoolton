@@ -87,7 +87,7 @@ import Block from '@shared/Block.vue';
 import Button from '@shared/Button.vue';
 import LProgress from '@shared/LProgress.vue';
 import PageTitle from '@shared/PageTitle.vue';
-import Header from '@/components/layouts/Header.vue';
+import Header from '@/components/schoolton/layouts/Header.vue';
 import User from '@/components/user/User.vue'
 import Qr from '@/pages/Qr.vue';
 

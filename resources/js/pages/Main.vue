@@ -35,9 +35,9 @@
 import { computed, ref } from 'vue'
 import Toolbar from '@shared/Toolbar.vue';
 import PageTitle from '@shared/PageTitle.vue';
-import Home from '@/components/home/Home.vue'
-import Market from '@/components/market/Market.vue'
-import Courses from '@/components/edu/Courses.vue'
+import Home from '@/components/schoolton/home/Home.vue'
+import Market from '@/components/schoolton/market/Market.vue'
+import Courses from '@/components/schoolton/edu/Courses.vue'
 import Quiz from './Main.vue'
 
 
