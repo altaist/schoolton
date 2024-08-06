@@ -1,41 +1,39 @@
 <template>
-    {{ customForm }}
     <div>
-        <div>Форма заказа</div>
         <div>
-            <PersonsForm v-model='customForm'/>
+            <PersonsForm v-model='customForm' />
         </div>
         <div>
-            <ProfileForm v-model="userForm"/>
+            <ProfileForm v-model="userForm" />
         </div>
-        <div>
-            <q-btn label="OK" @click="onSubmit" :loading="loading" />
+        <div class="q-my-xl text-center">
+            <q-btn label="Заказать" @click="onSubmit" :loading="loading" color="secondary" />
         </div>
 
     </div>
     <q-dialog v-model="visibleFormCompleteDialog">
-            <q-card class="q-pa-md">
-                <q-card-section>
-                    <div class="text-h6 text-left">Ваш заказ сформирован!</div>
-                </q-card-section>
-                <q-card-section class="q-pt-none">
-                    <div>Мы получили необходимую информацию и готовы к созданию карты</div>
-                </q-card-section>
+        <q-card class="q-pa-md">
+            <q-card-section>
+                <div class="text-h6 text-left">Ваш заказ сформирован!</div>
+            </q-card-section>
+            <q-card-section class="q-pt-none">
+                <div>Мы получили необходимую информацию и готовы к созданию карты</div>
+            </q-card-section>
 
-                <q-card-section class="q-pt-none">
-                    Получите скидку <b>100</b> рублей при оплате заказа в течение ближайших 5 минут
-                </q-card-section>
+            <q-card-section class="q-pt-none">
+                Получите скидку <b>100</b> рублей при оплате заказа в течение ближайших 5 минут
+            </q-card-section>
 
-                <q-card-section class="q-pt-none">
-                    Текущая стоимость заказа:<br> <span class="text-strike">700</span> <span class="text-h6 text-positive">600</span> рублей
-                </q-card-section>
+            <q-card-section class="q-pt-none">
+                Текущая стоимость заказа:<br> <span class="text-strike">700</span> <span class="text-h6 text-positive">600</span> рублей
+            </q-card-section>
 
-                <q-card-actions align="center">
+            <q-card-actions align="center">
 
-                    <q-btn  label="Оплатить 600 рублей" @click="onPaymentStart" color="positive" />
-                </q-card-actions>
-            </q-card>
-        </q-dialog>
+                <q-btn label="Оплатить 600 рублей" @click="onPaymentStart" color="positive" />
+            </q-card-actions>
+        </q-card>
+    </q-dialog>
 </template>
 <script setup>
 import { ref, computed } from 'vue'

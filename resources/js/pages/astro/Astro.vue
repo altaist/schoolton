@@ -34,18 +34,23 @@
                 </q-card>
             </div>
             <div>
-                Аспекты
+                <Section title="Аспекты"></Section>
             </div>
             <div>
-                Как заказать
+                <Section title="Как заказать"></Section>
             </div>
             <div class="q-my-md">
+                <q-card class="bg-secondary text-white">
+                    <q-card-section>
+                        <div class="text-h4 text-center">Заказать натальную карту</div>
+                    </q-card-section>
+                </q-card>
                 <OrderForm/>
             </div>
 
 
 
-            <div>
+            <!--div>
                 Получи ответы на вопросы:
             </div>
             <div v-if="false">
@@ -67,7 +72,7 @@
             <div>
                 * По мнению редакторов жрунала MagicPult
             </div>
-            <div></div>
+            <div></div-->
 
         </div>
     </div>
