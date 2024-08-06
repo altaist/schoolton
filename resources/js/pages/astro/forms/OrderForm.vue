@@ -6,9 +6,7 @@
             <PersonsForm v-model='customForm'/>
         </div>
         <div>
-            <q-input label="Email" v-model="userForm.contactEmail" email></q-input>
-            <q-input label="Телефон" v-model="userForm.tel"></q-input>
-            <q-input label="Телеграм" v-model="userForm.tgId"></q-input>
+            <ProfileForm v-model="userForm"/>
         </div>
         <div>
             <q-btn label="OK" @click="onSubmit" :loading="loading" />
@@ -45,6 +43,7 @@ import { createAutoUserOrder } from '@/composables/shop';
 import { loading } from '@/utils/requests';
 import { auth, userComputed } from '@/composables/users';
 import PersonsForm from './PersonsForm.vue'
+import ProfileForm from './ProfileForm.vue'
 
 const productForm = ref({
     id: 1,
