@@ -52,12 +52,10 @@
 </template>
 <script setup>
 import { ref, toRefs } from 'vue'
-import Block from '@shared/Block.vue';
-import Header from '@/components/layouts/Header.vue';
 import QuizMain from '@/modules/quiz/components/QuizMain.vue';
 import PageTitle from '@shared/PageTitle.vue';
-import GptGenerator from '@/components/generator/GptGenerator.vue'
-import CourseContent from '@/components/edu/CourseContent.vue'
+import GptGenerator from '@/components/schoolton/generator/GptGenerator.vue'
+import CourseContent from '@/components/schoolton/edu/CourseContent.vue'
 
 defineProps({
     visibility: {
