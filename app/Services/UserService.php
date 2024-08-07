@@ -64,18 +64,18 @@ class UserService extends BaseService
         $validator = Validator::make($data, [
             'name' => 'string|max:255',
             'contactEmail' => 'string|lowercase|email|max:255|unique:'.User::class,
-            'contactTel' => 'string|lowercase|max:12',
-            'social_id' => 'string',
-            'social_type' => 'string',
+            'tel' => 'nullable|string|lowercase|max:12',
+            'socialId' => 'nullable|string',
+            'socialType' => 'nullable|string',
         ]);
 
         $validated = $validator->validate();
 
         $user->name = data_get($validated, 'name', $user->name);
         $user->contact_email = Str::lower(data_get($validated, 'contactEmail', $user->contact_email));
-        $user->contact_tel = data_get($validated, 'contactTel', $user->contact_tel);
-        $user->social_id = data_get($validated, 'social_id', $user->social_id);
-        $user->social_type = data_get($validated, 'social_type', $user->social_type);
+        $user->contact_tel = data_get($validated, 'tel', $user->contact_tel);
+        $user->social_id = data_get($validated, 'socialId', $user->social_id);
+        $user->social_type = data_get($validated, 'socialType', $user->social_type);
         $user->password = data_get($validated, 'password', $user->password);
 
         $user->save();

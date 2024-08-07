@@ -25,6 +25,11 @@ export const deleteOrder = async (orderId) => {
     });
 }
 
+export const completePayment = async (orderId, sum) => {
+    console.log(orderId, sum);
+    return await requestPost(route('payment.complete', { order: orderId, sum: sum }), {});
+}
+
 export const createPayment = async (orderId, sum) => {
     return await requestPost(route('payment.store'), {
         order_id: orderId,

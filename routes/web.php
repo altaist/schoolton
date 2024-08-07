@@ -53,6 +53,7 @@ Route::prefix('payments')->group(function () {
     Route::post('/', [PaymentController::class, 'store'])->name('payment.store');
     Route::put('/{payment}', [PaymentController::class, 'update'])->name('payment.update.state');
     Route::put('/{payment}/state', [PaymentController::class, 'updateState'])->name('payment.update.state');
+    Route::post('/{order}/complete/{sum}', [PaymentController::class, 'completePayment'])->name('payment.complete');
     Route::delete('/{payment}', [PaymentController::class, 'destroy'])->name('payment.update.state');
 });
 

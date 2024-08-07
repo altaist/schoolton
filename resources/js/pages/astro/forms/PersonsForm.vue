@@ -55,8 +55,14 @@
     </div>
 </template>
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, toRef, computed } from 'vue'
+import { useLaravelErrors } from '@/utils/requests'
 
 const customForm = defineModel();
+
+const props = defineProps(['errors']);
+
+const errorData = toRef(props, 'errors');
+const { err, errcheck } = useLaravelErrors(errorData);
 
 </script>
