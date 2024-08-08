@@ -1,38 +1,27 @@
 <template>
     <div>
         <div>
+            <SectionHeader2>Информация для карты</SectionHeader2>
             <PersonsForm v-model='customForm' :errors="apiErrors"/>
         </div>
         <div>
+            <SectionHeader2>Контактная информация</SectionHeader2>
             <ProfileForm v-model="userForm" :errors="apiErrors" />
         </div>
+        <div class="q-my-md text-center">
+            <div class="text-h5">Стоимость: 490 руб</div>
+
+        </div>
         <div class="q-my-xl text-center">
-            <q-btn label="Заказать" @click="onSubmit" :loading="loading" color="secondary" />
+            <q-btn label="Заказать" @click="onSubmit" :loading="loading" color="deep-orange" rounded size="xl"/>
         </div>
 
     </div>
-    <q-dialog v-model="visibleFormCompleteDialog">
-        <q-card class="q-pa-md">
-            <q-card-section>
-                <div class="text-h6 text-left">Ваш заказ сформирован!</div>
-            </q-card-section>
-            <q-card-section class="q-pt-none">
-                <div>Мы получили необходимую информацию и готовы к созданию карты</div>
-            </q-card-section>
-
-            <q-card-section class="q-pt-none" v-if="false">
-                Получите скидку <b>100</b> рублей при оплате заказа в течение ближайших 5 минут
-            </q-card-section>
-
-            <q-card-section class="q-pt-none" v-if="false">
-                Текущая стоимость заказа:<br> <span class="text-strike">700</span> <span class="text-h6 text-positive">600</span> рублей
-            </q-card-section>
-
-            <q-card-actions align="center">
-
-                <q-btn label="Оплатить 600 рублей" @click="onPaymentStart" color="positive" />
-            </q-card-actions>
-        </q-card>
+    <q-dialog v-model="visibleFormCompletedDialog">
+        <OrderCompletedDialog :sum="490" @click:payment="onPaymentStart" @click:lk="onGoLk" />
+    </q-dialog>
+    <q-dialog v-model="visiblePaymentDialog">
+        <FakePaymentDialog :sum="490" @click:payment="onGoLk" @click:lk="onGoLk" />
     </q-dialog>
 </template>
 <script setup>
@@ -42,6 +31,9 @@ import { loading } from '@/utils/requests';
 import { auth, userComputed } from '@/composables/users';
 import PersonsForm from './PersonsForm.vue'
 import ProfileForm from './ProfileForm.vue'
+import SectionHeader2 from "@/shared/SectionHeader2.vue"
+import OrderCompletedDialog from './OrderCompletedDialog.vue';
+import FakePaymentDialog from './FakePaymentDialog.vue';
 
 const productForm = ref({
     id: 1,
@@ -75,7 +67,8 @@ const orderData = ref({
 
 const apiErrors = ref([]);
 
-const visibleFormCompleteDialog = ref(false);
+const visibleFormCompletedDialog = ref(false);
+const visiblePaymentDialog = ref(false);
 
 const rules = {
     date: v => /^-?[\d]+\-[0-1]\d\-[0-3]\d$/.test(v),
@@ -93,16 +86,22 @@ const onSubmit = async () => {
                 apiErrors.value = null;
                 const order = result;
                 orderData.value.id = order.id;
-                visibleFormCompleteDialog.value = true
+                visibleFormCompletedDialog.value = true
             }
         });
-
-
-
 }
 const onPaymentStart = async () => {
-    visibleFormCompleteDialog.value = false;
-    // createPayment(orderData.value.id, orderData.value.price);
+    visibleFormCompletedDialog.value = false;
+    visiblePaymentDialog.value = true;
+}
+
+const onPaymentCompleted = async () => {
+    visiblePaymentDialog.value = false;
+    onGoLk();
+}
+
+const onGoLk = async () => {
+    visibleFormCompletedDialog.value = false;
     window.location = route('lk');
 }
 

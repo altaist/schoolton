@@ -1,7 +1,5 @@
 <template>
     <div>
-        <div class="text-h6">Контактные данные</div>
-
         <div>
             <q-input label="Email" v-model="userForm.contactEmail" email :error-message="err('contactEmail')" :error="errcheck('contactEmail')"></q-input>
             <q-input label="Телефон" v-model="userForm.tel" :error-message="err('tel')" :error="errcheck('tel')"></q-input>

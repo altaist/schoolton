@@ -1,8 +1,7 @@
 <template>
-    <div class="q-my-sm ">
+    <div class="q-my-sm">
         <div v-for="person in customForm.persons">
             <div class="q-my-md">
-                <div class="text-h6">Информация о человеке</div>
                 <div>
                     <q-input v-model="person.personName" label="Имя"></q-input>
                 </div>

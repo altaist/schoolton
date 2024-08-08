@@ -1,9 +1,8 @@
 <template>
-    <div class="q-my-sm q-pa-sm">
-        <div class="text-h2">Личный</div>
-        <div class="text-h3">Кабинет</div>
-        <div>
-            <div>Активные заказы</div>
+    <div class="q-my-sm q-pa-md">
+        <SectionHeader>Личный кабинет</SectionHeader>
+        <div class="q-my-xl">
+            <SectionHeader2>Мои заказы</SectionHeader2>
             <div v-for="order in orders">
                 <OrderItem :order="order"/>
             </div>
@@ -17,6 +16,8 @@ import { loadOrdersForUser } from '@/composables/shop';
 import { auth } from '@composables/users'
 import { usePage } from '@inertiajs/vue3'
 import OrderItem from './OrderItem.vue';
+import SectionHeader from '@shared/SectionHeader.vue';
+import SectionHeader2 from '@shared/SectionHeader2.vue';
 
 const props = defineProps({
     data: {

@@ -1,43 +1,23 @@
 <template>
-    <div :class="[rounded, padding, margin, textColor, bgColor, border]">
-        <slot>
-            <div class="row">
-                <div class="col">{{ textLeft }}</div>
-                <div class="col text-right">{{ textRight }}</div>
-            </div>
-        </slot>
+    <div :class="[color, textColor, 'q-my-md']" :style="['border-radius: ' + radiusComputed]">
+        <slot></slot>
     </div>
 </template>
 <script setup>
-import { ref, toRefs } from 'vue'
+import { ref, computed } from 'vue'
 
 const props = defineProps({
-    loading: {
-        type: Boolean,
-        default: false
-    },
-    textLeft: {
-    },
-    textRight: {
-        type: String
-    },
-    textRight1: {
-        type: String
-    },
-    textRight2: {
-        type: String
+    color: {
+        type: String,
+        default: 'bg-primary'
     },
     textColor: {
         type: String,
         default: 'text-white'
     },
-    bgColor: {
-        type: String,
-        default: 'bg-primary'
-    },
     border: {
         type: String,
-        default: 'border-1'
+        default: ''
     },
     padding: {
         type: String,
@@ -52,6 +32,30 @@ const props = defineProps({
         type: String,
         default: 'rounded-1'
     },
+
+    radius: {
+        default: "0px"
+    },
+
+    type: {
+        type: Number,
+        default: 0
+    }
+});
+
+const getRadiusPresets = (mode) => {
+    switch (mode) {
+        case 1:
+            return '20% 10% 20% 10%'
+        case 2:
+            return '10% 20% 10% 20%'
+        default:
+            return props.radius
+    }
+}
+
+const radiusComputed = computed(() => {
+    return getRadiusPresets(props.radius);
 });
 
 </script>

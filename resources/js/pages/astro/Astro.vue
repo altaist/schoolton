@@ -6,20 +6,38 @@
                     Удобный и быстрый сервис заказа натальных карт
                 </div>
                 <div class="text-h6 q-mt-xl">
-                    Нам доверяют. Более 1000 выполненных заказов!
+                    Нам доверяют. Более 1000 выполненных исследований!
+                </div>
+
+                <div class="text-h6 q-mt-xl">
+                    <q-btn label="Заказать" color="white" text-color="black" rounded href="#order" size="lg" />
                 </div>
 
             </div>
-            <section>
+            <Block radius="10% 10% 10% 10%" class="q-pa-xl text-h6 text-white bg-deep-orange">
+                <div class="q-my-sm">
+                    Натальные карты - это диаграммы, которые отображают положение планет, звезд и других небесных тел в момент рождения человека.
+                </div>
+                <div class="q-mt-lg">
+                    Они помогают людям лучше понимать
+                    себя и принимать осознанные решения
+                </div>
+            </Block>
 
-            </section>
-            <div class="q-mt-xl">
+            <Block radius="20% 10% 20% 10%" class="q-pa-xl text-h6 text-white bg-accent">
+                <div class="">
+                    Мы создадим для вас карту и проведем исследование, содержащее индивидуальные инсайты и множество аспектов - от личной жизни до профессионального роста.
+                </div>
+            </Block>
+
+
+            <!--div class="q-mt-xl">
                 <q-card class="q-pa-md text-h6 text-white bg-deep-orange ">
                     <q-card-section>
                         Натальные карты - это диаграммы, которые отображают положение планет, звезд и других небесных тел в момент рождения человека.
                     </q-card-section>
                     <q-card-section>
-                        Наше исследование включает себя кроме самой карты подробное описание личных характеристик, жизненных тенденций и потенциальных возможностей.
+                        Получите подробное описание личных характеристик, жизненных тенденций и потенциальных возможностей.
                     </q-card-section>
 
                 </q-card>
@@ -32,21 +50,65 @@
                 себя и принимать осознанные решения.
                     </q-card-section>
                 </q-card>
-            </div>
+            </div-->
+
             <div>
-                <Section title="Аспекты"></Section>
+                <Section title="Почему мы?">
+                    <Block radius="10px" class="q-pa-md text-h6 text-white bg-secondary">
+                        <div class="text-h4 q-my-sm">1. Быстро</div>
+                        <div>Готовый результат в течение 1-4 часов в зависимости от загрузки экспертов</div>
+                    </Block>
+                    <Block radius="10px" class="q-pa-md text-h6 text-white bg-secondary">
+                        <div class="text-h4 q-my-sm">2. Удобно</div>
+                        <div>Личный кабинет, ссылка на готовую карту в PDF, служба поддержки</div>
+                    </Block>
+                    <Block radius="10px" class="q-pa-md text-h6 text-white bg-secondary">
+                        <div class="text-h4 q-my-sm">3. Не дорого</div>
+                        <div>Стоимость создания карты: 490 рублей при оплате сразу после заказа. Возвращаем деньги, если результат не понравился</div>
+                    </Block>
+
+
+                </Section>
             </div>
-            <div>
-                <Section title="Как заказать"></Section>
+            <div class="q-my-md" id="order">
+                <SectionHeader class="text-h4">Заказать исследование</SectionHeader>
+                <div class="row">
+                    <div class="col-6">
+                        <div></div>
+                    </div>
+                    <div class="col-6">
+                        <div></div>
+                    </div>
+                </div>
+                <div class="text-h6 q-my-md q-pa-md">
+                    <div class="q-my-sm">1. Заполните информацию</div>
+                    <div class="q-my-sm">2. Оплатите удобным способом</div>
+                    <div class="q-my-sm">3. Получите в личном кабинете ссылку на готовый PDF файл</div>
+                </div>
+
+                <div class="q-px-sm">
+                    <OrderForm />
+                    <div class="q-mt-md">
+                        <Docs />
+                    </div>
+                </div>
             </div>
-            <div class="q-my-md">
-                <q-card class="bg-secondary text-white">
-                    <q-card-section>
-                        <div class="text-h4 text-center">Заказать натальную карту</div>
-                    </q-card-section>
-                </q-card>
-                <OrderForm/>
+            <div class="q-mt-xl">
+                <Section>
+                    <SectionHeader2>Вопросы, на которые дают ответы исследования</SectionHeader2>
+                    <div>
+                        <Questions />
+                    </div>
+                </Section>
             </div>
+            <Block radius="10% 10% 10% 10%" class="q-pa-xl text-h5 text-white bg-secondary">
+                <div class="">
+                    Получите подробное описание личных характеристик, жизненных тенденций и потенциальных возможностей!
+                </div>
+                <div class="text-h6 q-mt-xl">
+                    <q-btn label="Заказать" color="white" text-color="black" rounded href="#order" size="lg" />
+                </div>
+            </Block>
 
 
 
@@ -81,8 +143,11 @@
 import { ref, computed } from 'vue'
 import Block from '@shared/Block.vue';
 import Section from '@shared/Section.vue';
+import SectionHeader from '@shared/SectionHeader.vue';
+import SectionHeader2 from '@shared/SectionHeader2.vue';
 import Questions from './Questions.vue';
 import OrderForm from './forms/OrderForm.vue'
+import Docs from './forms/Docs.vue'
 
 const props = defineProps({
     title: {

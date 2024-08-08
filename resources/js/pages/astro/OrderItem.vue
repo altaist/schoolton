@@ -1,12 +1,14 @@
 <template>
     <div class="q-my-sm q-pa-sm">
-        <div>{{ orderRef.id }}</div>
-        <div>{{ orderRef.json_data }}</div>
-        <div v-if="!orderRef.paid_at">
-            <q-btn label="Оплатить" @click="visibleFormCompleteDialog=true"/>
-        </div>
-        <div v-else>
-<div class="text-positive">Оплачено</div>
+        <div class="q-pa-lg bg-grey-3 rounded-1">
+            <div class="text-h5">Заказ{{ orderRef.id }}</div>
+            <div v-if="false">{{ orderRef.json_data }}</div>
+            <div v-if="!orderRef.paid_at" class="q-my-md text-center">
+                <q-btn label="Оплатить" @click="visibleFormCompleteDialog = true" color="deep-orange"/>
+            </div>
+            <div v-else>
+                <div class="text-positive">Оплачено</div>
+            </div>
         </div>
     </div>
     <q-dialog v-model="visibleFormCompleteDialog">
@@ -27,14 +29,13 @@
             </q-card-section>
 
             <q-card-actions align="center">
-
                 <q-btn label="Оплатить 600 рублей" @click="onPaymentComplete" color="positive" />
             </q-card-actions>
         </q-card>
     </q-dialog>
 </template>
 <script setup>
-import { ref, toRef, computed} from 'vue'
+import { ref, toRef, computed } from 'vue'
 import { completePayment } from '@/composables/shop';
 
 const props = defineProps({
@@ -51,7 +52,7 @@ const visibleFormCompleteDialog = ref(false);
 const onPaymentComplete = async () => {
     visibleFormCompleteDialog.value = false;
     const data = await completePayment(orderRef.value.id, orderRef.value.price || 10);
-    if(data.order){
+    if (data.order) {
         orderRef.value = data.order;
     }
     // window.location = route('lk');
