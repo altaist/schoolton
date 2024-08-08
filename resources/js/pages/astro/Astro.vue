@@ -12,6 +12,7 @@
                 <div class="text-h6 q-mt-xl">
                     <q-btn label="Заказать" color="white" text-color="black" rounded href="#order" size="lg" />
                 </div>
+                <div class="q-mt-lg"><a href="#docs">Документы</a></div>
 
             </div>
             <div class="q-mt-md">
@@ -95,7 +96,7 @@
                     <div class="q-my-sm">3. Получите в личном кабинете ссылку на готовый PDF файл</div>
                 </div>
 
-                <div class="q-px-sm">
+                <div class="q-px-sm" id="docs">
                     <OrderForm />
                     <div class="q-mt-md">
                         <Docs />
