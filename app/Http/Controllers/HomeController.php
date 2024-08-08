@@ -14,10 +14,10 @@ class HomeController extends BaseController
     public function index()
     {
         $user = Auth::user();
-        $component = 'Start';
+        $component = 'astro/Astro';
 
         if($user){
-            $component = 'Main';
+            $component = 'astro/Astro';
         }
 
         return $this->inertia($component, ['user' => $user]);
