@@ -1,5 +1,5 @@
 <template>
-    <div class="q-my-sm q-pa-md">
+    <div class="container q-pa-md" style="max-width: 1024px;">
         <div>
             <div style="border-radius: 20% 10% 20% 10%; color: white; background-color: #5b6dcd; min-height: 200px;" class="q-pa-xl">
                 <div class="text-h4 q-my-sm">
@@ -14,21 +14,30 @@
                 </div>
 
             </div>
-            <Block radius="10% 10% 10% 10%" class="q-pa-xl text-h6 text-white bg-deep-orange">
-                <div class="q-my-sm">
-                    Натальные карты - это диаграммы, которые отображают положение планет, звезд и других небесных тел в момент рождения человека.
+            <div class="q-mt-md">
+                <div class="row q-col-gutter-sm">
+                <div class="col-sm-12 col-md-6">
+                    <Block radius="10% 10% 10% 10%" class="q-pa-xl text-h6 text-white bg-deep-orange">
+                        <div class="q-my-sm">
+                            Натальные карты - это диаграммы, которые отображают положение планет, звезд и других небесных тел в момент рождения человека.
+                        </div>
+                        <div class="q-mt-lg">
+                            Они помогают людям лучше понимать
+                            себя и принимать осознанные решения
+                        </div>
+                    </Block>
                 </div>
-                <div class="q-mt-lg">
-                    Они помогают людям лучше понимать
-                    себя и принимать осознанные решения
+                <div class="col-sm-12 col-md-6">
+                    <Block radius="20% 10% 20% 10%" class="q-pa-xl text-h6 text-white bg-accent">
+                        <div class="">
+                            Мы создадим для вас карту и проведем исследование, содержащее индивидуальные инсайты и множество аспектов - от личной жизни до профессионального роста.
+                        </div>
+                    </Block>
                 </div>
-            </Block>
+            </div>
+            </div>
 
-            <Block radius="20% 10% 20% 10%" class="q-pa-xl text-h6 text-white bg-accent">
-                <div class="">
-                    Мы создадим для вас карту и проведем исследование, содержащее индивидуальные инсайты и множество аспектов - от личной жизни до профессионального роста.
-                </div>
-            </Block>
+
 
 
             <!--div class="q-mt-xl">
