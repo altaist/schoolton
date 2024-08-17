@@ -55,8 +55,6 @@ class OrderService extends BaseService
             UserService::make()->updateUserFromArray($userId, data_get($requestData, 'user'));
         }
 
-        // dd($requestData);
-
         $validated = Validator::make($requestData, [
             'user.id' => 'required|exists:users,id',
             'product.id' => 'required|numeric|poly_exists:product.type',
