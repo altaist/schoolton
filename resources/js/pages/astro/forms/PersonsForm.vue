@@ -3,13 +3,13 @@
         <div v-for="person in customForm.persons">
             <div class="q-my-md">
                 <div>
-                    <q-input v-model="person.personName" label="Имя"></q-input>
+                    <q-input v-model="person.name" label="Имя" :rules="baseRules"></q-input>
                 </div>
                 <div>
-                    <q-input v-model="person.city" label="Город"></q-input>
+                    <q-input v-model="person.city" label="Город" :rules="baseRules"></q-input>
                 </div>
                 <div>
-                    <q-input v-model="person.date" label="Дата рождения" mask="##.##.####">
+                    <q-input v-model="person.date" label="Дата рождения" mask="##.##.####" :rules="baseRules">
                         <template v-slot:append>
                             <q-icon name="event" class="cursor-pointer">
                                 <q-popup-proxy cover transition-show="scale" transition-hide="scale">
@@ -63,5 +63,9 @@ const props = defineProps(['errors']);
 
 const errorData = toRef(props, 'errors');
 const { err, errcheck } = useLaravelErrors(errorData);
+
+const baseRules = [
+    val => (val && val.length > 0) || 'Это поле обязательно'
+]
 
 </script>

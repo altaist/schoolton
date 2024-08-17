@@ -26,6 +26,7 @@
 </template>
 <script setup>
 import { ref, computed } from 'vue'
+import { useQuasar } from 'quasar';
 import { createAutoUserOrder } from '@/composables/shop';
 import { loading } from '@/utils/requests';
 import { auth, userComputed } from '@/composables/users';
@@ -34,6 +35,8 @@ import ProfileForm from './ProfileForm.vue'
 import SectionHeader2 from "@/shared/SectionHeader2.vue"
 import OrderCompletedDialog from './OrderCompletedDialog.vue';
 import FakePaymentDialog from './FakePaymentDialog.vue';
+
+const $q = useQuasar();
 
 const productForm = ref({
     id: 1,
@@ -76,6 +79,14 @@ const rules = {
 }
 
 const onSubmit = async () => {
+    const person = customForm.value.persons[0];
+    console.log(customForm.value.persons[0])
+
+    if(!person.name || !person.city || !person.date || !person.time)
+    {
+        alert('Заполните все поля формы!');
+        return;
+    }
 
     createAutoUserOrder(userForm.value, productForm.value, orderData.value, customForm.value)
         .then((result) => {
