@@ -14,6 +14,9 @@
   <!-- main CSS -->
   <link href="dist/css/main.css" rel="stylesheet">
   <title>AstroGyan - Astrology and Horoscope HTML Website Template</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Prosto+One&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -125,140 +128,7 @@
         <!-- color mode  -->
       </div>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-	  <!--
 
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-          <li class="nav-item dropdown">
-            <a class="nav-link nav-effect dropdown-toggle" href="#" id="navbarDropdownHome" data-bs-toggle="dropdown"
-              aria-expanded="false">
-              Home
-            </a>
-            <ul class="dropdown-menu dropdown-menu-efct sub-menu-effect" aria-labelledby="navbarDropdownHome">
-              <li><a class="dropdown-item" href="index.html">Home Main</a></li>
-              <li><a class="dropdown-item" href="index-blog.html">Home Blog</a></li>
-              <li><a class="dropdown-item" href="index-video.html">Home Video</a></li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown megamenu-li">
-            <a class="nav-link nav-effect dropdown-toggle" href="#" id="navbarDropdownShop" aria-haspopup="true"
-              data-bs-toggle="dropdown" aria-expanded="false">
-              Shop
-            </a>
-            <div class="dropdown-menu megamenu p-4" aria-labelledby="navbarDropdownShop">
-              <div class="row">
-                <div class="col-sm-6 col-lg-2 mb-3 mb-lg-0">
-                  <h5 class="mb-3 fw-bold">Shop Pages</h5>
-                  <ul class="sub-menu-effect">
-                    <li><a class="dropdown-item" href="shop-list-view.html">Shop List View</a></li>
-                    <li><a class="dropdown-item" href="shop-categories-view.html">Shop Categories</a></li>
-                    <li><a class="dropdown-item" href="shop-grid-view.html">Shop Grid</a></li>
-                  </ul>
-                </div>
-                <div class="col-sm-6 col-lg-2 mb-3 mb-lg-0">
-                  <h5 class="mb-3 fw-bold">Product Pages</h5>
-                  <ul class="sub-menu-effect">
-                    <li><a class="dropdown-item" href="shop-detail-horizontal.html">Horizontal Thumbnail</a></li>
-                    <li><a class="dropdown-item" href="shop-detail-bottom-info.html">Bottom Information</a></li>
-                    <li><a class="dropdown-item" href="shop-detail-side-info.html">Side Information</a></li>
-                  </ul>
-                </div>
-                <div class="col-sm-6 col-lg-2 mb-3 mb-lg-0">
-                  <h5 class="mb-3 fw-bold">Checkout Pages</h5>
-                  <ul class="sub-menu-effect">
-                    <li><a class="dropdown-item" href="shop-cart.html">Shop Cart</a></li>
-                    <li><a class="dropdown-item" href="shop-checkout.html">Shop Checkout</a></li>
-                    <li><a class="dropdown-item" href="shop-wishlist.html">Shop Wishlist</a></li>
-                    <li><a class="dropdown-item" href="shop-order-success.html">Order Success</a></li>
-                  </ul>
-                </div>
-                <div class="col-sm-6 col-lg-2 mb-3 mb-lg-0">
-                  <h5 class="mb-3 fw-bold">Account Pages</h5>
-                  <ul class="sub-menu-effect">
-                    <li><a class="dropdown-item" href="login.html">Login</a></li>
-                    <li><a class="dropdown-item" href="signup.html">Create an Account</a></li>
-                    <li><a class="dropdown-item" href="forgot-password.html">Forgot Password</a></li>
-                  </ul>
-                </div>
-                <div class="col-sm-6 col-lg-4 mb-3 mb-lg-0">
-                  <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                      <div class="carousel-item active">
-                        <img src="dist/images/menu/banner.jpg" alt="banner" class="img-fluid">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="dist/images/menu/banner2.jpg" alt="banner" class="img-fluid">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="dist/images/menu/banner3.jpg" alt="banner" class="img-fluid">
-                      </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
-                      data-bs-slide="prev">
-                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                      <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
-                      data-bs-slide="next">
-                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                      <span class="visually-hidden">Next</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link nav-effect dropdown-toggle" href="#" id="navbarDropdownPages" data-bs-toggle="dropdown"
-              aria-expanded="false" data-bs-auto-close="outside">Pages</a>
-            <ul class="dropdown-menu dropdown-menu-efct sub-menu-effect" aria-labelledby="navbarDropdownPages">
-              <li><a class="dropdown-item" href="about.html">About Page</a></li>
-              <li class="nav-item dropdown sub-down">
-                <a class="nav-link dropdown-toggle sub" href="#" id="navbarSubDropdown2" data-bs-toggle="dropdown"
-                  aria-expanded="false" data-bs-auto-close="outside">Services</a>
-                <ul class="dropdown-menu dropdown-submenu" aria-labelledby="navbarSubDropdown2">
-                  <li><a class="dropdown-item" href="services.html">Services</a></li>
-                  <li><a class="dropdown-item" href="services-details.html">Services Details</a></li>
-                </ul>
-              </li>
-              <li><a class="dropdown-item" href="contact.html">Contact Page</a></li>
-              <li><a class="dropdown-item" href="privacy.html">Privacy Page</a></li>
-              <li><a class="dropdown-item" href="faq.html">FAQs</a></li>
-              <li><a class="dropdown-item" href="pricing-plan.html">Pricing</a></li>
-              <li><a class="dropdown-item" href="testimonials.html">Testimonials</a></li>
-              <li><a class="dropdown-item" href="our-team.html">Team Page</a></li>
-              <li><a class="dropdown-item" href="team-detail.html">Team Detail</a></li>
-              <li><a class="dropdown-item" href="appointment.html">Appointment Page</a></li>
-              <li><a class="dropdown-item" href="clients.html">Clients</a></li>
-              <li><a class="dropdown-item" href="error.html">404 Error Page</a></li>
-              <li><a class="dropdown-item" href="maintenance.html">Maintenance Mode</a></li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link nav-effect dropdown-toggle" href="#" id="navbarDropdownGallery" data-bs-toggle="dropdown"
-              aria-expanded="false">Gallery</a>
-            <ul class="dropdown-menu dropdown-menu-efct sub-menu-effect" aria-labelledby="navbarDropdownGallery">
-              <li><a class="dropdown-item" href="gallery-2-columns.html">Gallery 2 columns</a></li>
-              <li><a class="dropdown-item" href="gallery-slider.html">Gallery - Slider</a></li>
-              <li><a class="dropdown-item" href="gallery-mixed.html">Gallery Mixed</a></li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link nav-effect dropdown-toggle" href="#" id="navbarDropdownBlogs" data-bs-toggle="dropdown"
-              aria-expanded="false">Blogs</a>
-            <ul class="dropdown-menu dropdown-menu-efct sub-menu-effect" aria-labelledby="navbarDropdownBlogs">
-              <li><a class="dropdown-item" href="blog-no-sidebar.html">Blog No Sidebar</a></li>
-              <li><a class="dropdown-item" href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
-              <li><a class="dropdown-item" href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
-              <li><a class="dropdown-item" href="blog-masonry.html">Blog Masonry</a></li>
-              <li><a class="dropdown-item" href="blog-post-standard.html">Single Post</a></li>
-              <li><a class="dropdown-item" href="blog-post-no-sidebar.html">No Sidebar Post</a></li>
-              <li><a class="dropdown-item" href="blog-post-gallery.html">Gallery Post</a></li>
-              <li><a class="dropdown-item" href="blog-post-video.html">Video Post</a></li>
-              <li><a class="dropdown-item" href="blog-post-audio.html">Audio Post</a></li>
-            </ul>
-          </li>
-        </ul>
-		-->
 
 
         <div class="d-flex ms-2 justify-content-center">
@@ -272,21 +142,13 @@
   <section class="hero">
     <div class="container position-relative z-2">
       <div class="row justify-content-center align-items-center">
-        <div class="col-12 col-lg-6" data-aos="fade-up">
-          <p class="mb-3 theme-text-accent-two">Welcome to AstroGyan</p>
-          <h1 class="display-1 fw-bold mb-3 theme-text-white animate-charcter">Experienced Famous Astrologer
+        <div class="col-12 col-lg-6" >
+          <!--p class="mb-3 theme-text-accent-two">Центр астрологических исследований АстроПульс</p-->
+          <h1 class="display-2 fw-bold mb-3 theme-text-white animate-charcter">Удобный и быстрый сервис заказа натальных карт
           </h1>
-          <p class="mb-5 theme-text-accent-two">Ready for your Daily Horoscope</p>
+          <p class="mb-5 theme-text-accent-two text-h5"> Нам доверяют. Более 1000 выполненных исследований!</p>
           <div class="group">
-            <button class="rounded-pill btn custom-btn-primary font-small primary-btn-effect" type="submit">Learn
-              More</button>
-            <span class="ms-3">
-              <a href="https://www.youtube.com/watch?v=r44RKWyfcFw&fbclid=IwAR21beSJORalzmzokxDRcGfkZA1AtRTE__l5N4r09HcGS5Y6vOluyouM9EM"
-                class="btn custom-btn-secondary icon-wrapper glightbox">
-                <i class="bi bi-play-fill h4"></i>
-              </a>
-            </span>
-            <span class="ms-1 d-none d-md-inline-flex theme-text-white">Watch a Demo</span>
+            <button class="rounded-pill btn custom-btn-primary  primary-btn-effect" type="submit">ЗАКАЗАТЬ</button>
           </div>
         </div>
         <div class="col-12 col-lg-6">
