@@ -13,6 +13,9 @@ class HomeController extends BaseController
      */
     public function index()
     {
+        $view = env('PROJECT_ID', 'app');
+        return view($view, []);
+
         $user = Auth::user();
         $component = 'astro/Astro';
 

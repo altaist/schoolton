@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
@@ -35,5 +36,24 @@ class HandleInertiaRequests extends Middleware
                 'user' => $request->user(),
             ],
         ];
+    }
+
+        /**
+     * Sets the root template that's loaded on the first page visit.
+     *
+     * @see https://inertiajs.com/server-side-setup#root-template
+     *
+     * @return string
+     */
+    public function rootView(Request $request)
+    {
+        $route = Route::currentRouteName();
+        //$view = data_get(config('project.project_views'), env('PROJECT_ID', 'app'), 'app');
+
+        //if (in_array($route, $this->externalRootViewList)) {
+        //    return "webapp";
+        //}
+
+        return parent::rootView($request);
     }
 }
