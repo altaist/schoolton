@@ -12,7 +12,7 @@
 
     <!-- main CSS -->
     <link href="dist/css/main.css" rel="stylesheet">
-    <title>Генератор натальных карт</title>
+    <title>Создать натальную карту</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Prosto+One&display=swap" rel="stylesheet">
@@ -49,11 +49,11 @@
 
     <!-- Body Part - hero section -->
     <section class="hero">
-        <div class="container position-relative z-2 mt-2">
+        <div class="container position-relative z-2 my-5">
             <div class="row justify-content-center align-items-center">
                 <div class="col-12 col-lg-6">
                     <!--p class="mb-3 theme-text-accent-two">Центр астрологических исследований АстроПульс</p-->
-                    <h1 class="display-2 fw-bold mb-3 theme-text-white animate-charcter">Удобный и быстрый сервис заказа натальных карт
+                    <h1 class="display-2 fw-bold mt-3 mb-3 theme-text-white animate-charcter">Удобный и быстрый сервис заказа натальных карт
                     </h1>
                     <p class="mb-5 theme-text-accent-two text-h4"> Нам доверяют. Более 1000 выполненных исследований!</p>
                     <div class="group">
@@ -508,21 +508,6 @@
     </footer>
     <!-- back to top -->
     <a href="#wrapper" data-type="section-switch" class="scrollup"><i class="bi bi-caret-up"></i></a>
-
-
-    <div class="tmodal" id="modalThx">
-        <div class="tmodal-content">
-            <span class="close-tmodal">&times;</span>
-            <p>Сообщение отправлено!</p>
-        </div>
-    </div>
-
-    <div class="tmodal" id="modalBad">
-        <div class="tmodal-content">
-            <span class="close-tmodal">&times;</span>
-            <p>Ошибка, попробуйте еще раз!</p>
-        </div>
-    </div>
 
 
     <!-- Bootstrap Bundle with Popper -->
