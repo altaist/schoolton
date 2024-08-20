@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', [HomeController::class, 'index'])->name('root');
+Route::get('/astro-order', function () {
+    return Inertia::render('astro/AstroOrder', []);
+})->name('astro.order');
 
 Route::get('/bye', function () {
     return Inertia::render('Logout', []);

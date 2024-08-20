@@ -1,5 +1,5 @@
 <template>
-    <div :class="['q-pa-md q-my-sm rounded text-h6', 'text-white', color]"><slot>{{ title }}</slot></div>
+    <div :class="['q-py-md q-my-sm rounded text-h4', 'text-grey-4', color]"><slot>{{ title }}</slot></div>
 </template>
 <script setup>
 import { ref, computed} from 'vue'
@@ -9,8 +9,7 @@ const props = defineProps({
         type: String,
     },
     color: {
-        type: String,
-        default: 'bg-secondary'
+        type: String
     }
 });
 </script>
