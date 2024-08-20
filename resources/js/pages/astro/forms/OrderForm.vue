@@ -1,28 +1,29 @@
 <template>
-    <div>
-        <div>
-            <SectionHeader2>Информация для карты</SectionHeader2>
-            <PersonsForm v-model='customForm' :errors="apiErrors"/>
-        </div>
-        <div>
-            <SectionHeader2>Контактная информация</SectionHeader2>
-            <ProfileForm v-model="userForm" :errors="apiErrors" />
+    <div class="text-center">
+        <div class="row q-col-gutter-md text-white">
+            <div class="col-12 col-lg-12">
+                <SectionHeader2>Информация для карты</SectionHeader2>
+                <PersonsForm v-model='customForm' :errors="apiErrors" />
+            </div>
+            <div class="col-12 col-lg-12">
+                <SectionHeader2>Контактная информация</SectionHeader2>
+                <ProfileForm v-model="userForm" :errors="apiErrors" />
+            </div>
+
         </div>
         <div class="q-my-md text-center">
             <div class="text-h5">Стоимость: 490 руб</div>
-
         </div>
         <div class="q-my-xl text-center">
-            <q-btn label="Заказать" @click="onSubmit" :loading="loading" color="deep-orange" rounded size="xl"/>
-        </div>
-
-    </div>
-    <q-dialog v-model="visibleFormCompletedDialog">
+            <q-btn label="Заказать" @click="onSubmit" :loading="loading" color="deep-orange-10" rounded size="xl" />
+        </div>    <q-dialog v-model="visibleFormCompletedDialog">
         <OrderCompletedDialog :sum="490" @click:payment="onPaymentStart" @click:lk="onGoLk" />
     </q-dialog>
     <q-dialog v-model="visiblePaymentDialog">
         <FakePaymentDialog :sum="490" @click:payment="onGoLk" @click:lk="onGoLk" />
     </q-dialog>
+    </div>
+
 </template>
 <script setup>
 import { ref, computed } from 'vue'
@@ -82,8 +83,7 @@ const onSubmit = async () => {
     const person = customForm.value.persons[0];
     console.log(customForm.value.persons[0])
 
-    if(!person.name || !person.city || !person.date || !person.time)
-    {
+    if (!person.name || !person.city || !person.date || !person.time) {
         alert('Заполните все поля формы!');
         return;
     }
@@ -93,7 +93,7 @@ const onSubmit = async () => {
             console.log('Submit result: ' + result);
             if (result.errors) {
                 apiErrors.value = result.errors;
-            } else if(result.id) {
+            } else if (result.id) {
                 apiErrors.value = null;
                 const order = result;
                 orderData.value.id = order.id;

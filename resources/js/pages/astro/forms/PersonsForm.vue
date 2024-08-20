@@ -1,15 +1,15 @@
 <template>
-    <div class="q-my-sm">
+    <div class="q-ma-sm">
         <div v-for="person in customForm.persons">
             <div class="q-my-md">
                 <div>
-                    <q-input v-model="person.name" label="Имя" :rules="baseRules"></q-input>
+                    <q-input v-model="person.name" label="Имя *" dark ></q-input>
                 </div>
                 <div>
-                    <q-input v-model="person.city" label="Город" :rules="baseRules"></q-input>
+                    <q-input v-model="person.city" label="Город *" dark ></q-input>
                 </div>
                 <div>
-                    <q-input v-model="person.date" label="Дата рождения" mask="##.##.####" :rules="baseRules">
+                    <q-input v-model="person.date" label="Дата рождения *" mask="##.##.####" dark >
                         <template v-slot:append>
                             <q-icon name="event" class="cursor-pointer">
                                 <q-popup-proxy cover transition-show="scale" transition-hide="scale">
@@ -24,13 +24,13 @@
                     </q-input>
                 </div>
                 <div>
-                    <q-input v-model="person.time" label="Время рождения" mask="time" :rules="['time']"></q-input>
+                    <q-input v-model="person.time" label="Время рождения *" mask="time" dark></q-input>
                 </div>
                 <div v-if="false">
                     <q-input v-model="person.date" label="Дата рождения" mask="##.##.####" :rules="['date']"></q-input>
                 </div>
                 <div v-if="false">
-                    <q-input filled v-model="person.time" mask="time" label="Вреия рождения" :rules="['time']">
+                    <q-input filled v-model="person.time" mask="time" label="Время рождения" :rules="['time']">
                         <template v-slot:append>
                             <q-icon name="access_time" class="cursor-pointer">
                                 <q-popup-proxy cover transition-show="scale" transition-hide="scale">

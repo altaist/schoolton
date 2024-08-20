@@ -1,9 +1,11 @@
 <template>
-    <div>
+    <div class="q-ma-sm">
         <div>
-            <q-input label="Email" v-model="userForm.contactEmail" email :error-message="err('contactEmail')" :error="errcheck('contactEmail')"></q-input>
-            <q-input label="Телефон" v-model="userForm.tel" :error-message="err('tel')" :error="errcheck('tel')"></q-input>
-            <q-input label="Телеграмм" v-model="userForm.socialId" :error-message="err('socialId')" :error="errcheck('socialId')"></q-input>
+            <q-form>
+                <q-input label="Email *" color="white" v-model="userForm.contactEmail" :error-message="err('tel')" :error="errcheck('tel')" dark />
+                <q-input label="Телефон" v-model="userForm.tel" :error-message="err('tel')" :error="errcheck('tel')" dark/>
+                <q-input label="Телеграмм" v-model="userForm.socialId" :error-message="err('socialId')" :error="errcheck('socialId')" dark/>
+            </q-form>
         </div>
 
     </div>
