@@ -3,12 +3,14 @@
 namespace App\Services\Market;
 
 use App\Constants\OrderState;
+use App\Mail\OrderCreated;
 use App\Models\Order;
 use App\Models\User;
 use App\Services\BaseService;
 use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class OrderService extends BaseService
@@ -52,6 +54,7 @@ class OrderService extends BaseService
             $user = UserService::make()->createUserFromArray(data_get($requestData, 'user'), true);
             $requestData['user']['id'] = $user->id;
         }elseif($userId){
+            $user = User::findOrFail($userId);
             UserService::make()->updateUserFromArray($userId, data_get($requestData, 'user'));
         }
 
@@ -59,8 +62,8 @@ class OrderService extends BaseService
             'user.id' => 'required|exists:users,id',
             'product.id' => 'required|numeric|poly_exists:product.type',
             'product.type' => 'string',
-            'priceId' => 'sometimes|numeric',
-            'price' => 'sometimes|numeric',
+            'product.priceId' => 'sometimes|numeric',
+            'product.price' => 'sometimes|numeric',
             'state' => 'sometimes|numeric',
             'json_data' => 'nullable|array'
         ], [
@@ -76,8 +79,12 @@ class OrderService extends BaseService
             'state' => data_get($validated, 'state', 0),
             'json_data' => data_get($validated, 'json_data', 0),
         ];
+        // dd($fields);
 
-        return Order::create($fields);
+        $order = Order::create($fields);
+        Mail::mailer('log')->to($user->email)->send(new OrderCreated($order));
+
+        return $order;
     }
 
     public function updateFromArray(Order $order, $requestData)
