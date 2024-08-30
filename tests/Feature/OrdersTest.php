@@ -7,11 +7,14 @@ namespace Tests\Feature;
 use App\Models\Course;
 use App\Models\Feedback;
 use App\Models\Order;
+use App\Models\Product;
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class OrdersTest extends TestCase
 {
+    use RefreshDatabase;
     /**
      * A basic test example.
      */
@@ -30,11 +33,29 @@ class OrdersTest extends TestCase
     {
         $user = User::factory()->create();
         $course = Course::factory()->create();
+        $product = Product::factory()->create();
 
         $response = $this->post(route('order.store'), [
-            'user_id' => $user->id,
-            'orderable_id' => $course->id,
-            'price' => '123',
+            'user' => [
+                'id' => $user->id,
+            ],
+            'product' => [
+                'id' => 1,
+                'type' => 'product',
+                'price' => 123
+
+            ],
+            'json_data' => [
+                'persons' => [
+                    [
+                        'name' => 'Иван',
+                        'city' => 'Новосибирск',
+                        'date' => '2024-12-12',
+                        'time' => '12:12'
+                    ]
+                ]
+            ],
+            'autocreate' => 1,
         ]);
         $response
             ->assertStatus(200)
@@ -43,7 +64,7 @@ class OrdersTest extends TestCase
                 'id' => 1,
                 'user_id' => $user->id,
                 'price' => '123',
-                'orderable_type' => 'course',
+                'orderable_type' => 'product',
                 'orderable_id' => $course->id
             ]);
 
