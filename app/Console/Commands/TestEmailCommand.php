@@ -2,6 +2,8 @@
 
 namespace App\Console\Commands;
 
+use App\Mail\OrderCreated;
+use App\Models\Order;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
 
@@ -28,5 +30,6 @@ class TestEmailCommand extends Command
     {
         Mail::mailer('log')->raw('Test log email', function($msg) {$msg->to('apechersky@ya.ru')->subject('Test log email subject'); });
         Mail::mailer('smtp')->raw('Test smtp email', function($msg) {$msg->to('apechersky@ya.ru')->subject('Test smtp email subject'); });
+        Mail::to('apechersky@ya.ru')->send(new OrderCreated(new Order()));
     }
 }
