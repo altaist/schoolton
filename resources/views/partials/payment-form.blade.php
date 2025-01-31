@@ -15,7 +15,4 @@
     <input type="hidden" name="SignatureValue" value="{{ $signature_value }}">
     <input type="hidden" name="IsTest" value="{{ $is_test }}">
     
-    <button type="submit" class="btn btn-primary">
-        Оплатить {{ $order_price }} руб.
-    </button>
 </form> 
