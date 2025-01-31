@@ -68,12 +68,14 @@
                         </div>
 
                         <div class="mb-4">
-                            <a href="{{ route('order.edit', $order->order_id) }}" class="btn btn-primary">
+                        <div class="d-flex gap-2 mb-4">
+                            <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#editModal">
                                 Изменить данные
-                            </a>
+                            </button>
                             <button class="btn btn-secondary" onclick="copyOrderLink()">
                                 Скопировать ссылку на заказ
                             </button>
+                        </div>
                         </div>
 
                         @include('partials.payment-form')
