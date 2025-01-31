@@ -60,10 +60,8 @@
                 <div class="col-12">
                     <h2>Ваш заказ создан</h2>
                     @if($order->status === 'paid')
-                        <div class="alert alert-success">
-                            <h4 class="mb-3">Заказ принят в работу</h4>
+                            <h2 class="mb-3">Заказ принят в работу</h2>
                             <p>Спасибо за оплату! Ваша натальная карта будет отправлена на email {{ $order->email }} в течение 24 часов.</p>
-                        </div>
                     @else
                         <div class="timer-container mb-4">
                             <p>Время до отмены заказа: <span id="timer">...</span></p>
@@ -73,6 +71,9 @@
                             <a href="{{ route('order.edit', $order->order_id) }}" class="btn btn-primary">
                                 Изменить данные
                             </a>
+                            <button class="btn btn-secondary" onclick="copyOrderLink()">
+                                Скопировать ссылку на заказ
+                            </button>
                         </div>
 
                         @include('partials.payment-form')
@@ -114,14 +115,6 @@
                             </tr>
                         </tbody>
                     </table>
-                    <div class="d-flex gap-2 mb-4">
-                        <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#editModal">
-                            Изменить данные
-                        </button>
-                        <button class="btn btn-secondary" onclick="copyOrderLink()">
-                            Скопировать ссылку на заказ
-                        </button>
-                    </div>
                 </div>
             </div>
 
