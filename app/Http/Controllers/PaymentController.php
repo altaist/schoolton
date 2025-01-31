@@ -39,7 +39,7 @@ class PaymentController extends Controller
 
     public function handlePayment(Request $request)
     {
-        // Логируем входящий запрос
+        // Логируем входящий запрос 
         Log::info('Received payment notification', [
             'ip' => $request->ip(),
             'all_params' => $request->all()

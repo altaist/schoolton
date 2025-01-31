@@ -49,6 +49,8 @@
             fetch('/payment/check-status/{{ $inv_id }}')
                 .then(response => response.json())
                 .then(data => {
+                    console.log(data);
+                    console.log(data.status);
                     if (data.status === 'paid' && data.redirect_url) {
                         window.location.href = data.redirect_url;
                     }
