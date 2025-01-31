@@ -6,25 +6,42 @@ use App\Constants\OrderState;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
-class Order extends BaseModel
+class Order extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'state',
-        'user_id',
-        'orderable_id',
-        'orderable_type',
-        'price',
-        'price_id',
-        'json_data',
-        'state',
+        'order_id',
+        'email',
+        'gender',
+        'birth_date',
+        'birth_time',
+        'birth_city',
+        'amount',
+        'status',
+        'expires_at',
+        'payment_method',
+        'payment_fee',
+        'payer_email'
     ];
 
     protected $casts = [
-        'json_data' => 'array'
+        'json_data' => 'array',
+        'expires_at' => 'datetime'
     ];
+
+    protected $table = 'natal_orders';
+
+    protected static function boot()
+    {
+        parent::boot();
+        
+        static::creating(function ($order) {
+            $order->order_id = (string) Str::uuid();
+        });
+    }
 
     public function orderable()
     {

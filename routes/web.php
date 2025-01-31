@@ -6,6 +6,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\OrderViewController;
+use App\Http\Controllers\PaymentSuccessController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -117,5 +119,15 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
+
+Route::get('/order/{orderId}', [OrderViewController::class, 'show'])->name('order.show');
+Route::post('/order/{orderId}/update', [OrderViewController::class, 'update'])->name('order.update');
+
+Route::post('/get_pay', [PaymentController::class, 'handlePayment'])->name('payment.handle');
+
+Route::get('/success_pay', [PaymentSuccessController::class, 'show'])->name('payment.success');
+Route::get('/payment/check-status/{inv_id}', [PaymentSuccessController::class, 'checkStatus'])->name('payment.check-status');
 
 require __DIR__.'/auth.php';

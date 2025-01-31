@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Services\Market\OrderService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use App\Models\Order;
+use Illuminate\Support\Facades\Log;
 
 class OrderController extends BaseController
 {
@@ -37,12 +40,45 @@ class OrderController extends BaseController
         return $orderService->getOrdersForUser($user);
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        $orderService = OrderService::make();
-        return response()->json($orderService->createFromRequest());
-    }
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|max:255',
+            'gender' => 'required|in:male,female',
+            'birth_date' => 'required|date',
+            'birth_time' => 'required',
+            'birth_city' => 'required|string|max:255',
+        ]);
 
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        try {
+            $expiresAt = now()->addMinutes((int)config('robokassa.wait_time'))->setTimezone('UTC');
+            
+            $order = Order::create([
+                'email' => $request->email,
+                'gender' => $request->gender,
+                'birth_date' => $request->birth_date,
+                'birth_time' => $request->birth_time,
+                'birth_city' => $request->birth_city,
+                'amount' => (float)config('robokassa.order_price'),
+                'status' => 'new',
+                'expires_at' => $expiresAt
+            ]);
+
+            return redirect()->route('order.show', ['orderId' => $order->order_id]);
+
+        } catch (\Exception $e) {
+            Log::error('Order creation error: ' . $e->getMessage());
+            return back()
+                ->with('error', 'Произошла ошибка при создании заказа')
+                ->withInput();
+        }
+    }
 
     public function updateState($orderId, $stateId)
     {

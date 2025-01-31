@@ -16,6 +16,87 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Prosto+One&display=swap" rel="stylesheet">
+
+    <!-- Добавить в head стили для снежинок -->
+    <style>
+        .snowflake {
+            color: #fff;
+            font-size: 1em;
+            font-family: Arial, sans-serif;
+            text-shadow: 0 0 5px #000;
+            position: absolute;
+            top: -10%;
+            z-index: 1;
+            user-select: none;
+            cursor: default;
+            animation-name: snowflakes-fall, snowflakes-shake;
+            animation-duration: 5s, 2s;
+            animation-timing-function: linear, ease-in-out;
+            animation-iteration-count: infinite, infinite;
+            animation-play-state: running, running;
+        }
+
+        .snowflakes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .price-block {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            min-height: 300px;
+        }
+
+        @keyframes snowflakes-fall {
+            0% { top: -10%; }
+            100% { top: 100%; }
+        }
+
+        @keyframes snowflakes-shake {
+            0% { transform: translateX(0px); }
+            50% { transform: translateX(40px); }
+            100% { transform: translateX(0px); }
+        }
+
+        .old-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 1.5rem;
+        }
+
+        .new-price {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #fff;
+            margin: 1rem 0;
+        }
+
+        .discount-label {
+            background: #ff4d4d;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .price-content {
+            position: relative;
+            z-index: 2;
+        }
+    </style>
 </head>
 
 <body>
@@ -52,12 +133,10 @@
         <div class="container position-relative z-2 my-5">
             <div class="row justify-content-center align-items-center">
                 <div class="col-12 col-lg-6">
-                    <!--p class="mb-3 theme-text-accent-two">Центр астрологических исследований АстроПульс</p-->
-                    <h1 class="display-2 fw-bold mt-3 mb-3 theme-text-white animate-charcter">Удобный и быстрый сервис заказа натальных карт
-                    </h1>
-                    <p class="mb-5 theme-text-accent-two text-h4"> Нам доверяют. Более 1000 выполненных исследований!</p>
+                    <h1 class="display-2 fw-bold mt-3 mb-3 theme-text-white animate-charcter">Разбор вашей натальной карты</h1>
+                    <p class="mb-5 theme-text-accent-two text-h4">Нам доверяют. Более 1000 выполненных исследований!</p>
                     <div class="group">
-                        <button class="rounded-pill btn btn-lg custom-btn-primary  primary-btn-effect" onClick="window.location='/astro-order'">ЗАКАЗАТЬ ЗА 1 МИНУТУ</button>
+                        <button class="rounded-pill btn btn-lg custom-btn-primary primary-btn-effect" data-bs-toggle="modal" data-bs-target="#orderModal">ЗАКАЗАТЬ ЗА 1 МИНУТУ</button>
                     </div>
                 </div>
                 <div class="col-12 col-lg-6">
@@ -71,6 +150,109 @@
         </div>
     </section>
 
+    <!-- Блок с ценой и снежинками -->
+    <section class="pricing py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6 text-center">
+                    <div class="price-block">
+                        <div class="snowflakes" aria-hidden="true">
+                            <div class="snowflake">❅</div>
+                            <div class="snowflake">❆</div>
+                            <div class="snowflake">❅</div>
+                            <div class="snowflake">❆</div>
+                            <div class="snowflake">❅</div>
+                            <div class="snowflake">❆</div>
+                            <div class="snowflake">❅</div>
+                            <div class="snowflake">❆</div>
+                            <div class="snowflake">❅</div>
+                            <div class="snowflake">❆</div>
+                            <div class="snowflake">❅</div>
+                            <div class="snowflake">❆</div>
+                            <div class="snowflake">❅</div>
+                            <div class="snowflake">❆</div>
+                            <div class="snowflake">❅</div>
+                            <div class="snowflake">❆</div>
+                            <div class="snowflake">❅</div>
+                            <div class="snowflake">❆</div>
+                            <div class="snowflake">❅</div>
+                            <div class="snowflake">❆</div>
+                        </div>
+                        
+                        <div class="price-content">
+                            <div class="discount-label">Новогодняя скидка 70%</div>
+                            <div class="old-price">4 999 ₽</div>
+                            <div class="new-price">1 499 ₽</div>
+                            <button class="rounded-pill btn btn-lg custom-btn-primary primary-btn-effect" data-bs-toggle="modal" data-bs-target="#orderModal">ЗАКАЗАТЬ СО СКИДКОЙ</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Модальное окно для формы заказа -->
+    <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="orderModalLabel">Заказать натальную карту</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="orderForm" method="POST" action="{{ route('orders.store') }}">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email*</label>
+                            <input type="email" class="form-control" id="email" name="email" value="test@example.com" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Пол*</label>
+                            <div class="d-flex gap-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="gender" id="genderMale" value="male" checked required>
+                                    <label class="form-check-label" for="genderMale">
+                                        Мужской
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="gender" id="genderFemale" value="female" required>
+                                    <label class="form-check-label" for="genderFemale">
+                                        Женский
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="birthDate" class="form-label">Дата рождения*</label>
+                            <input type="date" class="form-control" id="birthDate" name="birth_date" value="1990-01-01" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="birthTime" class="form-label">Время рождения*</label>
+                            <input type="time" class="form-control" id="birthTime" name="birth_time" value="12:00" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="birthCity" class="form-label">Место рождения*</label>
+                            <input type="text" class="form-control" id="birthCity" name="birth_city" value="Москва" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Заказать</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Скрипты -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const snowflakes = document.querySelectorAll('.snowflake');
+            snowflakes.forEach((snowflake, index) => {
+                snowflake.style.left = Math.random() * 100 + '%';
+                snowflake.style.animationDelay = (Math.random() * 3) + 's, ' + (Math.random() * 2) + 's';
+            });
+        });
+    </script>
 
     <!-- about company section -->
     <section class="about-company" data-aos="fade-up">
@@ -165,7 +347,9 @@
                 <!-- repetable -->
             </div>
             <div class="mt-4 text-center">
-                <button class="rounded-pill btn btn-lg custom-btn-primary  primary-btn-effect" onClick="window.location='/astro-order'">СДЕЛАТЬ ЗАКАЗ</button>
+              <div class="group">
+                          <button class="rounded-pill btn btn-lg custom-btn-primary primary-btn-effect" data-bs-toggle="modal" data-bs-target="#orderModal">ЗАКАЗАТЬ ЗА 1 МИНУТУ</button>
+              </div>
             </div>
         </div>
     </section>
@@ -628,7 +812,7 @@
             <div class="row mt-5">
                 <div class="col-12 col-md-6 col-lg-3 mb-3 mb-lg-0">
                     <div class="box">
-                        <span class="px-2 py-2 rounded-circle theme-bg-secondary h4 fw-bold d-inline-flex point">01</span>
+                        <span class="px-2 py-2 rounded-circle theme-bg-secondary h4 fw-bold d-inline-flex point">1</span>
                         <span class="ms-2 fw-bold theme-text-dark">Информация</span>
                         <p class="theme-text-accent-three mt-4 mb-0 pe-5">Введите свои контакты, имя, дату, время и город рождения человека, для которого создается карта</p>
                     </div>
@@ -636,7 +820,7 @@
                 <!-- repetable -->
                 <div class="col-12 col-md-6 col-lg-3 mb-3 mb-lg-0">
                     <div class="box">
-                        <span class="px-2 py-2 rounded-circle theme-bg-secondary h4 fw-bold d-inline-flex point">02</span>
+                        <span class="px-2 py-2 rounded-circle theme-bg-secondary h4 fw-bold d-inline-flex point">2</span>
                         <span class="ms-2 fw-bold theme-text-dark">Оплата</span>
                         <p class="theme-text-accent-three mt-4 mb-0 pe-5">Оплатите любым удобным для вас способом</p>
                     </div>
@@ -644,7 +828,7 @@
                 <!-- repetable -->
                 <div class="col-12 col-md-6 col-lg-3 mb-3 mb-lg-0">
                     <div class="box">
-                        <span class="px-2 py-2 rounded-circle theme-bg-secondary h4 fw-bold d-inline-flex point">03</span>
+                        <span class="px-2 py-2 rounded-circle theme-bg-secondary h4 fw-bold d-inline-flex point">3</span>
                         <span class="ms-2 fw-bold theme-text-dark">Ожидание</span>
                         <p class="theme-text-accent-three mt-4 mb-0 pe-5">Подготовка карты занимает в среднем 3-4 часа, гарантировано пришлем результат в течение суток</p>
                     </div>
@@ -652,7 +836,7 @@
                 <!-- repetable -->
                 <div class="col-12 col-md-6 col-lg-3 mb-3 mb-lg-0">
                     <div class="box">
-                        <span class="px-2 py-2 rounded-circle theme-bg-secondary h4 fw-bold d-inline-flex point">04</span>
+                        <span class="px-2 py-2 rounded-circle theme-bg-secondary h4 fw-bold d-inline-flex point">4</span>
                         <span class="ms-2 fw-bold theme-text-dark">Результаты</span>
                         <p class="theme-text-accent-three mt-4 mb-0 pe-5">Мы вышлем карту в формате PDF на почту, указанную при регистрации</p>
                     </div>
@@ -698,7 +882,7 @@
                                             <i class="bi bi-star-fill"></i>
                                             <i class="bi bi-star"></i>
                                         </span>
-                                        <div class="mt-3"><span class="h5 fw-bold">Светлана</span>
+                                        <div class="mt-3"><span class="h5 fw-bold" style="color: #000;">Светлана</span>
 
                                         </div>
                                         <p class="font-small mb-0 mt-4 theme-text-accent-three lh-lg">Нормальный сервис. Генерация натальной карты заняла всего пару часов, и информация оказалась вполне точной. Рекомендую всем, кто интересуется астрологией.</p>
@@ -730,7 +914,7 @@
                                             <i class="bi bi-star-fill"></i>
                                             <i class="bi bi-star-fill"></i>
                                         </span>
-                                        <div class="mt-3"><span class="h5 fw-bold">Юлия</span>
+                                        <div class="mt-3"><span class="h5 fw-bold" style="color: #000;">Юлия</span>
                                         </div>
                                         <p class="font-small mb-0 mt-4 theme-text-accent-three lh-lg">Очень удобный интерфейс и понятные объяснения. Получила много интересных инсайтов о своей личности. Буду пользоваться еще!</p>
                                     </div>
@@ -760,7 +944,7 @@
                                             <i class="bi bi-star-fill"></i>
                                             <i class="bi bi-star-fill"></i>
                                         </span>
-                                        <div class="mt-3"><span class="h5 fw-bold">Игорь</span>
+                                        <div class="mt-3"><span class="h5 fw-bold" style="color: #000;">Игорь</span>
                                         </div>
                                         <p class="font-small mb-0 mt-4 theme-text-accent-three lh-lg">Приятно удивлен точностью и глубиной анализа. Сервис прост в использовании и дает много полезной информации. Рекомендую всем!</p>
                                     </div>
@@ -791,7 +975,7 @@
                                             <i class="bi bi-star-fill"></i>
                                             <i class="bi bi-star-fill"></i>
                                         </span>
-                                        <div class="mt-3"><span class="h5 fw-bold">Ирина</span>
+                                        <div class="mt-3"><span class="h5 fw-bold" style="color: #000;">Ирина</span>
                                         </div>
                                         <p class="font-small mb-0 mt-4 theme-text-accent-three lh-lg">Натальная карта оказалась очень подробной и точной. Спасибо за качественную работу!</p>
                                     </div>
@@ -817,7 +1001,9 @@
                         <h4 class="h1 fw-bold mb-4 theme-text-accent-one">Попробуйте прямо сейчас!</h4>
                         <p class="h5 fw-bold theme-text-accent-two mb-0"></p>
                         <div class="group mt-5">
-                            <button class="rounded-pill btn custom-btn-primary btn-lg primary-btn-effect pa-3" onClick="window.location='/astro-order'">Заказать натальную карту</button>
+                        <div class="group">
+                        <button class="rounded-pill btn btn-lg custom-btn-primary primary-btn-effect" data-bs-toggle="modal" data-bs-target="#orderModal">ЗАКАЗАТЬ ЗА 1 МИНУТУ</button>
+                        </div>
                         </div>
                     </div>
                 </div>
