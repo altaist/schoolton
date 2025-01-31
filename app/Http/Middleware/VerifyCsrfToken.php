@@ -13,6 +13,10 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         'get_pay',
-        '/get_pay'
+        '/get_pay',
+        'get_pay/*',
+        '/get_pay/*',
+        'https://natalnayakarta.ru/get_pay',
+        'http://natalnayakarta.ru/get_pay'
     ];
 } 
