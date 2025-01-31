@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Order;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class OrderController extends BaseController
 {
@@ -42,6 +43,10 @@ class OrderController extends BaseController
 
     public function store(Request $request)
     {
+        Log::info('Received order request', [
+            'data' => $request->all()
+        ]);
+
         $validator = Validator::make($request->all(), [
             'email' => 'required|email|max:255',
             'gender' => 'required|in:male,female',
@@ -51,6 +56,10 @@ class OrderController extends BaseController
         ]);
 
         if ($validator->fails()) {
+            Log::error('Order validation failed', [
+                'errors' => $validator->errors()->toArray()
+            ]);
+            
             return back()
                 ->withErrors($validator)
                 ->withInput();
@@ -60,6 +69,7 @@ class OrderController extends BaseController
             $expiresAt = now()->addMinutes((int)config('robokassa.wait_time'))->setTimezone('UTC');
             
             $order = Order::create([
+                'order_id' => (string) Str::uuid(),
                 'email' => $request->email,
                 'gender' => $request->gender,
                 'birth_date' => $request->birth_date,
@@ -70,10 +80,19 @@ class OrderController extends BaseController
                 'expires_at' => $expiresAt
             ]);
 
+            Log::info('Order created successfully', [
+                'order_id' => $order->id,
+                'uuid' => $order->order_id
+            ]);
+
             return redirect()->route('order.show', ['orderId' => $order->order_id]);
 
         } catch (\Exception $e) {
-            Log::error('Order creation error: ' . $e->getMessage());
+            Log::error('Order creation error', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+
             return back()
                 ->with('error', 'Произошла ошибка при создании заказа')
                 ->withInput();
