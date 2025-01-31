@@ -97,7 +97,7 @@ Route::prefix('course')->group(function () {
 Route::prefix('task')->group(function () {
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['web'])->group(function () {
     Route::prefix('lk')->group(function () {
 
         Route::get('/', [ProfileController::class, 'showLk'])->name('lk');
@@ -127,9 +127,10 @@ Route::post('/order/{orderId}/update', [OrderViewController::class, 'update'])->
 
 Route::post('/get_pay', [PaymentController::class, 'handlePayment'])
     ->name('payment.handle')
-    ->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
+    ->middleware([]);
 
 Route::get('/success_pay', [PaymentSuccessController::class, 'show'])->name('payment.success');
 Route::get('/payment/check-status/{inv_id}', [PaymentSuccessController::class, 'checkStatus'])->name('payment.check-status');
+});
 
 require __DIR__.'/auth.php';
