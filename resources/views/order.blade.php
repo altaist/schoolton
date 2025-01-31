@@ -117,7 +117,7 @@
                     </table>
                 </div>
             </div>
-            @if($order->status === 'paid')
+            @if($order->status !== 'paid')
             <div class="row mt-4">
                 <div class="col-12 text-center">
                     <?php
