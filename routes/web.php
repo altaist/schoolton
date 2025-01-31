@@ -126,12 +126,8 @@ Route::get('/order/{orderId}', [OrderViewController::class, 'show'])->name('orde
 Route::post('/order/{orderId}/update', [OrderViewController::class, 'update'])->name('order.update');
 
 Route::post('/get_pay', [PaymentController::class, 'handlePayment'])
-    ->middleware('api')
-    ->withoutMiddleware([
-        \App\Http\Middleware\VerifyCsrfToken::class,
-        \Illuminate\Session\Middleware\StartSession::class,
-        \Illuminate\View\Middleware\ShareErrorsFromSession::class
-    ])
+    ->withoutMiddleware(['web'])
+    ->middleware(['api'])
     ->name('payment.handle');
 
 Route::get('/success_pay', [PaymentSuccessController::class, 'show'])->name('payment.success');
