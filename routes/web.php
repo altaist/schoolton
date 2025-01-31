@@ -131,6 +131,6 @@ Route::post('/get_pay', [PaymentController::class, 'handlePayment'])
 
 Route::get('/success_pay', [PaymentSuccessController::class, 'show'])->name('payment.success');
 Route::get('/payment/check-status/{inv_id}', [PaymentSuccessController::class, 'checkStatus'])->name('payment.check-status');
-});
+
 
 require __DIR__.'/auth.php';
