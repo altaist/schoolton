@@ -58,11 +58,11 @@
         <div class="order-container">
             <div class="row mb-4">
                 <div class="col-12">
-                    <h2>Ваш заказ создан</h2>
                     @if($order->status === 'paid')
-                            <h2 class="mb-3">Заказ принят в работу</h2>
-                            <p>Спасибо за оплату! Ваша натальная карта будет отправлена на email {{ $order->email }} в течение 24 часов.</p>
+                    <h2 class="mb-3">Заказ принят в работу</h2>
+                    <p>Спасибо за оплату! Ваша натальная карта будет отправлена на email {{ $order->email }} в течение 24 часов.</p>
                     @else
+                        <h2>Ваш заказ создан</h2>
                         <div class="timer-container mb-4">
                             <p>Время до отмены заказа: <span id="timer">...</span></p>
                         </div>
