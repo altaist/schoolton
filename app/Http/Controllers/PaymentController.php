@@ -39,118 +39,58 @@ class PaymentController extends Controller
 
     public function handlePayment(Request $request)
     {
-        // Логируем входящий запрос 
-        Log::info('Received payment notification', [
-            'all_params' => $request->all()
+        // Отключаем вывод HTML при ошибках
+        config(['app.debug' => false]);
+        
+        // Логируем входящий запрос
+        Log::channel('daily')->info('Payment notification received', [
+            'method' => $request->method(),
+            'ip' => $request->ip(),
+            'data' => $request->all()
         ]);
-
-        // Получаем параметры
-        $out_sum = $request->input('OutSum');
-        $inv_id = $request->input('InvId');
-        $signature_value = $request->input('SignatureValue');
-        $email = $request->input('EMail');
-        $fee = $request->input('Fee');
-        $payment_method = $request->input('PaymentMethod');
-
-        // Логируем основные параметры
-        Log::info('Payment parameters', [
-            'out_sum' => $out_sum,
-            'inv_id' => $inv_id,
-            'signature' => $signature_value,
-            'email' => $email,
-            'fee' => $fee,
-            'payment_method' => $payment_method
-        ]);
-
-        // Получаем пароль в зависимости от режима (тестовый/боевой)
-        $is_test = config('robokassa.test_mode');
-        $password_2 = $is_test ? config('robokassa.test_password_2') : config('robokassa.password_2');
-
-        // Формируем подпись для проверки
-        $signature_check = strtoupper(md5("$out_sum:$inv_id:$password_2"));
-
-        // Логируем проверку подписи
-        Log::info('Signature verification', [
-            'received_signature' => $signature_value,
-            'calculated_signature' => $signature_check,
-            'is_test_mode' => $is_test
-        ]);
-
-        // Проверяем подпись
-        if ($signature_check !== strtoupper($signature_value)) {
-            Log::error('Payment signature verification failed', [
-                'received' => $signature_value,
-                'calculated' => $signature_check,
-                'inv_id' => $inv_id,
-                'out_sum' => $out_sum
-            ]);
-            return response('Signature verification failed', 400);
-        }
 
         try {
-            // Находим заказ
-            $order = Order::findOrFail($inv_id);
+            $out_sum = $request->input('OutSum');
+            $inv_id = $request->input('InvId');
+            $signature_value = $request->input('SignatureValue');
 
-            Log::info('Found order', [
-                'order_id' => $order->id,
-                'order_uuid' => $order->order_id,
-                'current_status' => $order->status,
-                'order_amount' => $order->amount
-            ]);
+            // Проверяем подпись
+            $is_test = config('robokassa.test_mode');
+            $password_2 = $is_test ? config('robokassa.test_password_2') : config('robokassa.password_2');
+            
+            $signature_check = strtoupper(md5("$out_sum:$inv_id:$password_2"));
 
-            // Проверяем сумму
-            if ((float)$out_sum !== (float)$order->amount) {
-                Log::error('Payment amount mismatch', [
-                    'order_id' => $inv_id,
-                    'expected' => $order->amount,
-                    'received' => $out_sum,
-                    'difference' => (float)$order->amount - (float)$out_sum
+            if ($signature_check !== strtoupper($signature_value)) {
+                Log::channel('daily')->error('Invalid signature', [
+                    'received' => $signature_value,
+                    'calculated' => $signature_check
                 ]);
-                return response('Amount mismatch', 400);
+                return response("bad sign\n", 400);
             }
 
-            // Логируем перед обновлением
-            Log::info('Updating order status', [
-                'order_id' => $inv_id,
-                'old_status' => $order->status,
-                'new_status' => 'paid'
-            ]);
+            // Находим и обновляем заказ
+            $order = Order::find($inv_id);
+            if (!$order) {
+                Log::channel('daily')->error('Order not found', ['inv_id' => $inv_id]);
+                return response("Order not found\n", 404);
+            }
 
-            // Обновляем статус заказа
             $order->update([
-                'status' => 'paid',
-                'payment_method' => $payment_method,
-                'payment_fee' => $fee,
-                'payer_email' => $email
+                'status' => 'paid'
             ]);
 
-            // Логируем успешное обновление
-            Log::info('Order successfully updated', [
-                'order_id' => $inv_id,
-                'new_status' => 'paid',
-                'payment_details' => [
-                    'method' => $payment_method,
-                    'fee' => $fee,
-                    'email' => $email
-                ]
+            Log::channel('daily')->info('Payment processed successfully', [
+                'order_id' => $inv_id
             ]);
 
-            // Возвращаем ответ в формате OK{$inv_id}
-            $response = "OK$inv_id";
-            Log::info('Sending response to Robokassa', [
-                'response' => $response
-            ]);
-            
-            return response($response);
+            return response("OK$inv_id\n");
 
         } catch (\Exception $e) {
-            Log::error('Payment processing error', [
-                'order_id' => $inv_id,
-                'error_message' => $e->getMessage(),
-                'error_trace' => $e->getTraceAsString(),
-                'request_data' => $request->all()
+            Log::channel('daily')->error('Payment processing error', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
             ]);
-            return response('Internal error', 500);
+            return response("Internal error\n", 500);
         }
     }
 }
