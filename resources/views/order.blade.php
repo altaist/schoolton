@@ -59,7 +59,24 @@
             <div class="row mb-4">
                 <div class="col-12">
                     <h2>Ваш заказ создан</h2>
-                    <p>Осталось времени для оплаты: <span class="timer" id="timer">10:00</span></p>
+                    @if($order->status === 'paid')
+                        <div class="alert alert-success">
+                            <h4 class="mb-3">Заказ принят в работу</h4>
+                            <p>Спасибо за оплату! Ваша натальная карта будет отправлена на email {{ $order->email }} в течение 24 часов.</p>
+                        </div>
+                    @else
+                        <div class="timer-container mb-4">
+                            <p>Время до отмены заказа: <span id="timer">...</span></p>
+                        </div>
+
+                        <div class="mb-4">
+                            <a href="{{ route('order.edit', $order->order_id) }}" class="btn btn-primary">
+                                Изменить данные
+                            </a>
+                        </div>
+
+                        @include('partials.payment-form')
+                    @endif
                 </div>
             </div>
 

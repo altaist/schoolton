@@ -7,6 +7,8 @@ use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderPaidNotification;
 
 class PaymentController extends Controller
 {
@@ -78,6 +80,9 @@ class PaymentController extends Controller
             $order->update([
                 'status' => 'paid'
             ]);
+
+            // Отправляем email
+            Mail::to($order->email)->send(new OrderPaidNotification($order));
 
             Log::channel('daily')->info('Payment processed successfully', [
                 'order_id' => $inv_id
