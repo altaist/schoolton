@@ -82,7 +82,38 @@
                         @else
                             <div>
                                 <h4><strong>Создан</strong></h4>
+                                <p>Оплатите ваш заказ в течение <span id="timer" class="text-danger"></span></p>
                             </div>
+
+                            <script>
+                            // Получаем время создания заказа
+                            const orderCreatedAt = new Date("{{ $order->created_at }}");
+                            // Добавляем 30 минут
+                            const reserveEndTime = new Date(orderCreatedAt.getTime() + 30 * 60000);
+
+                            function updateTimer() {
+                                const now = new Date();
+                                const diff = reserveEndTime - now;
+
+                                if (diff <= 0) {
+                                    document.getElementById('timer').textContent = 'Время резерва истекло';
+                                    clearInterval(timerInterval);
+                                    return;
+                                }
+
+                                const minutes = Math.floor(diff / 60000);
+                                const seconds = Math.floor((diff % 60000) / 1000);
+
+                                document.getElementById('timer').textContent = 
+                                    minutes.toString().padStart(2, '0') + ':' + 
+                                    seconds.toString().padStart(2, '0');
+                            }
+
+                            // Обновляем таймер каждую секунду
+                            const timerInterval = setInterval(updateTimer, 1000);
+                            // Запускаем таймер сразу
+                            updateTimer();
+                            </script>
                         @endif
 
                         <div class="mt-4">
