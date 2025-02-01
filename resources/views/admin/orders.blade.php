@@ -5,6 +5,20 @@
 @section('content')
 <h2 class="mb-4">Список заказов</h2>
 
+@if(session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+
+@if(session('error'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ session('error') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+
 <div class="table-responsive">
     <table class="table table-striped">
         <thead>
@@ -74,7 +88,7 @@
                                        class="form-control" 
                                        id="email{{ $order->id }}" 
                                        name="email" 
-                                       value="{{ $order->email }}" 
+                                       value="{{ old('email', $order->email) }}" 
                                        required>
                             </div>
                             
@@ -89,7 +103,9 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-                            <button type="submit" class="btn btn-primary">Отправить</button>
+                            <button type="submit" class="btn btn-primary">
+                                Отправить
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -97,12 +113,4 @@
         </div>
     @endif
 @endforeach
-@endsection
-
-@push('styles')
-<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
-@endpush
-
-@push('scripts')
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-@endpush 
+@endsection 

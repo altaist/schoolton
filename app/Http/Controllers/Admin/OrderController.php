@@ -31,16 +31,12 @@ class OrderController extends Controller
             // Обновляем статус заказа
             $order->update(['status' => 'completed']);
             
-            return response()->json([
-                'success' => true,
-                'message' => 'Файл успешно отправлен'
-            ]);
+            return redirect()->back()->with('success', 'Файл успешно отправлен');
             
         } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Произошла ошибка: ' . $e->getMessage()
-            ], 500);
+            return redirect()->back()
+                ->with('error', 'Произошла ошибка: ' . $e->getMessage())
+                ->withInput();
         }
     }
 } 
