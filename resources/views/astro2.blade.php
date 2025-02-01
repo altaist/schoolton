@@ -1051,6 +1051,40 @@
     <script src="dist/js/counter.js"></script>
     <script src="dist/js/aos.js"></script>
     <script src="dist/js/main.js"></script>
+
+    <script>
+    // Функция для проверки email
+    function validateEmail(email) {
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        return emailRegex.test(email);
+    }
+
+    // Добавляем слушатель для формы
+    document.getElementById('orderForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const emailInput = document.getElementById('email');
+        
+        // Проверка email
+        if (!validateEmail(emailInput.value)) {
+            emailInput.classList.add('is-invalid');
+            return false;
+        }
+        
+        // Если email валиден, отправляем форму
+        emailInput.classList.remove('is-invalid');
+        this.submit();
+    });
+
+    // Добавляем слушатель для валидации email при вводе
+    document.getElementById('email').addEventListener('input', function() {
+        if (!validateEmail(this.value)) {
+            this.classList.add('is-invalid');
+        } else {
+            this.classList.remove('is-invalid');
+        }
+    });
+    </script>
 </body>
 
 </html>

@@ -84,6 +84,15 @@
                                 <h4><strong>Создан</strong></h4>
                             </div>
                         @endif
+
+                        <div class="mt-4">
+                            <button type="button" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#editModal">
+                                Изменить данные
+                            </button>
+                            <button type="button" class="btn btn-secondary" onclick="copyOrderLink()">
+                                Скопировать ссылку на заказ
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -275,7 +284,19 @@
         }
 
         function updateOrder() {
-            let formData = new FormData(document.getElementById('updateOrderForm'));
+            const form = document.getElementById('updateOrderForm');
+            const emailInput = document.getElementById('editEmail');
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+            // Проверка email
+            if (!emailRegex.test(emailInput.value)) {
+                emailInput.classList.add('is-invalid');
+                return false; // Прерываем выполнение функции
+            }
+
+            // Если email валиден, продолжаем выполнение
+            emailInput.classList.remove('is-invalid');
+            let formData = new FormData(form);
             
             fetch('/order/{{ $order->order_id }}/update', {
                 method: 'POST',
@@ -297,6 +318,16 @@
                 alert('Произошла ошибка при обновлении данных');
             });
         }
+
+        // Добавляем слушатель для валидации email при вводе
+        document.getElementById('editEmail').addEventListener('input', function() {
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!emailRegex.test(this.value)) {
+                this.classList.add('is-invalid');
+            } else {
+                this.classList.remove('is-invalid');
+            }
+        });
 
         function copyOrderLink() {
             const url = window.location.href;
