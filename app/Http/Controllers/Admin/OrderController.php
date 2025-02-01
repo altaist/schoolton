@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\NatalOrder;
+use App\Models\Order as NatalOrder;
 use App\Mail\OrderFileEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
