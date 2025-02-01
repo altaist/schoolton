@@ -194,17 +194,17 @@
     <!-- Модальное окно для формы заказа -->
     <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
+            <div class="modal-content bg-dark text-white">
+                <div class="modal-header border-secondary">
                     <h5 class="modal-title" id="orderModalLabel">Заказать натальную карту</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form id="orderForm" method="POST" action="{{ route('orders.store') }}">
                         @csrf
                         <div class="mb-3">
                             <label for="email" class="form-label">Email*</label>
-                            <input type="email" class="form-control" id="email" name="email" value="test@example.com" required>
+                            <input type="email" class="form-control bg-dark text-white border-secondary" id="email" name="email" value="test@example.com" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Пол*</label>
@@ -225,15 +225,15 @@
                         </div>
                         <div class="mb-3">
                             <label for="birthDate" class="form-label">Дата рождения*</label>
-                            <input type="date" class="form-control" id="birthDate" name="birth_date" value="1990-01-01" required>
+                            <input type="date" class="form-control bg-dark text-white border-secondary" id="birthDate" name="birth_date" value="1990-01-01" required>
                         </div>
                         <div class="mb-3">
                             <label for="birthTime" class="form-label">Время рождения*</label>
-                            <input type="time" class="form-control" id="birthTime" name="birth_time" value="12:00" required>
+                            <input type="time" class="form-control bg-dark text-white border-secondary" id="birthTime" name="birth_time" value="12:00" required>
                         </div>
                         <div class="mb-3">
                             <label for="birthCity" class="form-label">Место рождения*</label>
-                            <input type="text" class="form-control" id="birthCity" name="birth_city" value="Москва" required>
+                            <input type="text" class="form-control bg-dark text-white border-secondary" id="birthCity" name="birth_city" value="Москва" required>
                         </div>
                         <button type="submit" class="btn btn-primary w-100">Заказать</button>
                     </form>
