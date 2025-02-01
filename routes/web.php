@@ -127,10 +127,9 @@ Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
 Route::get('/order/{orderId}', [OrderViewController::class, 'show'])->name('order.show');
 Route::post('/order/{orderId}/update', [OrderViewController::class, 'update'])->name('order.update');
 
-Route::middleware(['api'])->group(function () {
-    Route::post('/get_pay', [PaymentController::class, 'handlePayment'])
-        ->name('payment.handle');
-});
+Route::post('/get_pay', [PaymentController::class, 'handlePayment'])
+    ->name('payment.handle')
+    ->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
 
 Route::get('/success_pay', [PaymentSuccessController::class, 'show'])
     ->name('payment.success');
