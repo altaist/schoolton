@@ -10,7 +10,6 @@ use App\Http\Controllers\OrderViewController;
 use App\Http\Controllers\PaymentSuccessController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\Admin\OrderController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -147,5 +146,5 @@ Route::middleware(['api'])->group(function () {
         ->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
 });
 
-Route::post('/admin/orders/send-file', [OrderController::class, 'sendFile'])->name('admin.orders.send-file');
+Route::post('/admin/orders/send-file', [\App\Http\Controllers\Admin\OrderController::class, 'sendFile'])->name('admin.orders.send-file');
 
