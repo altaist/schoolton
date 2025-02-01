@@ -1,28 +1,20 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html>
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Админ-панель</title>
 
-        <title inertia>{{ config('app.name', 'Laravel') }}</title>
-
-        <!-- Fonts -->
-        <!--link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet"-->
-
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Prosto+One&display=swap" rel="stylesheet">
-
-        <script src="https://telegram.org/js/telegram-web-app.js"></script>
-
-        <!-- Scripts -->
-        @routes
-        @vite(['resources/js/app.js', "resources/js/pages/{$page['component']}.vue"])
+        <!-- Стили -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        
+        @viteReactRefresh
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
         @inertiaHead
     </head>
-    <body class="antialiased">
+    <body>
         @inertia
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>

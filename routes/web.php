@@ -8,6 +8,8 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\OrderViewController;
 use App\Http\Controllers\PaymentSuccessController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -126,12 +128,18 @@ Route::get('/order/{orderId}', [OrderViewController::class, 'show'])->name('orde
 Route::post('/order/{orderId}/update', [OrderViewController::class, 'update'])->name('order.update');
 
 Route::post('/get_pay', [PaymentController::class, 'handlePayment'])
-    ->withoutMiddleware(['web'])
-    ->middleware(['api'])
-    ->name('payment.handle');
+    ->name('payment.handle')
+    ->middleware([]);
 
-Route::get('/success_pay', [PaymentSuccessController::class, 'show'])->name('payment.success');
-Route::get('/payment/check-status/{inv_id}', [PaymentSuccessController::class, 'checkStatus'])->name('payment.check-status');
+Route::get('/success_pay', [PaymentSuccessController::class, 'show'])
+    ->name('payment.success');
 
+Route::get('/payment/check-status/{inv_id}', [PaymentSuccessController::class, 'checkStatus'])
+    ->name('payment.check-status');
 
-require __DIR__.'/auth.php';
+// Админка
+Route::get('/admin/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/admin/login', [AuthController::class, 'login']);
+Route::post('/admin/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/admin', [AdminController::class, 'index'])->name('admin.orders');
+

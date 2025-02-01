@@ -133,10 +133,10 @@
         <div class="container position-relative z-2 my-5">
             <div class="row justify-content-center align-items-center">
                 <div class="col-12 col-lg-6">
-                    <h1 class="display-2 fw-bold mt-3 mb-3 theme-text-white animate-charcter">Разбор вашей натальной карты</h1>
-                    <p class="mb-5 theme-text-accent-two text-h4">Нам доверяют. Более 1000 выполненных исследований!</p>
+                    <h1 class="display-2 fw-bold mt-3 mb-3 theme-text-white animate-charcter">Ваша натальная карта в 1 клик</h1>
+                    <p class="mb-5 theme-text-accent-two text-h4">Закажите прямо сейчас по особой цене</p>
                     <div class="group">
-                        <button class="rounded-pill btn btn-lg custom-btn-primary primary-btn-effect" data-bs-toggle="modal" data-bs-target="#orderModal">ЗАКАЗАТЬ ЗА 1 МИНУТУ</button>
+                        <button class="rounded-pill btn btn-lg custom-btn-primary primary-btn-effect" data-bs-toggle="modal" data-bs-target="#orderModal">ЗАКАЗАТЬ</button>
                     </div>
                 </div>
                 <div class="col-12 col-lg-6">
@@ -1010,31 +1010,7 @@
             </div>
         </div>
     </section>
-    <!-- download our aap section -->
-    <section class="download-aap py-5" data-aos="fade-up">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-12 col-lg-8">
-                    <p class="mb-3 theme-text-white">Астропрогнозы прямо в телеграмм</p>
-                    <h4 class="h1 fw-bold mb-5 mb-lg-0 theme-text-accent-one">Подключи ежедневные прогнозы</h4>
-                </div>
-                <div class="col-12 col-lg-4 text-center">
-                    <div class="d-flex justify-content-center">
-                        <a href="javascript:void(0)"
-                            class="d-inline-flex align-items-center theme-bg-white px-4 py-2 theme-border-radius">
-                            <div class="flex-grow-1 ms-2 font-extra-small">
-                                <span class="mb-0 theme-text-accent-three">Телеграмм Бот</span>
-                                <span class="mb-0 theme-text-dark fw-bold d-block">Astro Pulse</span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <div>
-
-    </div>
+    
     <!-- Footer Part -->
     <footer class="footer py-5" >
         <div class="container">

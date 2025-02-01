@@ -25,6 +25,7 @@ class User extends Authenticatable
         'contact_email',
         'contact_tel',
         'auth_token',
+        'is_admin',
     ];
 
     /**
@@ -50,7 +51,7 @@ class User extends Authenticatable
             'password' => 'hashed',
             'created_at' => 'datetime:Y-m-d H:i',
             'updated_at' => 'datetime',
-
+            'is_admin' => 'boolean',
         ];
     }
 
