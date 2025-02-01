@@ -61,18 +61,18 @@
                     <div class="order-status">
                         <h4>Статус заказа:</h4>
                         @if($order->status === 'paid')
-                            <div class="alert alert-warning">
+                            <div>
                                 <strong>Оплачен</strong>
                                 <p>Ваш заказ оплачен и находится в обработке. Готовый файл будет отправлен на ваш email.</p>
                             </div>
                         @elseif($order->status === 'completed')
-                            <div class="alert alert-success">
+                            <div>
                                 <strong>Завершён</strong>
                                 <p>Ваш заказ выполнен! Файл был отправлен на ваш email.</p>
                                 <p>Если вы не получили письмо, проверьте папку "Спам" или свяжитесь с нами.</p>
                             </div>
                         @else
-                            <div class="alert alert-secondary">
+                            <div>
                                 <strong>Создан</strong>
                             </div>
                         @endif
@@ -116,7 +116,7 @@
                     </table>
                 </div>
             </div>
-            @if($order->status !== 'paid')
+            @if($order->status !== 'paid' && $order->status !== 'completed')
             <div class="row mt-4">
                 <div class="col-12 text-center">
                     <?php
