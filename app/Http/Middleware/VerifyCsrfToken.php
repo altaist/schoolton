@@ -13,6 +13,7 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         'get_pay',
+        '*get_pay*',
         '/get_pay',
         'get_pay/*',
         '/get_pay/*',
