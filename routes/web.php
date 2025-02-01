@@ -10,6 +10,7 @@ use App\Http\Controllers\OrderViewController;
 use App\Http\Controllers\PaymentSuccessController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Admin\OrderController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
