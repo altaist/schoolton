@@ -51,6 +51,14 @@
         .toast-body {
             font-size: 1rem;
         }
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .container {
+            margin-top: auto;
+        }
     </style>
 </head>
 <body>
@@ -214,6 +222,23 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
                     <button type="button" class="btn btn-primary" onclick="updateOrder()">Сохранить изменения</button>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" style="margin-top: auto;">
+        <div class="row justify-content-center">
+            <div class="col-md-8 text-center">
+                <hr class="my-4">
+                <p class="text-muted mb-2">
+                    Если у вас возникли вопросы, 
+                    <a href="mailto:info@natalnayakarta.store" class="text-decoration-none">
+                        свяжитесь с нами
+                    </a>
+                </p>
+                <p class="text-muted mb-4">
+                    info@natalnayakarta.store
+                </p>
             </div>
         </div>
     </div>
