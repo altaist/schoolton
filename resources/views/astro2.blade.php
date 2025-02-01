@@ -308,39 +308,39 @@
             <div class="row">
                 <div class="col-12 col-lg-12 text-center">
                     <p class="mb-4 theme-text-primary">Почему мы?</p>
-                    <h2 class="h1 fw-bold mb-4 theme-text-dark">Причины заказать натальную карту прямо сейчас</h2>
+                    <h2 class="h1 fw-bold mb-4 text-dark">Причины заказать натальную карту прямо сейчас</h2>
                 </div>
             </div>
             <div class="row mt-5">
                 <div class="col-12 col-md-6 col-lg-3 mb-3 mb-lg-0 ">
                     <div class="box">
                         <span class="px-4 py-2 rounded-circle theme-bg-secondary h1 fw-bold d-inline-flex point2"> 1</span>
-                        <span class="ms-2 fw-bold theme-text-dark">Удобно</span>
-                        <p class="theme-text-accent-three mt-4 mb-0 pe-5">Ничего лишнего. Просто введите данные для расчета и оплатите онлайн. Результат по почте или в личном кабинете</p>
+                        <span class="ms-2 fw-bold text-dark">Удобно</span>
+                        <p class="text-dark mt-4 mb-0 pe-5">Ничего лишнего. Просто введите данные для расчета и оплатите онлайн. Результат по почте или в личном кабинете</p>
                     </div>
                 </div>
                 <!-- repetable -->
                 <div class="col-12 col-md-6 col-lg-3 mb-3 mb-lg-0 ">
                     <div class="box">
                         <span class="px-4 py-2 rounded-circle theme-bg-secondary h1 fw-bold d-inline-flex point2"> 2</span>
-                        <span class="ms-2 fw-bold theme-text-dark">Быстро</span>
-                        <p class="theme-text-accent-three mt-4 mb-0 pe-5">Один из самых быстрых сервисов. Результат в течение нескольких часов после заказа!</p>
+                        <span class="ms-2 fw-bold text-dark">Быстро</span>
+                        <p class="text-dark mt-4 mb-0 pe-5">Один из самых быстрых сервисов. Результат в течение нескольких часов после заказа!</p>
                     </div>
                 </div>
 
                 <div class="col-12 col-md-6 col-lg-3 mb-3 mb-lg-0 ">
                     <div class="box">
                         <span class="px-4 py-2 rounded-circle theme-bg-secondary h1 fw-bold d-inline-flex point2"> 3</span>
-                        <span class="ms-2 fw-bold theme-text-dark">Не дорого</span>
-                        <p class="theme-text-accent-three mt-4 mb-0 pe-5">Доступные цены. Потому что у нас больше заказов и меньше издержки </p>
+                        <span class="ms-2 fw-bold text-dark">Не дорого</span>
+                        <p class="text-dark mt-4 mb-0 pe-5">Доступные цены. Потому что у нас больше заказов и меньше издержки </p>
                     </div>
                 </div>
 
                 <div class="col-12 col-md-6 col-lg-3 mb-3 mb-lg-0 ">
                     <div class="box">
                         <span class="px-4 py-2 rounded-circle theme-bg-secondary h1 fw-bold d-inline-flex point2"> 4</span>
-                        <span class="ms-2 fw-bold theme-text-dark">Надежно</span>
-                        <p class="theme-text-accent-three mt-4 mb-0 pe-5">Мы дорожим своей репутацией и используем лучшие инстрменты и алгоритмы для работы. Если вам не понравится результат - мы вернем деньги</p>
+                        <span class="ms-2 fw-bold text-dark">Надежно</span>
+                        <p class="text-dark mt-4 mb-0 pe-5">Мы дорожим своей репутацией и используем лучшие инстрменты и алгоритмы для работы. Если вам не понравится результат - мы вернем деньги</p>
                     </div>
                 </div>
 
@@ -806,39 +806,39 @@
             <div class="row">
                 <div class="col-12 col-lg-12 text-center">
                     <p class="mb-4 theme-text-primary">4 простых шага</p>
-                    <h2 class="h1 fw-bold mb-4 theme-text-dark">Как создать карту</h2>
+                    <h2 class="h1 fw-bold mb-4 text-dark">Как создать карту</h2>
                 </div>
             </div>
             <div class="row mt-5">
                 <div class="col-12 col-md-6 col-lg-3 mb-3 mb-lg-0">
                     <div class="box">
                         <span class="px-2 py-2 rounded-circle theme-bg-secondary h4 fw-bold d-inline-flex point">1</span>
-                        <span class="ms-2 fw-bold theme-text-dark">Информация</span>
-                        <p class="theme-text-accent-three mt-4 mb-0 pe-5">Введите свои контакты, имя, дату, время и город рождения человека, для которого создается карта</p>
+                        <span class="ms-2 fw-bold text-dark">Информация</span>
+                        <p class="text-dark mt-4 mb-0 pe-5">Введите свои контакты, имя, дату, время и город рождения человека, для которого создается карта</p>
                     </div>
                 </div>
                 <!-- repetable -->
                 <div class="col-12 col-md-6 col-lg-3 mb-3 mb-lg-0">
                     <div class="box">
                         <span class="px-2 py-2 rounded-circle theme-bg-secondary h4 fw-bold d-inline-flex point">2</span>
-                        <span class="ms-2 fw-bold theme-text-dark">Оплата</span>
-                        <p class="theme-text-accent-three mt-4 mb-0 pe-5">Оплатите любым удобным для вас способом</p>
+                        <span class="ms-2 fw-bold text-dark">Оплата</span>
+                        <p class="text-dark mt-4 mb-0 pe-5">Оплатите любым удобным для вас способом</p>
                     </div>
                 </div>
                 <!-- repetable -->
                 <div class="col-12 col-md-6 col-lg-3 mb-3 mb-lg-0">
                     <div class="box">
                         <span class="px-2 py-2 rounded-circle theme-bg-secondary h4 fw-bold d-inline-flex point">3</span>
-                        <span class="ms-2 fw-bold theme-text-dark">Ожидание</span>
-                        <p class="theme-text-accent-three mt-4 mb-0 pe-5">Подготовка карты занимает в среднем 3-4 часа, гарантировано пришлем результат в течение суток</p>
+                        <span class="ms-2 fw-bold text-dark">Ожидание</span>
+                        <p class="text-dark mt-4 mb-0 pe-5">Подготовка карты занимает в среднем 3-4 часа, гарантировано пришлем результат в течение суток</p>
                     </div>
                 </div>
                 <!-- repetable -->
                 <div class="col-12 col-md-6 col-lg-3 mb-3 mb-lg-0">
                     <div class="box">
                         <span class="px-2 py-2 rounded-circle theme-bg-secondary h4 fw-bold d-inline-flex point">4</span>
-                        <span class="ms-2 fw-bold theme-text-dark">Результаты</span>
-                        <p class="theme-text-accent-three mt-4 mb-0 pe-5">Мы вышлем карту в формате PDF на почту, указанную при регистрации</p>
+                        <span class="ms-2 fw-bold text-dark">Результаты</span>
+                        <p class="text-dark mt-4 mb-0 pe-5">Мы вышлем карту в формате PDF на почту, указанную при регистрации</p>
                     </div>
                 </div>
                 <!-- repetable -->
