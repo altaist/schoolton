@@ -117,9 +117,11 @@
                         @endif
 
                         <div class="mt-4">
+                            @if($order->status !== 'paid' && $order->status !== 'completed')
                             <button type="button" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#editModal">
                                 Изменить данные
                             </button>
+                            @endif
                             <button type="button" class="btn btn-secondary" onclick="copyOrderLink()">
                                 Скопировать ссылку на заказ
                             </button>
