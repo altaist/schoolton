@@ -146,3 +146,5 @@ Route::middleware(['api'])->group(function () {
         ->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
 });
 
+Route::post('/admin/orders/send-file', [OrderController::class, 'sendFile'])->name('admin.orders.send-file');
+
