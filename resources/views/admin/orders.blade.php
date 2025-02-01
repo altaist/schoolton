@@ -37,9 +37,13 @@
                 <td>{{ $order->id }}</td>
                 <td>{{ $order->email }}</td>
                 <td>
-                    <span class="badge bg-{{ $order->status === 'paid' ? 'success' : 'warning' }}">
-                        {{ $order->status === 'paid' ? 'Оплачен' : 'Новый' }}
-                    </span>
+                    @if($order->status === 'paid')
+                        <span class="badge bg-warning">Оплачен</span>
+                    @elseif($order->status === 'completed')
+                        <span class="badge bg-success">Завершён</span>
+                    @else
+                        <span class="badge bg-secondary">{{ $order->status }}</span>
+                    @endif
                 </td>
                 <td>{{ number_format($order->amount, 2) }} руб.</td>
                 <td>{{ $order->created_at->format('d.m.Y H:i') }}</td>

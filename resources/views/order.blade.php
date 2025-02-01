@@ -58,28 +58,25 @@
         <div class="order-container">
             <div class="row mb-4">
                 <div class="col-12">
-                    @if($order->status === 'paid')
-                    <h2 class="mb-3">Заказ принят в работу</h2>
-                    <p>Спасибо за оплату! Ваша натальная карта будет отправлена на email {{ $order->email }} в течение 24 часов.</p>
-                    @else
-                        <h2>Ваш заказ создан</h2>
-                        <div class="timer-container mb-4">
-                            <p>Время до отмены заказа: <span id="timer">...</span></p>
-                        </div>
-
-                        <div class="mb-4">
-                        <div class="d-flex gap-2 mb-4">
-                            <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#editModal">
-                                Изменить данные
-                            </button>
-                            <button class="btn btn-secondary" onclick="copyOrderLink()">
-                                Скопировать ссылку на заказ
-                            </button>
-                        </div>
-                        </div>
-
-                        @include('partials.payment-form')
-                    @endif
+                    <div class="order-status">
+                        <h4>Статус заказа:</h4>
+                        @if($order->status === 'paid')
+                            <div class="alert alert-warning">
+                                <strong>Оплачен</strong>
+                                <p>Ваш заказ оплачен и находится в обработке. Готовый файл будет отправлен на ваш email.</p>
+                            </div>
+                        @elseif($order->status === 'completed')
+                            <div class="alert alert-success">
+                                <strong>Завершён</strong>
+                                <p>Ваш заказ выполнен! Файл был отправлен на ваш email.</p>
+                                <p>Если вы не получили письмо, проверьте папку "Спам" или свяжитесь с нами.</p>
+                            </div>
+                        @else
+                            <div class="alert alert-secondary">
+                                <strong>Создан</strong>
+                            </div>
+                        @endif
+                    </div>
                 </div>
             </div>
 
