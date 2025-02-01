@@ -62,18 +62,18 @@
                         <h4>Статус заказа:</h4>
                         @if($order->status === 'paid')
                             <div>
-                                <strong>Оплачен</strong>
+                                <h4><strong>Оплачен</strong></h4>
                                 <p>Ваш заказ оплачен и находится в обработке. Готовый файл будет отправлен на ваш email.</p>
                             </div>
                         @elseif($order->status === 'completed')
                             <div>
-                                <strong>Завершён</strong>
+                                <h4><strong>Завершён</strong></h4>
                                 <p>Ваш заказ выполнен! Файл был отправлен на ваш email.</p>
                                 <p>Если вы не получили письмо, проверьте папку "Спам" или свяжитесь с нами.</p>
                             </div>
                         @else
                             <div>
-                                <strong>Создан</strong>
+                                <h4><strong>Создан</strong></h4>
                             </div>
                         @endif
                     </div>
