@@ -177,7 +177,7 @@
                     $order_price = config('robokassa.order_price');
                     
                     $invid = $order->id;
-                    $description = "Заказ натальной карты №{$order->id}";
+                    $description = "Заказ натальной карты №{$order->display_id}";
                     $signature_value = md5("$merchant_login:$order_price:$invid:$password_1");
                     
                     $payment_url .= "?" . http_build_query([
