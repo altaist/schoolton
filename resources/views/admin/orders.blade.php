@@ -34,7 +34,7 @@
         <tbody>
             @foreach($orders as $order)
             <tr>
-                <td>{{ $order->id }}</td>
+                <td>{{ $order->display_id }}</td>
                 <td>{{ $order->email }}</td>
                 <td>
                     @if($order->status === 'paid')

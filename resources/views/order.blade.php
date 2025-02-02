@@ -136,7 +136,7 @@
                         <tbody>
                             <tr>
                                 <td>Номер заказа:</td>
-                                <td>{{ $order->id }}</td>
+                                <td>{{ $order->display_id }}</td>
                             </tr>
                             <tr>
                                 <td>Email:</td>

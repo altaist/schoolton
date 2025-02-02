@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Order extends Model
 {
@@ -123,5 +124,12 @@ class Order extends Model
         return $query
             ->where('orderable_id', $orderableId)
             ->where('orderable_type', $orderableType);
+    }
+
+    protected function displayId(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->id + 1000,
+        );
     }
 }
