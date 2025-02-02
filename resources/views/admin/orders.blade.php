@@ -67,7 +67,8 @@
                             onclick="copyOrderData(`{{ json_encode([
                                 'birth_date' => $order->birth_date,
                                 'birth_time' => $order->birth_time,
-                                'birth_city' => $order->birth_city
+                                'birth_city' => $order->birth_city,
+                                'gender' => $order->gender === 'male' ? 'Мужской' : 'Женский'
                             ]) }}`)">
                         Скопировать данные
                     </button>
