@@ -65,6 +65,7 @@
                     <button type="button" 
                             class="btn btn-sm btn-secondary" 
                             onclick="copyOrderData(`{{ json_encode([
+                                'id' => $order->id,
                                 'birth_date' => $order->birth_date,
                                 'birth_time' => $order->birth_time,
                                 'birth_city' => $order->birth_city,
