@@ -62,6 +62,15 @@
                             Загрузить файл
                         </button>
                     @endif
+                    <button type="button" 
+                            class="btn btn-sm btn-secondary" 
+                            onclick="copyOrderData(`{{ json_encode([
+                                'birth_date' => $order->birth_date,
+                                'birth_time' => $order->birth_time,
+                                'birth_city' => $order->birth_city
+                            ]) }}`)">
+                        Скопировать данные
+                    </button>
                 </td>
             </tr>
             @endforeach
@@ -117,4 +126,21 @@
         </div>
     @endif
 @endforeach
+
+<!-- Добавьте этот скрипт перед закрывающим тегом </body> -->
+<script>
+function copyOrderData(jsonString) {
+    const data = JSON.parse(jsonString);
+    const formattedData = JSON.stringify(data, null, 2);
+    
+    navigator.clipboard.writeText(formattedData)
+        .then(() => {
+            alert('Данные скопированы в буфер обмена');
+        })
+        .catch(err => {
+            console.error('Ошибка при копировании: ', err);
+            alert('Ошибка при копировании данных');
+        });
+}
+</script>
 @endsection 
