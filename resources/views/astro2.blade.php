@@ -97,6 +97,10 @@
             position: relative;
             z-index: 2;
         }
+
+        .ruble {
+            font-family: 'Ruble', Arial, sans-serif;
+        }
     </style>
 
     <!-- Добавить стили для принудительной темной темы -->
@@ -116,6 +120,13 @@
 
         .theme-text-accent-three {
             color: #b3b3b3 !important;
+        }
+    </style>
+
+    <style>
+        @font-face {
+            font-family: 'Ruble';
+            src: url('/fonts/ALSRubl.ttf') format('truetype');
         }
     </style>
 </head>
@@ -181,10 +192,10 @@
                         </div>
                         
                         <div class="price-content">
-                            <div class="discount-label">Зимняя скидка 600₽</div>
+                            <div class="discount-label">Зимняя скидка 600 <span class="ruble">₽</span></div>
                             <div class="mb-2" style="color: #fff;">До конца февраля</div>
-                            <div class="old-price">2100₽</div>
-                            <div class="new-price">1500₽</div>
+                            <div class="old-price">2100 <span class="ruble">₽</span></div>
+                            <div class="new-price">1500 <span class="ruble">₽</span></div>
                             <button class="rounded-pill btn btn-lg custom-btn-primary primary-btn-effect" data-bs-toggle="modal" data-bs-target="#orderModal">ЗАКАЗАТЬ СО СКИДКОЙ</button>
                         </div>
                     </div>
