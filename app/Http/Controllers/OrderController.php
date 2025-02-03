@@ -9,8 +9,6 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Order;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
-use App\Mail\OrderCreated;
-use Illuminate\Support\Facades\Mail;
 
 class OrderController extends BaseController
 {
@@ -86,9 +84,6 @@ class OrderController extends BaseController
                 'order_id' => $order->id,
                 'uuid' => $order->order_id
             ]);
-
-            // Отправляем письмо
-            Mail::to($order->email)->send(new OrderCreated($order));
 
             return redirect()->route('order.show', ['orderId' => $order->order_id]);
 
