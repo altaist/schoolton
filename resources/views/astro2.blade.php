@@ -5,6 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <title>Создать натальную карту онлайн</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Заказать и создать натальную карту онлайн. Онлайн-сервис и генератор натальных карт. Астрологический прогноз на базе натальных карт>
     <meta name="author" content="ThemesLay">
