@@ -206,13 +206,13 @@
                         @csrf
                         <div class="mb-3">
                             <label for="email" class="form-label">Email*</label>
-                            <input type="email" class="form-control bg-dark text-white border-secondary" id="email" name="email" value="test@example.com" required>
+                            <input type="email" class="form-control bg-dark text-white border-secondary" id="email" name="email" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Пол*</label>
                             <div class="d-flex gap-3">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="gender" id="genderMale" value="male" checked required>
+                                    <input class="form-check-input" type="radio" name="gender" id="genderMale" value="male" required>
                                     <label class="form-check-label" for="genderMale">
                                         Мужской
                                     </label>
@@ -227,15 +227,15 @@
                         </div>
                         <div class="mb-3">
                             <label for="birthDate" class="form-label">Дата рождения*</label>
-                            <input type="date" class="form-control bg-dark text-white border-secondary" id="birthDate" name="birth_date" value="1990-01-01" required>
+                            <input type="date" class="form-control bg-dark text-white border-secondary" id="birthDate" name="birth_date" required>
                         </div>
                         <div class="mb-3">
                             <label for="birthTime" class="form-label">Время рождения*</label>
-                            <input type="time" class="form-control bg-dark text-white border-secondary" id="birthTime" name="birth_time" value="12:00" required>
+                            <input type="time" class="form-control bg-dark text-white border-secondary" id="birthTime" name="birth_time" required>
                         </div>
                         <div class="mb-3">
                             <label for="birthCity" class="form-label">Место рождения*</label>
-                            <input type="text" class="form-control bg-dark text-white border-secondary" id="birthCity" name="birth_city" value="Москва" required>
+                            <input type="text" class="form-control bg-dark text-white border-secondary" id="birthCity" name="birth_city" required>
                         </div>
                         <button type="submit" class="btn btn-primary w-100">Заказать</button>
                     </form>
