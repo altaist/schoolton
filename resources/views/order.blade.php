@@ -161,7 +161,7 @@
                             </tr>
                             <tr>
                                 <td>Сумма:</td>
-                                <td>1 499 ₽</td>
+                                <td>{{ number_format(config('robokassa.order_price'), 0, '.', ' ') }} ₽</td>
                             </tr>
                         </tbody>
                     </table>

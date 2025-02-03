@@ -22,7 +22,7 @@ class OrderFileEmail extends Mailable
     public function build()
     {
         return $this->view('emails.order-file')
-                    ->subject('Ваш заказ #' . $this->order->id . ' готов')
+                    ->subject('Ваш заказ #' . $this->order->display_id . ' готов')
                     ->attach(storage_path('app/' . $this->filePath));
     }
 } 
