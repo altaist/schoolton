@@ -92,7 +92,26 @@
                         <h5 class="modal-title">Загрузка файла для заказа #{{ $order->id }}</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="{{ route('admin.orders.send-file') }}" method="POST" enctype="multipart/form-data">
+                    <script>
+                    function uploadFile{{ $order->id }}() {
+                        const form = document.getElementById('uploadForm{{ $order->id }}');
+                        const submitBtn = document.getElementById('submitBtn{{ $order->id }}');
+                        
+                        // Проверяем валидность формы
+                        if (!form.checkValidity()) {
+                            form.reportValidity();
+                            return;
+                        }
+                        
+                        // Отключаем кнопку
+                        submitBtn.disabled = true;
+                        submitBtn.innerHTML = 'Загрузка...';
+                        
+                        // Отправляем форму стандартным способом
+                        form.submit();
+                    }
+                    </script>
+                    <form action="{{ route('admin.orders.send-file') }}" method="POST" enctype="multipart/form-data" id="uploadForm{{ $order->id }}">
                         @csrf
                         <div class="modal-body">
                             <input type="hidden" name="order_id" value="{{ $order->id }}">
@@ -118,7 +137,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-                            <button type="submit" class="btn btn-primary">
+                            <button type="button" class="btn btn-primary" id="submitBtn{{ $order->id }}" onclick="uploadFile{{ $order->id }}()">
                                 Отправить
                             </button>
                         </div>
