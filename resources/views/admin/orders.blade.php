@@ -154,14 +154,57 @@ function copyOrderData(jsonString) {
     const data = JSON.parse(jsonString);
     const formattedData = JSON.stringify(data, null, 2);
     
-    navigator.clipboard.writeText(formattedData)
-        .then(() => {
+    if (navigator.clipboard && window.isSecureContext) {
+        // Современный способ копирования
+        navigator.clipboard.writeText(formattedData)
+            .then(() => {
+                alert('Данные скопированы в буфер обмена');
+            })
+            .catch(err => {
+                console.error('Ошибка при копировании: ', err);
+                fallbackCopyTextToClipboard(formattedData);
+            });
+    } else {
+        // Fallback для устройств без поддержки Clipboard API
+        fallbackCopyTextToClipboard(formattedData);
+    }
+}
+
+function fallbackCopyTextToClipboard(text) {
+    try {
+        // Создаем временный textarea элемент
+        const textArea = document.createElement('textarea');
+        textArea.value = text;
+        
+        // Делаем элемент невидимым
+        textArea.style.position = 'fixed';
+        textArea.style.top = '0';
+        textArea.style.left = '0';
+        textArea.style.width = '2em';
+        textArea.style.height = '2em';
+        textArea.style.padding = '0';
+        textArea.style.border = 'none';
+        textArea.style.outline = 'none';
+        textArea.style.boxShadow = 'none';
+        textArea.style.background = 'transparent';
+        
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        
+        try {
+            document.execCommand('copy');
             alert('Данные скопированы в буфер обмена');
-        })
-        .catch(err => {
+        } catch (err) {
             console.error('Ошибка при копировании: ', err);
-            alert('Ошибка при копировании данных');
-        });
+            alert('Не удалось скопировать данные. Пожалуйста, скопируйте их вручную.');
+        }
+        
+        document.body.removeChild(textArea);
+    } catch (err) {
+        console.error('Ошибка при копировании: ', err);
+        alert('Не удалось скопировать данные. Пожалуйста, скопируйте их вручную.');
+    }
 }
 </script>
 @endsection 
