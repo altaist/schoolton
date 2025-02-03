@@ -182,7 +182,7 @@
                         
                         <div class="price-content">
                             <div class="discount-label">Зимняя скидка 600₽</div>
-                            <div class="text-muted mb-2">До конца февраля</div>
+                            <div class="text-muted mb-2" style="color: #000;">До конца февраля</div>
                             <div class="old-price">2100 ₽</div>
                             <div class="new-price">1500 ₽</div>
                             <button class="rounded-pill btn btn-lg custom-btn-primary primary-btn-effect" data-bs-toggle="modal" data-bs-target="#orderModal">ЗАКАЗАТЬ СО СКИДКОЙ</button>
