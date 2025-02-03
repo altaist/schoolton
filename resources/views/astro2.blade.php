@@ -181,7 +181,7 @@
                         </div>
                         
                         <div class="price-content">
-                            <div class="discount-label">Новогодняя скидка 600₽</div>
+                            <div class="discount-label">Зимняя скидка 600₽</div>
                             <div class="text-muted mb-2">До конца февраля</div>
                             <div class="old-price">2100 ₽</div>
                             <div class="new-price">1500 ₽</div>
@@ -1034,7 +1034,7 @@
             </div>
             <div class="row mt-5 pt-5 border-top">
                 <div class="col-12 col-md-12 text-center">
-                    <p class="pt-2 mb-0 font-extra-small">&copy; Copyright 2024 Сервис заказа натальных карт.</p>
+                    <p class="pt-2 mb-0 font-extra-small">&copy; Copyright 2025 Сервис заказа натальных карт.</p>
                 </div>
             </div>
         </div>
