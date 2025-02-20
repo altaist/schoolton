@@ -182,47 +182,7 @@
         </div>
     </section>
 
-    <!-- Блок с ценой и снежинками -->
-    <section class="pricing py-5">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-6 text-center">
-                    <div class="price-block">
-                        <div class="snowflakes" aria-hidden="true">
-                            <div class="snowflake">❅</div>
-                            <div class="snowflake">❆</div>
-                            <div class="snowflake">❅</div>
-                            <div class="snowflake">❆</div>
-                            <div class="snowflake">❅</div>
-                            <div class="snowflake">❆</div>
-                            <div class="snowflake">❅</div>
-                            <div class="snowflake">❆</div>
-                            <div class="snowflake">❅</div>
-                            <div class="snowflake">❆</div>
-                            <div class="snowflake">❅</div>
-                            <div class="snowflake">❆</div>
-                            <div class="snowflake">❅</div>
-                            <div class="snowflake">❆</div>
-                            <div class="snowflake">❅</div>
-                            <div class="snowflake">❆</div>
-                            <div class="snowflake">❅</div>
-                            <div class="snowflake">❆</div>
-                            <div class="snowflake">❅</div>
-                            <div class="snowflake">❆</div>
-                        </div>
-                        
-                        <div class="price-content">
-                            <div class="discount-label">Зимняя скидка 600 <span class="ruble">₽</span></div>
-                            <div class="mb-2" style="color: #fff;">До конца февраля</div>
-                            <div class="old-price">2100 <span class="ruble">₽</span></div>
-                            <div class="new-price">1500 <span class="ruble">₽</span></div>
-                            <button class="rounded-pill btn btn-lg custom-btn-primary primary-btn-effect" data-bs-toggle="modal" data-bs-target="#orderModal">ЗАКАЗАТЬ СО СКИДКОЙ</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    
 
     <!-- Модальное окно для формы заказа -->
     <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
