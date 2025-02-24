@@ -242,11 +242,11 @@
 
                     <div class="price-wrapper mb-4" style="display: none;">
                         <div class="d-flex align-items-center gap-3 flex-wrap">
-                            <div class="discount-badge">До конца февраля</div>
                             <div class="price-info text-start">
                                 <span class="old-price me-2">2100₽</span>
                                 <span class="new-price">1500₽</span>
                             </div>
+                            <div class="discount-badge">До конца февраля</div>
                         </div>
                     </div>
 
@@ -1259,5 +1259,20 @@
         .d-flex.align-items-center {
             justify-content: flex-start;
         }
+    }
+</style>
+
+<style>
+    .d-flex.align-items-center.gap-3.flex-wrap {
+        justify-content: space-between; /* Распределяет элементы по краям */
+    }
+    
+    .discount-badge {
+        margin-left: auto; /* Прижимает элемент к правому краю */
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        padding: 0.5rem 1rem;
+        border-radius: 25px;
+        color: #fff;
     }
 </style>
