@@ -37,22 +37,22 @@
         console.log('Флаги:', data.flags);
         
         const flags = data.flags;
-        const heroBlock = document.querySelector('.hero-price-block');
+        const priceWrapper = document.querySelector('.price-wrapper');
         const pricingSection = document.querySelector('section.pricing');
         
-        // Получаем значение флага redir (теперь как массив)
+        // Получаем значение флага redir (как массив)
         const redirFlag = Array.isArray(flags.redir) ? flags.redir[0] : null;
         console.log('Текущий флаг redir:', redirFlag);
-        console.log('Найден блок hero-price-block:', !!heroBlock);
+        console.log('Найден блок price-wrapper:', !!priceWrapper);
         console.log('Найдена секция pricing:', !!pricingSection);
         
         if (redirFlag === '?h=e7d31fc8') {
-            console.log('Активирована версия B (цена в hero секции)');
-            if (heroBlock) {
-                heroBlock.style.display = 'block';
-                console.log('hero-price-block показан');
+            console.log('Активирована версия B (цена в главном блоке)');
+            if (priceWrapper) {
+                priceWrapper.style.display = 'block';
+                console.log('price-wrapper показан');
             } else {
-                console.error('hero-price-block не найден!');
+                console.error('price-wrapper не найден!');
             }
             
             if (pricingSection) {
@@ -63,11 +63,11 @@
             }
         } else if (redirFlag === '?h=a9f42b3d') {
             console.log('Активирована версия A (отдельная секция с ценой)');
-            if (heroBlock) {
-                heroBlock.style.display = 'none';
-                console.log('hero-price-block скрыт');
+            if (priceWrapper) {
+                priceWrapper.style.display = 'none';
+                console.log('price-wrapper скрыт');
             } else {
-                console.error('hero-price-block не найден!');
+                console.error('price-wrapper не найден!');
             }
             
             if (pricingSection) {
