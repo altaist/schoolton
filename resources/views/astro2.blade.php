@@ -24,28 +24,63 @@
     </script>
 
     <!-- Код эксперимента -->
-    <script>
-        (function(e, x, pe, r, i, me, nt){
-        e[i]=e[i]||function(){(e[i].a=e[i].a||[]).push(arguments)},
-        me=x.createElement(pe),me.async=1,me.src=r,nt=x.getElementsByTagName(pe)[0],me.addEventListener('error',function(){function cb(t){t=t[t.length-1],'function'==typeof t&&t({flags:{}})};Array.isArray(e[i].a)&&e[i].a.forEach(cb);e[i]=function(){cb(arguments)}}),nt.parentNode.insertBefore(me,nt)})
-        (window, document, 'script', 'https://abt.s3.yandex.net/expjs/latest/exp.js', 'ymab');
+<script>
+    (function(e, x, pe, r, i, me, nt){
+    e[i]=e[i]||function(){(e[i].a=e[i].a||[]).push(arguments)},
+    me=x.createElement(pe),me.async=1,me.src=r,nt=x.getElementsByTagName(pe)[0],me.addEventListener('error',function(){function cb(t){t=t[t.length-1],'function'==typeof t&&t({flags:{}})};Array.isArray(e[i].a)&&e[i].a.forEach(cb);e[i]=function(){cb(arguments)}}),nt.parentNode.insertBefore(me,nt)})
+    (window, document, 'script', 'https://abt.s3.yandex.net/expjs/latest/exp.js', 'ymab');
+    
+    // Инициализация с ID метрики
+    ymab('metrika.99885577', 'init', {}, function(data) {
+        console.group('Яндекс.Метрика AB-тест');
+        console.log('Получены данные:', data);
+        console.log('Флаги:', data.flags);
         
-        // Инициализация с ID метрики
-        ymab('metrika.99885577', 'init', {}, function(data) {
-            const flags = data.flags;
-            console.log('Received flags:', flags);
-            
-            if (flags.redir === '?h=e7d31fc8') {
-                // Главный блок (B) - цена в hero секции
-                document.querySelector('.hero-price-block').style.display = 'block';
-                document.querySelector('section.pricing').style.display = 'none';
-            } else if (flags.redir === '?h=a9f42b3d') {
-                // Отдельный блок (A) - отдельная секция с ценой
-                document.querySelector('.hero-price-block').style.display = 'none';
-                document.querySelector('section.pricing').style.display = 'block';
+        const flags = data.flags;
+        const heroBlock = document.querySelector('.hero-price-block');
+        const pricingSection = document.querySelector('section.pricing');
+        
+        console.log('Текущий флаг redir:', flags.redir);
+        console.log('Найден блок hero-price-block:', !!heroBlock);
+        console.log('Найдена секция pricing:', !!pricingSection);
+        
+        if (flags.redir === '?h=e7d31fc8') {
+            console.log('Активирована версия B (цена в hero секции)');
+            if (heroBlock) {
+                heroBlock.style.display = 'block';
+                console.log('hero-price-block показан');
+            } else {
+                console.error('hero-price-block не найден!');
             }
-        });
-    </script>
+            
+            if (pricingSection) {
+                pricingSection.style.display = 'none';
+                console.log('section.pricing скрыта');
+            } else {
+                console.error('section.pricing не найдена!');
+            }
+        } else if (flags.redir === '?h=a9f42b3d') {
+            console.log('Активирована версия A (отдельная секция с ценой)');
+            if (heroBlock) {
+                heroBlock.style.display = 'none';
+                console.log('hero-price-block скрыт');
+            } else {
+                console.error('hero-price-block не найден!');
+            }
+            
+            if (pricingSection) {
+                pricingSection.style.display = 'block';
+                console.log('section.pricing показана');
+            } else {
+                console.error('section.pricing не найдена!');
+            }
+        } else {
+            console.warn('Неизвестное значение флага redir:', flags.redir);
+        }
+        
+        console.groupEnd();
+    });
+</script>
 
     <!-- Защита от мерцания -->
     <style>.varioqub-antiflicker {opacity: 0 !important;}</style>
