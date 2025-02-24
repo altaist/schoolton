@@ -40,11 +40,13 @@
         const heroBlock = document.querySelector('.hero-price-block');
         const pricingSection = document.querySelector('section.pricing');
         
-        console.log('Текущий флаг redir:', flags.redir);
+        // Получаем значение флага redir (теперь как массив)
+        const redirFlag = Array.isArray(flags.redir) ? flags.redir[0] : null;
+        console.log('Текущий флаг redir:', redirFlag);
         console.log('Найден блок hero-price-block:', !!heroBlock);
         console.log('Найдена секция pricing:', !!pricingSection);
         
-        if (flags.redir === '?h=e7d31fc8') {
+        if (redirFlag === '?h=e7d31fc8') {
             console.log('Активирована версия B (цена в hero секции)');
             if (heroBlock) {
                 heroBlock.style.display = 'block';
@@ -59,7 +61,7 @@
             } else {
                 console.error('section.pricing не найдена!');
             }
-        } else if (flags.redir === '?h=a9f42b3d') {
+        } else if (redirFlag === '?h=a9f42b3d') {
             console.log('Активирована версия A (отдельная секция с ценой)');
             if (heroBlock) {
                 heroBlock.style.display = 'none';
@@ -75,7 +77,7 @@
                 console.error('section.pricing не найдена!');
             }
         } else {
-            console.warn('Неизвестное значение флага redir:', flags.redir);
+            console.warn('Неизвестное значение флага redir:', redirFlag);
         }
         
         console.groupEnd();
