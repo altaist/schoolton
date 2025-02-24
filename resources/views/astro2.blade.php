@@ -186,7 +186,30 @@
             <div class="row justify-content-center align-items-center">
                 <div class="col-12 col-lg-6">
                     <h1 class="display-2 fw-bold mt-3 mb-3 theme-text-white animate-charcter">Ваша натальная карта в 1 клик</h1>
-                    <p class="mb-5 theme-text-accent-two text-h4">Закажите прямо сейчас по особой цене</p>
+                    <p class="mb-4 theme-text-accent-two text-h4">Закажите прямо сейчас по особой цене</p>
+                    
+                    @if($flags['redir'] === $flags['price_block']['main'])
+                        <!-- Версия с ценой в главном блоке -->
+                        <div class="price-wrapper mb-4">
+                            <div class="d-flex align-items-center gap-3 flex-wrap">
+                                <div class="discount-badge">До конца февраля</div>
+                                <div class="price-info text-start">
+                                    <span class="old-price me-2">2100₽</span>
+                                    <span class="new-price">1500₽</span>
+                                </div>
+                            </div>
+                        </div>
+                    @elseif($flags['redir'] === $flags['price_block']['separate'])
+                        <!-- Версия с ценой в отдельном блоке -->
+                        <div class="price-block mb-4">
+                            <div class="price-content">
+                                <div class="discount-label">До конца февраля</div>
+                                <div class="old-price">2100₽</div>
+                                <div class="new-price">1500₽</div>
+                            </div>
+                        </div>
+                    @endif
+
                     <div class="group d-flex flex-column flex-sm-row gap-3">
                         <button class="rounded-pill btn btn-lg custom-btn-primary primary-btn-effect" data-bs-toggle="modal" data-bs-target="#orderModal">ЗАКАЗАТЬ</button>
                         <a href="{{ route('download.example') }}" class="rounded-pill btn btn-lg btn-outline-light">ПОСМОТРЕТЬ ПРИМЕР</a>
@@ -196,48 +219,6 @@
                     <div class="hero-wrap">
                         <div class="hero-inner">
                             <img src="dist/images/hero/sign-picture.png" class="img-fluid box-icon-float" alt="hero main image">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Блок с ценой и снежинками -->
-    <section class="pricing py-5" data-aos="fade-up" data-aos-delay="80" data-aos-offset="0">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-6 text-center">
-                    <div class="price-block">
-                        <div class="snowflakes" aria-hidden="true">
-                            <div class="snowflake">❅</div>
-                            <div class="snowflake">❆</div>
-                            <div class="snowflake">❅</div>
-                            <div class="snowflake">❆</div>
-                            <div class="snowflake">❅</div>
-                            <div class="snowflake">❆</div>
-                            <div class="snowflake">❅</div>
-                            <div class="snowflake">❆</div>
-                            <div class="snowflake">❅</div>
-                            <div class="snowflake">❆</div>
-                            <div class="snowflake">❅</div>
-                            <div class="snowflake">❆</div>
-                            <div class="snowflake">❅</div>
-                            <div class="snowflake">❆</div>
-                            <div class="snowflake">❅</div>
-                            <div class="snowflake">❆</div>
-                            <div class="snowflake">❅</div>
-                            <div class="snowflake">❆</div>
-                            <div class="snowflake">❅</div>
-                            <div class="snowflake">❆</div>
-                        </div>
-                        
-                        <div class="price-content">
-                            <div class="discount-label">Зимняя скидка 600 <span class="ruble">₽</span></div>
-                            <div class="mb-2" style="color: #fff;">До конца февраля</div>
-                            <div class="old-price">2100 <span class="ruble">₽</span></div>
-                            <div class="new-price">1500 <span class="ruble">₽</span></div>
-                            <button class="rounded-pill btn btn-lg custom-btn-primary primary-btn-effect" data-bs-toggle="modal" data-bs-target="#orderModal">ЗАКАЗАТЬ СО СКИДКОЙ</button>
                         </div>
                     </div>
                 </div>

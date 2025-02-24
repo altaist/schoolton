@@ -14,7 +14,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', [HomeController::class, 'index'])->name('root');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/astro-order', function () {
     return Inertia::render('astro/AstroOrder', []);
 })->name('astro.order');
@@ -152,18 +152,4 @@ Route::get('/download-example', function() {
     return response()->download(public_path('example.pdf'));
 })->name('download.example');
 
-Route::get('/', function () {
-    // Получаем параметр redir из GET запроса
-    $redir = request()->query('redir', '');
-    
-    // Определяем версию на основе значения redir
-    switch ($redir) {
-        case '?h=e7d31fc8':  // Главный блок (B)
-            return view('astro2_b');
-        case '?h=a9f42b3d':  // Отдельный блок (A)
-            return view('astro2');
-        default:
-            return view('astro2');
-    }
-})->name('home');
 
