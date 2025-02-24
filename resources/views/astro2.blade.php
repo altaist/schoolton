@@ -30,6 +30,17 @@
     me=x.createElement(pe),me.async=1,me.src=r,nt=x.getElementsByTagName(pe)[0],me.addEventListener('error',function(){function cb(t){t=t[t.length-1],'function'==typeof t&&t({flags:{}})};Array.isArray(e[i].a)&&e[i].a.forEach(cb);e[i]=function(){cb(arguments)}}),nt.parentNode.insertBefore(me,nt)})
     (window, document, 'script', 'https://abt.s3.yandex.net/expjs/latest/exp.js', 'ymab');
     
+    // Функция для получения параметров из URL
+    function getUrlParameter(name) {
+        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+        var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+        var results = regex.exec(location.search);
+        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+    }
+
+    // Проверяем наличие параметра dev_version
+    const devVersion = getUrlParameter('dev_version');
+    
     // Инициализация с ID метрики
     ymab('metrika.99885577', 'init', {}, function(data) {
         console.group('Яндекс.Метрика AB-тест');
@@ -40,8 +51,16 @@
         const priceWrapper = document.querySelector('.price-wrapper');
         const pricingSection = document.querySelector('section.pricing');
         
-        // Получаем значение флага redir (как массив)
-        const redirFlag = Array.isArray(flags.redir) ? flags.redir[0] : null;
+        // Получаем значение флага (приоритет у dev_version)
+        let redirFlag;
+        if (devVersion) {
+            redirFlag = devVersion;
+            console.log('Используется версия для разработчика:', devVersion);
+        } else {
+            redirFlag = Array.isArray(flags.redir) ? flags.redir[0] : null;
+            console.log('Используется версия из Метрики:', redirFlag);
+        }
+        
         console.log('Текущий флаг redir:', redirFlag);
         console.log('Найден блок price-wrapper:', !!priceWrapper);
         console.log('Найдена секция pricing:', !!pricingSection);
@@ -242,11 +261,12 @@
 
                     <div class="price-wrapper mb-4" style="display: none;">
                         <div class="d-flex align-items-center gap-3 flex-wrap">
+                            <div class="discount-badge">До конца февраля</div>
+                            
                             <div class="price-info text-start">
                                 <span class="old-price me-2">2100₽</span>
                                 <span class="new-price">1500₽</span>
                             </div>
-                            <div class="discount-badge">До конца февраля</div>
                         </div>
                     </div>
 
@@ -1259,20 +1279,5 @@
         .d-flex.align-items-center {
             justify-content: flex-start;
         }
-    }
-</style>
-
-<style>
-    .d-flex.align-items-center.gap-3.flex-wrap {
-        justify-content: space-between; /* Распределяет элементы по краям */
-    }
-    
-    .discount-badge {
-        margin-left: auto; /* Прижимает элемент к правому краю */
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
-        padding: 0.5rem 1rem;
-        border-radius: 25px;
-        color: #fff;
     }
 </style>
