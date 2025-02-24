@@ -239,12 +239,14 @@
                     <p class="mb-4 theme-text-accent-two text-h4">Закажите прямо сейчас по особой цене</p>
                     
                     <!-- Блок цены в hero секции (изначально скрыт) -->
-                    <div class="hero-price-block mb-4" style="display: none;">
-                        <div class="price-content">
-                            <div class="discount-label">Зимняя скидка 600 ₽</div>
-                            <div class="mb-2" style="color: #fff;">До конца февраля</div>
-                            <div class="old-price">2100 ₽</div>
-                            <div class="new-price">1500 ₽</div>
+
+                    <div class="price-wrapper mb-4" style="display: none;">
+                        <div class="d-flex align-items-center gap-3 flex-wrap">
+                            <div class="discount-badge">До конца февраля</div>
+                            <div class="price-info text-start">
+                                <span class="old-price me-2">2100₽</span>
+                                <span class="new-price">1500₽</span>
+                            </div>
                         </div>
                     </div>
 
