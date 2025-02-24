@@ -153,10 +153,17 @@ Route::get('/download-example', function() {
 })->name('download.example');
 
 Route::get('/', function () {
-    // Получаем параметр эксперимента из Яндекс.Метрики
-    $experimentVersion = request()->cookie('ymab_XXXX') ?? 'A';
+    // Получаем параметр из GET
+    $hash = request()->query('h', '');
     
-    // Возвращаем соответствующую версию страницы
-    return view($experimentVersion === 'B' ? 'astro2_b' : 'astro2');
+    // Определяем версию на основе хеша
+    switch ($hash) {
+        case 'e7d31fc8': // можете заменить на любой другой хеш
+            return view('astro2_b');
+        case 'a9f42b3d':
+            return view('astro2');
+        default:
+            return view('astro2');
+    }
 })->name('home');
 
