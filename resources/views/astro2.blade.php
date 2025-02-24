@@ -30,17 +30,19 @@
         me=x.createElement(pe),me.async=1,me.src=r,nt=x.getElementsByTagName(pe)[0],me.addEventListener('error',function(){function cb(t){t=t[t.length-1],'function'==typeof t&&t({flags:{}})};Array.isArray(e[i].a)&&e[i].a.forEach(cb);e[i]=function(){cb(arguments)}}),nt.parentNode.insertBefore(me,nt)})
         (window, document, 'script', 'https://abt.s3.yandex.net/expjs/latest/exp.js', 'ymab');
         
-        // Инициализация с вашим ID метрики
+        // Инициализация с ID метрики
         ymab('metrika.99885577', 'init', {}, function(data) {
             const flags = data.flags;
+            console.log('Received flags:', flags);
             
-            // Обработка флагов для блоков цен
-            if (flags.price_block === 'main') {
-                document.querySelector('.price-wrapper').style.display = 'block';
-                document.querySelector('.price-block').style.display = 'none';
-            } else if (flags.price_block === 'separate') {
-                document.querySelector('.price-wrapper').style.display = 'none';
-                document.querySelector('.price-block').style.display = 'block';
+            if (flags.redir === '?h=e7d31fc8') {
+                // Главный блок (B) - цена в hero секции
+                document.querySelector('.hero-price-block').style.display = 'block';
+                document.querySelector('section.pricing').style.display = 'none';
+            } else if (flags.redir === '?h=a9f42b3d') {
+                // Отдельный блок (A) - отдельная секция с ценой
+                document.querySelector('.hero-price-block').style.display = 'none';
+                document.querySelector('section.pricing').style.display = 'block';
             }
         });
     </script>
@@ -199,22 +201,13 @@
                     <h1 class="display-2 fw-bold mt-3 mb-3 theme-text-white animate-charcter">Ваша натальная карта в 1 клик</h1>
                     <p class="mb-4 theme-text-accent-two text-h4">Закажите прямо сейчас по особой цене</p>
                     
-                    <!-- Код эксперимента -->
-                    <div class="price-wrapper mb-4" style="display: none;">
-                        <div class="d-flex align-items-center gap-3 flex-wrap">
-                            <div class="discount-badge">До конца февраля</div>
-                            <div class="price-info text-start">
-                                <span class="old-price me-2">2100₽</span>
-                                <span class="new-price">1500₽</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="price-block mb-4" style="display: none;">
+                    <!-- Блок цены в hero секции (изначально скрыт) -->
+                    <div class="hero-price-block mb-4" style="display: none;">
                         <div class="price-content">
-                            <div class="discount-label">До конца февраля</div>
-                            <div class="old-price">2100₽</div>
-                            <div class="new-price">1500₽</div>
+                            <div class="discount-label">Зимняя скидка 600 ₽</div>
+                            <div class="mb-2" style="color: #fff;">До конца февраля</div>
+                            <div class="old-price">2100 ₽</div>
+                            <div class="new-price">1500 ₽</div>
                         </div>
                     </div>
 
@@ -233,6 +226,49 @@
             </div>
         </div>
     </section>
+
+    <!-- Отдельная секция с ценой (изначально скрыта) -->
+    <section class="pricing py-5" data-aos="fade-up" data-aos-delay="80" data-aos-offset="0" style="display: none;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6 text-center">
+                    <div class="price-block">
+                        <div class="snowflakes" aria-hidden="true">
+                            <div class="snowflake">❅</div>
+                            <div class="snowflake">❆</div>
+                            <div class="snowflake">❅</div>
+                            <div class="snowflake">❆</div>
+                            <div class="snowflake">❅</div>
+                            <div class="snowflake">❆</div>
+                            <div class="snowflake">❅</div>
+                            <div class="snowflake">❆</div>
+                            <div class="snowflake">❅</div>
+                            <div class="snowflake">❆</div>
+                            <div class="snowflake">❅</div>
+                            <div class="snowflake">❆</div>
+                            <div class="snowflake">❅</div>
+                            <div class="snowflake">❆</div>
+                            <div class="snowflake">❅</div>
+                            <div class="snowflake">❆</div>
+                            <div class="snowflake">❅</div>
+                            <div class="snowflake">❆</div>
+                            <div class="snowflake">❅</div>
+                            <div class="snowflake">❆</div>
+                        </div>
+                        
+                        <div class="price-content">
+                            <div class="discount-label">Зимняя скидка 600 ₽</div>
+                            <div class="mb-2" style="color: #fff;">До конца февраля</div>
+                            <div class="old-price">2100 ₽</div>
+                            <div class="new-price">1500 ₽</div>
+                            <button class="rounded-pill btn btn-lg custom-btn-primary primary-btn-effect" data-bs-toggle="modal" data-bs-target="#orderModal">ЗАКАЗАТЬ СО СКИДКОЙ</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
 
     <!-- Модальное окно для формы заказа -->
     <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
