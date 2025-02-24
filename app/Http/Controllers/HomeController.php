@@ -62,39 +62,7 @@ class HomeController extends BaseController
      */
     public function index(Request $request)
     {
-        $icookie = $request->cookie(self::COOKIE_NAME, '');
-        [$experiments, $newIcookie, $flags] = $this->splitUser($request, $icookie);
-
-        // Получаем последнее значение флага price_block более безопасным способом
-        $priceBlockVariant = 'default';
-        if (isset($flags['price_block']) && is_array($flags['price_block']) && !empty($flags['price_block'])) {
-            $priceBlockVariant = $flags['price_block'][array_key_last($flags['price_block'])];
-        }
-
-        $response = response()->view('astro2', [
-            'experiments' => $experiments,
-            'flags' => [
-                'price_block' => [
-                    'main' => 'main',
-                    'separate' => 'separate'
-                ],
-                'redir' => $priceBlockVariant
-            ]
-        ]);
-
-        if ($icookie !== $newIcookie) {
-            $response->cookie(
-                self::COOKIE_NAME,
-                $newIcookie,
-                60 * 24 * 365,
-                '/',
-                null,
-                false,
-                false
-            );
-        }
-
-        return $response;
+        return view('astro2');
     }
 
     /**
