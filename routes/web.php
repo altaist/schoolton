@@ -148,3 +148,7 @@ Route::middleware(['api'])->group(function () {
 
 Route::post('/admin/orders/send-file', [\App\Http\Controllers\Admin\OrderController::class, 'sendFile'])->name('admin.orders.send-file');
 
+Route::get('/download-example', function() {
+    return response()->download(public_path('example.pdf'));
+})->name('download.example');
+
