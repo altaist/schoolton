@@ -152,3 +152,11 @@ Route::get('/download-example', function() {
     return response()->download(public_path('example.pdf'));
 })->name('download.example');
 
+Route::get('/', function () {
+    // Получаем параметр эксперимента из Яндекс.Метрики
+    $experimentVersion = request()->cookie('ymab_XXXX') ?? 'A';
+    
+    // Возвращаем соответствующую версию страницы
+    return view($experimentVersion === 'B' ? 'astro2_b' : 'astro2');
+})->name('home');
+
