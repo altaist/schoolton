@@ -167,7 +167,7 @@
                 <div class="col-12 col-lg-6">
                     <h1 class="display-2 fw-bold mt-3 mb-3 theme-text-white animate-charcter">Ваша натальная карта в 1 клик</h1>
                     <p class="mb-5 theme-text-accent-two text-h4">Закажите прямо сейчас по особой цене</p>
-                    <div class="group d-flex gap-3">
+                    <div class="group d-flex flex-column flex-sm-row gap-3">
                         <button class="rounded-pill btn btn-lg custom-btn-primary primary-btn-effect" data-bs-toggle="modal" data-bs-target="#orderModal">ЗАКАЗАТЬ</button>
                         <a href="{{ route('download.example') }}" class="rounded-pill btn btn-lg btn-outline-light">ПОСМОТРЕТЬ ПРИМЕР</a>
                     </div>
@@ -1122,3 +1122,13 @@
 </body>
 
 </html>
+
+<style>
+    @media (max-width: 575px) {
+        .group .btn {
+            width: 100%;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+    }
+</style>
