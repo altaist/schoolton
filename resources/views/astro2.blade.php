@@ -1214,3 +1214,48 @@
         }
     }
 </style>
+
+<style>
+    .price-wrapper {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(5px);
+        border-radius: 25px;
+        padding: 15px 20px;
+        display: inline-block;
+    }
+
+    .discount-badge {
+        background: #ff4d4d;
+        color: white;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-weight: 500;
+        font-size: 0.9rem;
+    }
+
+    .old-price {
+        text-decoration: line-through;
+        color: #999;
+        font-size: 1.1rem;
+    }
+
+    .new-price {
+        color: #fff;
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+
+    .price-info {
+        text-align: left;
+    }
+
+    @media (max-width: 575px) {
+        .price-wrapper {
+            width: 100%;
+        }
+        
+        .d-flex.align-items-center {
+            justify-content: flex-start;
+        }
+    }
+</style>
