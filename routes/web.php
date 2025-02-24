@@ -153,14 +153,14 @@ Route::get('/download-example', function() {
 })->name('download.example');
 
 Route::get('/', function () {
-    // Получаем параметр из GET
-    $hash = request()->query('h', '');
+    // Получаем параметр redir из GET запроса
+    $redir = request()->query('redir', '');
     
-    // Определяем версию на основе хеша
-    switch ($hash) {
-        case 'e7d31fc8': // можете заменить на любой другой хеш
+    // Определяем версию на основе значения redir
+    switch ($redir) {
+        case '?h=e7d31fc8':  // Главный блок (B)
             return view('astro2_b');
-        case 'a9f42b3d':
+        case '?h=a9f42b3d':  // Отдельный блок (A)
             return view('astro2');
         default:
             return view('astro2');
