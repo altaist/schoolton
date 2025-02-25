@@ -167,35 +167,46 @@
                     </table>
                 </div>
             </div>
+            @php
+            $merchant_login = config('robokassa.merchant_login');
+            $is_test = config('robokassa.test_mode');
+            $password_1 = $is_test ? config('robokassa.test_password_1') : config('robokassa.password_1');
+            $payment_url = config('robokassa.payment_url');
+            $order_price = config('robokassa.order_price');
+
+            $invid = $order->id;
+            $description = "Заказ натальной карты №{$order->display_id}";
+            $signature_value = md5("$merchant_login:$order_price:$invid:$password_1");
+
+            $payment_url .= "?" . http_build_query([
+                'MerchantLogin' => $merchant_login,
+                'OutSum' => $order_price,
+                'InvoiceID' => $invid,
+                'Description' => $description,
+                'SignatureValue' => $signature_value,
+                'IsTest' => $is_test ? 1 : 0,
+                'SuccessURL' => route('payment.success')
+            ]);
+            @endphp
+
             @if($order->status !== 'paid' && $order->status !== 'completed')
-            <div class="row mt-4">
+            <div class="mt-3 d-block d-md-none">
+                <a href="{{ $payment_url }}" class="btn btn-primary btn-lg w-100" 
+                   style="background: linear-gradient(45deg, #2b5876, #4e4376); border: none; font-weight: 600; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+                    <i class="bi bi-credit-card me-2"></i>
+                    Оплатить {{ number_format($order_price, 2, ',', ' ') }} ₽
+                </a>
+            </div>
+            @endif
+
+            @if($order->status !== 'paid' && $order->status !== 'completed')
+            <div class="row mt-4 d-none d-md-flex">
                 <div class="col-12 text-center">
-                    <?php
-                    $merchant_login = config('robokassa.merchant_login');
-                    $is_test = config('robokassa.test_mode');
-                    $password_1 = $is_test ? config('robokassa.test_password_1') : config('robokassa.password_1');
-                    $payment_url = config('robokassa.payment_url');
-                    $order_price = config('robokassa.order_price');
-                    
-                    $invid = $order->id;
-                    $description = "Заказ натальной карты №{$order->display_id}";
-                    $signature_value = md5("$merchant_login:$order_price:$invid:$password_1");
-                    
-                    $payment_url .= "?" . http_build_query([
-                        'MerchantLogin' => $merchant_login,
-                        'OutSum' => $order_price,
-                        'InvoiceID' => $invid,
-                        'Description' => $description,
-                        'SignatureValue' => $signature_value,
-                        'IsTest' => $is_test ? 1 : 0,
-                        'SuccessURL' => route('payment.success')
-                    ]);
-                    ?>
                     <button class="btn btn-primary btn-lg px-5 py-3" 
-                            onclick="window.location.href='<?php echo $payment_url; ?>'" 
+                            onclick="window.location.href='{{ $payment_url }}'" 
                             style="background: linear-gradient(45deg, #2b5876, #4e4376); border: none; font-size: 1.2rem; font-weight: 600; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
                         <i class="bi bi-credit-card me-2"></i>
-                        Оплатить <?php echo number_format($order_price, 2, ',', ' '); ?> ₽
+                        Оплатить {{ number_format($order_price, 2, ',', ' ') }} ₽
                     </button>
                 </div>
             </div>
