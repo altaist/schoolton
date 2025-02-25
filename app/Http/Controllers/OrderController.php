@@ -45,6 +45,28 @@ class OrderController extends BaseController
 
     public function store(Request $request)
     {
+        // Проверяем, что запрос пришел с нашего сайта
+        if (!$request->session()->has('form_access_token')) {
+            Log::error('Unauthorized form access attempt', [
+                'ip' => $request->ip(),
+                'user_agent' => $request->userAgent()
+            ]);
+            return response()->json([
+                'success' => false,
+                'message' => 'Unauthorized access'
+            ], 403);
+        }
+
+        // Проверяем время жизни токена (например, 30 минут)
+        $tokenTime = $request->session()->get('form_access_time');
+        if (now()->diffInMinutes($tokenTime) > 30) {
+            $request->session()->forget(['form_access_token', 'form_access_time']);
+            return response()->json([
+                'success' => false,
+                'message' => 'Form session expired'
+            ], 403);
+        }
+
         Log::info('Received order request', [
             'data' => $request->all()
         ]);
@@ -55,6 +77,7 @@ class OrderController extends BaseController
             'birth_date' => 'required|date',
             'birth_time' => 'required',
             'birth_city' => 'required|string|max:255',
+            'honeypot' => 'size:0', // Добавляем поле-ловушку
         ]);
 
         if ($validator->fails()) {
@@ -89,6 +112,9 @@ class OrderController extends BaseController
                 'uuid' => $order->order_id,
                 'email_sent' => true
             ]);
+
+            // После успешного создания заказа удаляем токен доступа
+            $request->session()->forget(['form_access_token', 'form_access_time']);
 
             return redirect()->route('order.show', ['orderId' => $order->order_id]);
 
