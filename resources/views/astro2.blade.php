@@ -373,6 +373,12 @@
                             <label for="birthCity" class="form-label">Место рождения*</label>
                             <input type="text" class="form-control bg-dark text-white border-secondary" id="birthCity" name="birth_city" required>
                         </div>
+                        
+                        <!-- Добавляем каптчу -->
+                        <div class="mb-3">
+                            <div class="g-recaptcha" data-sitekey="{{ env('RECAPTCHA_SITE_KEY') }}" data-theme="dark"></div>
+                        </div>
+
                         <button type="submit" class="btn btn-primary w-100">Заказать</button>
                     </form>
                 </div>
@@ -1223,6 +1229,9 @@
         }
     });
     </script>
+
+    <!-- Добавляем скрипт reCAPTCHA перед закрывающим тегом </body> -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </body>
 
 </html>
