@@ -35,4 +35,9 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'admin' => \App\Http\Middleware\AdminMiddleware::class,
     ];
+
+    protected $routeMiddleware = [
+        // ...
+        'check.order.referer' => \App\Http\Middleware\CheckOrderReferer::class,
+    ];
 } 
