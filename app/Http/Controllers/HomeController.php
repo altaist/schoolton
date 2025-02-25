@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
 
 class HomeController extends BaseController
 {
@@ -63,11 +62,7 @@ class HomeController extends BaseController
      */
     public function index(Request $request)
     {
-        // Генерируем уникальный токен доступа к форме
-        $request->session()->put('form_access_token', Str::random(40));
-        $request->session()->put('form_access_time', now());
-        
-        return view('home');
+        return view('astro2');
     }
 
     /**

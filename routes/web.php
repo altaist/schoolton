@@ -123,9 +123,7 @@ Route::middleware(['web'])->group(function () {
 });
 
 Route::post('/orders/ajax', [OrderController::class, 'storeAjax'])->name('orders.store.ajax');
-Route::post('/orders', [OrderController::class, 'store'])
-    ->name('orders.store')
-    ->middleware(['throttle:5,1']); // 5 запросов в минуту
+Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
 
 
 Route::get('/order/{orderId}', [OrderViewController::class, 'show'])->name('order.show');
