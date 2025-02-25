@@ -1240,6 +1240,20 @@
             });
         }
     </script>
+
+    <script>
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            grecaptcha.ready(function() {
+                grecaptcha.execute('{{ config("services.recaptcha.site_key") }}', {action: 'submit'})
+                .then(function(token) {
+                    document.getElementById('recaptchaResponse').value = token;
+                    e.target.submit();
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
