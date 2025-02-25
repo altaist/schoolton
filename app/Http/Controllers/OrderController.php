@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use App\Mail\OrderCreatedNotification;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\RateLimiter;
 
 class OrderController extends BaseController
 {
@@ -45,6 +46,19 @@ class OrderController extends BaseController
 
     public function store(Request $request)
     {
+        if (RateLimiter::tooManyAttempts($request->ip(), 20)) { // 20 попыток в день
+            Log::warning('Too many order attempts', [
+                'ip' => $request->ip(),
+                'attempts' => RateLimiter::attempts($request->ip())
+            ]);
+            
+            return back()
+                ->with('error', 'Слишком много попыток. Пожалуйста, попробуйте позже.')
+                ->withInput();
+        }
+
+        RateLimiter::hit($request->ip(), 60 * 24); // Попытка сохраняется 24 часа
+
         Log::info('Received order request', [
             'data' => $request->all()
         ]);

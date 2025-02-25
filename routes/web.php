@@ -122,9 +122,13 @@ Route::middleware(['web'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware(['web', 'check.order.referer', 'throttle:orders'])->group(function () {
-    Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
-    Route::post('/orders/ajax', [OrderController::class, 'storeAjax'])->name('orders.store.ajax');
+Route::middleware(['web', 'check.order.referer'])->group(function () {
+    Route::post('/orders', [OrderController::class, 'store'])
+        ->middleware('throttle:6,1')  // 6 попыток в минуту
+        ->name('orders.store');
+    Route::post('/orders/ajax', [OrderController::class, 'storeAjax'])
+        ->middleware('throttle:6,1')
+        ->name('orders.store.ajax');
 });
 
 Route::get('/order/{orderId}', [OrderViewController::class, 'show'])->name('order.show');
