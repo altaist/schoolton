@@ -45,14 +45,13 @@ class OrderController extends BaseController
 
     public function store(Request $request)
     {
-        // Проверяем reCAPTCHA
+        // Проверяем reCAPTCHA v3
         $recaptcha = $request->input('g-recaptcha-response');
         
         $url = 'https://www.google.com/recaptcha/api/siteverify';
         $data = [
             'secret' => config('services.recaptcha.secret_key'),
-            'response' => $recaptcha,
-            'remoteip' => $request->ip()
+            'response' => $recaptcha
         ];
 
         $options = [
@@ -67,9 +66,9 @@ class OrderController extends BaseController
         $result = file_get_contents($url, false, $context);
         $resultJson = json_decode($result);
 
-        if (!$resultJson->success) {
+        if (!$resultJson->success || $resultJson->score < 0.5) {
             return back()
-                ->withErrors(['captcha' => 'Пожалуйста, подтвердите, что вы не робот'])
+                ->withErrors(['captcha' => 'Ошибка проверки reCAPTCHA'])
                 ->withInput();
         }
 

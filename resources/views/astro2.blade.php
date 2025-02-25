@@ -238,6 +238,9 @@
             src: url('/fonts/ALSRubl.ttf') format('truetype');
         }
     </style>
+
+    <!-- В секции head добавляем скрипт reCAPTCHA v3 -->
+    <script src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.site_key') }}"></script>
 </head>
 
 <body>
@@ -373,15 +376,8 @@
                             <label for="birthCity" class="form-label">Место рождения*</label>
                             <input type="text" class="form-control bg-dark text-white border-secondary" id="birthCity" name="birth_city" required>
                         </div>
-                        <!-- Добавляем каптчу -->
-        <div class="mb-3">
-            <div id="recaptcha-container"></div>
-            @error('captcha')
-                <div class="invalid-feedback d-block">
-                    {{ $message }}
-                </div>
-            @enderror
-        </div>
+                        <!-- Добавляем скрытое поле -->
+                        <input type="hidden" name="g-recaptcha-response" id="recaptchaResponse">
                         
                         <button type="submit" class="btn btn-primary w-100">Заказать</button>
                     </form>
