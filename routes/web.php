@@ -153,3 +153,5 @@ Route::get('/download-example', function() {
 })->name('download.example');
 
 
+// Добавьте этот маршрут, если используете AJAX
+Route::post('/orders/ajax', [OrderController::class, 'storeAjax'])->name('orders.store.ajax');
