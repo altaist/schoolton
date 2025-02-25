@@ -168,7 +168,7 @@
                 </div>
             </div>
             @if($order->status !== 'paid' && $order->status !== 'completed')
-            <div class="row mt-4 d-none d-md-block">
+            <div class="row mt-4">
                 <div class="col-12 text-center">
                     <?php
                     $merchant_login = config('robokassa.merchant_login');
