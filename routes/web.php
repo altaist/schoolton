@@ -55,6 +55,7 @@ Route::prefix('orders')->group(function () {
     Route::post('/', [OrderController::class, 'store'])->name('order.store');
     Route::get('/item/{id}', [OrderController::class, 'getItem'])->name('order.item');
     Route::get('/user/{user}', [OrderController::class, 'getOrdersForUser'])->name('order.user');
+    Route::post('/ajax', [OrderController::class, 'storeAjax'])->name('orders.store.ajax');
 });
 Route::prefix('payments')->group(function () {
     Route::post('/', [PaymentController::class, 'store'])->name('payment.store');

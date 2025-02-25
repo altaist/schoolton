@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Order;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use App\Mail\OrderCreatedNotification;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends BaseController
 {
@@ -80,6 +82,9 @@ class OrderController extends BaseController
                 'expires_at' => $expiresAt
             ]);
 
+            // Отправляем email с ссылкой на оплату
+            Mail::to($order->email)->send(new OrderCreatedNotification($order));
+
             Log::info('Order created successfully', [
                 'order_id' => $order->id,
                 'uuid' => $order->order_id
@@ -103,6 +108,59 @@ class OrderController extends BaseController
     {
         $orderService = OrderService::make();
         return $orderService->updateState($orderId, $stateId);
+    }
+
+    public function storeAjax(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|max:255',
+            'gender' => 'required|in:male,female',
+            'birth_date' => 'required|date',
+            'birth_time' => 'required',
+            'birth_city' => 'required|string|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        try {
+            $expiresAt = now()->addMinutes((int)config('robokassa.wait_time'))->setTimezone('UTC');
+            
+            $order = Order::create([
+                'order_id' => (string) Str::uuid(),
+                'email' => $request->email,
+                'gender' => $request->gender,
+                'birth_date' => $request->birth_date,
+                'birth_time' => $request->birth_time,
+                'birth_city' => $request->birth_city,
+                'amount' => (float)config('robokassa.order_price'),
+                'status' => 'new',
+                'expires_at' => $expiresAt
+            ]);
+
+            // Отправляем email с ссылкой на оплату
+            Mail::to($order->email)->send(new OrderCreatedNotification($order));
+
+            return response()->json([
+                'success' => true,
+                'order_id' => $order->id
+            ]);
+
+        } catch (\Exception $e) {
+            Log::error('Order creation error', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Произошла ошибка при создании заказа'
+            ], 500);
+        }
     }
 
 }
