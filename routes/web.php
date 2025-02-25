@@ -122,7 +122,10 @@ Route::middleware(['web'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
+Route::middleware(['web', 'check.order.referer', 'throttle:orders'])->group(function () {
+    Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
+    Route::post('/orders/ajax', [OrderController::class, 'storeAjax'])->name('orders.store.ajax');
+});
 
 Route::get('/order/{orderId}', [OrderViewController::class, 'show'])->name('order.show');
 Route::post('/order/{orderId}/update', [OrderViewController::class, 'update'])->name('order.update');
@@ -151,7 +154,3 @@ Route::post('/admin/orders/send-file', [\App\Http\Controllers\Admin\OrderControl
 Route::get('/download-example', function() {
     return response()->download(public_path('example.pdf'));
 })->name('download.example');
-
-
-// Добавьте этот маршрут, если используете AJAX
-Route::post('/orders/ajax', [OrderController::class, 'storeAjax'])->name('orders.store.ajax');
