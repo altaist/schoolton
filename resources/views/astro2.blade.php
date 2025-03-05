@@ -103,16 +103,7 @@
     });
 </script>
 
-    <!-- Защита от мерцания -->
-    <style>.varioqub-antiflicker {opacity: 0 !important;}</style>
-    <script>
-        (function(a,n,t,i,f,li,c,k,e,r){
-            a[t]=a[t]||function(){(a[t].a=a[t].a||[]).push(arguments)};n.classList.add(i);c=function(){n.classList.remove(i)};li.callback=c;a[t].antiFlicker=li;setTimeout(c,f);
-        })(window, document.documentElement, 'ymab', 'varioqub-antiflicker', 4000, { 'metrika.99885577': true });
-    </script>
-
-    <noscript><div><img src="https://mc.yandex.ru/watch/99885577" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-    <!-- /Yandex.Metrika counter -->
+    
 
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -259,19 +250,6 @@
                 <div class="col-12 col-lg-6">
                     <h1 class="display-2 fw-bold mt-3 mb-3 theme-text-white animate-charcter">Ваша натальная карта в 1 клик</h1>
                     <p class="mb-4 theme-text-accent-two text-h4">Закажите прямо сейчас по особой цене</p>
-                    
-                    <!-- Блок цены в hero секции (изначально скрыт) -->
-
-                    <div class="price-wrapper mb-4" style="display: none;">
-                        <div class="d-flex align-items-center gap-3 flex-wrap">
-                            <div class="discount-badge">До конца февраля</div>
-                            
-                            <div class="price-info text-start">
-                                <span class="old-price me-2">2100₽</span>
-                                <span class="new-price">1500₽</span>
-                            </div>
-                        </div>
-                    </div>
 
                     <div class="group d-flex flex-column flex-sm-row gap-3">
                         <button class="rounded-pill btn btn-lg custom-btn-primary primary-btn-effect" data-bs-toggle="modal" data-bs-target="#orderModal">ЗАКАЗАТЬ</button>
@@ -289,40 +267,39 @@
         </div>
     </section>
 
-    <!-- Отдельная секция с ценой (изначально скрыта) -->
-    <section class="pricing py-5" data-aos="fade-up" data-aos-delay="80" data-aos-offset="0" style="display: none;">
+    <section class="pricing py-5" data-aos="fade-up" data-aos-delay="80" data-aos-offset="0">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-6 text-center">
                     <div class="price-block">
                         <div class="snowflakes" aria-hidden="true">
-                            <div class="snowflake">❅</div>
-                            <div class="snowflake">❆</div>
-                            <div class="snowflake">❅</div>
-                            <div class="snowflake">❆</div>
-                            <div class="snowflake">❅</div>
-                            <div class="snowflake">❆</div>
-                            <div class="snowflake">❅</div>
-                            <div class="snowflake">❆</div>
-                            <div class="snowflake">❅</div>
-                            <div class="snowflake">❆</div>
-                            <div class="snowflake">❅</div>
-                            <div class="snowflake">❆</div>
-                            <div class="snowflake">❅</div>
-                            <div class="snowflake">❆</div>
-                            <div class="snowflake">❅</div>
-                            <div class="snowflake">❆</div>
-                            <div class="snowflake">❅</div>
-                            <div class="snowflake">❆</div>
-                            <div class="snowflake">❅</div>
-                            <div class="snowflake">❆</div>
+                            <div class="snowflake">🌸</div>
+                            <div class="snowflake">🌺</div>
+                            <div class="snowflake">🌹</div>
+                            <div class="snowflake">🌷</div>
+                            <div class="snowflake">🌼</div>
+                            <div class="snowflake">🌻</div>
+                            <div class="snowflake">🌸</div>
+                            <div class="snowflake">🌺</div>
+                            <div class="snowflake">🌹</div>
+                            <div class="snowflake">🌷</div>
+                            <div class="snowflake">🌼</div>
+                            <div class="snowflake">🌻</div>
+                            <div class="snowflake">🌸</div>
+                            <div class="snowflake">🌺</div>
+                            <div class="snowflake">🌹</div>
+                            <div class="snowflake">🌷</div>
+                            <div class="snowflake">🌼</div>
+                            <div class="snowflake">🌻</div>
+                            <div class="snowflake">🌸</div>
+                            <div class="snowflake">🌺</div>
                         </div>
                         
                         <div class="price-content">
-                            <div class="discount-label">Зимняя скидка 600 ₽</div>
-                            <div class="mb-2" style="color: #fff;">До конца февраля</div>
-                            <div class="old-price">2100 ₽</div>
-                            <div class="new-price">1500 ₽</div>
+                            <div class="discount-label">Скидка 60%</div>
+                            <div class="mb-2" style="color: #fff;">С 5 по 12 марта</div>
+                            <div class="old-price">1500 ₽</div>
+                            <div class="new-price">600 ₽</div>
                             <button class="rounded-pill btn btn-lg custom-btn-primary primary-btn-effect" data-bs-toggle="modal" data-bs-target="#orderModal">ЗАКАЗАТЬ СО СКИДКОЙ</button>
                         </div>
                     </div>
@@ -1289,12 +1266,12 @@
     .old-price {
         text-decoration: line-through;
         color: #999;
-        font-size: 1.1rem;
+        font-size: 2rem;
     }
 
     .new-price {
         color: #fff;
-        font-size: 1.5rem;
+        font-size: 4rem;
         font-weight: bold;
     }
 
