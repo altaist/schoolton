@@ -148,6 +148,7 @@
                                 'SuccessURL' => route('payment.success')
                             ]);
                             @endphp
+                            @if($order->status !== 'paid' && $order->status !== 'completed')
                             <div class="row mt-4 d-block d-md-none">
                                 <div class="col-12 text-center">
                                     <button class="btn btn-primary btn-lg px-5 py-3" 
@@ -158,7 +159,7 @@
                                     </button>
                                 </div>
                             </div>
-
+                            @endif
                         </div>
                     </div>
                 </div>
