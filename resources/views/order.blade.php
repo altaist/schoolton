@@ -132,7 +132,7 @@
                             $is_test = config('robokassa.test_mode');
                             $password_1 = $is_test ? config('robokassa.test_password_1') : config('robokassa.password_1');
                             $payment_url = config('robokassa.payment_url');
-                            $order_price = config('robokassa.order_price');
+                            $order_price = $order->amount;
 
                             $invid = $order->id;
                             $description = "Заказ натальной карты №{$order->display_id}";
@@ -173,6 +173,10 @@
                                 <td>{{ $order->display_id }}</td>
                             </tr>
                             <tr>
+                                <td>Тип:</td>
+                                <td>{{ \App\Models\Product::find($order->product_id)->title }}</td>
+                            </tr>
+                            <tr>
                                 <td>Email:</td>
                                 <td>{{ $order->email }}</td>
                             </tr>
@@ -194,7 +198,7 @@
                             </tr>
                             <tr>
                                 <td>Сумма:</td>
-                                <td>{{ number_format(config('robokassa.order_price'), 0, '.', ' ') }} ₽</td>
+                                <td>{{ number_format($order->amount, 0, '.', ' ') }} ₽</td>
                             </tr>
                         </tbody>
                     </table>
@@ -205,7 +209,7 @@
             $is_test = config('robokassa.test_mode');
             $password_1 = $is_test ? config('robokassa.test_password_1') : config('robokassa.password_1');
             $payment_url = config('robokassa.payment_url');
-            $order_price = config('robokassa.order_price');
+            $order_price = $order->amount;
 
             $invid = $order->id;
             $description = "Заказ натальной карты №{$order->display_id}";

@@ -2,23 +2,46 @@
 
 namespace Database\Seeders;
 
-use App\Models\Product;
-use Database\Seeders\CsvSeeder;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class ProductSeeder extends Seeder
 {
-    public $file = "csv/products.csv";
-    public $table = "products";
-
-    /**
-     * Seed the application's database.
-     */
-    public function run(): void
+    public function run()
     {
+        $products = [
+            [
+                'title' => 'Разбор натальной карты',
+                'price' => 600.00,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'title' => 'Расчет по картам Таро',
+                'price' => 899.00,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'title' => 'Солярный расчет',
+                'price' => 799.00,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'title' => 'Расчет любви',
+                'price' => 499.00,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'title' => 'Что ждет Вас в будущем?',
+                'price' => 499.00,
+                'created_at' => now(),
+                'updated_at' => now()
+            ]
+        ];
 
-        Product::factory()->create();
-
+        DB::table('products')->insert($products);
     }
-
 }

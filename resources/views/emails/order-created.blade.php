@@ -19,10 +19,12 @@
     <div class="container">
         <h2>Ваш заказ #{{ $order->display_id }} создан</h2>
         
-        <p>Благодарим вас за заказ натальной карты!</p>
+        <p>Благодарим вас за заказ!</p>
         
-        <p>Детали вашего заказа:</p>
+        
+        <p>Детали:</p>
         <ul>
+            <li>Тип: {{ \App\Models\Product::find($order->product_id)->title }}.</li>
             <li>Номер заказа: {{ $order->display_id }}</li>
             <li>Дата рождения: {{ $order->birth_date }}</li>
             <li>Время рождения: {{ $order->birth_time }}</li>

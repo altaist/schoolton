@@ -231,7 +231,9 @@
     </style>
 
     <!-- В секции head добавляем скрипт reCAPTCHA v3 -->
-    <script src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.site_key') }}"></script>
+    @if(!config('robokassa.test_mode'))
+        <script src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.site_key') }}"></script>
+    @endif
 </head>
 
 <body>
@@ -267,11 +269,19 @@
         </div>
     </section>
 
-    <section class="pricing py-5" data-aos="fade-up" data-aos-delay="80" data-aos-offset="0">
+    
+
+    <!-- Первый продукт -->
+    <section class="main-product py-5" data-aos="fade-up" data-aos-delay="80" data-aos-offset="0">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-md-6 text-center">
-                    <div class="price-block">
+                @php
+                    $products = \App\Models\Product::all();
+                    $firstProduct = $products->first();
+                @endphp
+                @if($firstProduct)
+                <div class="col-md-8">
+                    <div class="price-block main-price-block">
                         <div class="snowflakes" aria-hidden="true">
                             <div class="snowflake">🌸</div>
                             <div class="snowflake">🌺</div>
@@ -279,37 +289,72 @@
                             <div class="snowflake">🌷</div>
                             <div class="snowflake">🌼</div>
                             <div class="snowflake">🌻</div>
-                            <div class="snowflake">🌸</div>
-                            <div class="snowflake">🌺</div>
-                            <div class="snowflake">🌹</div>
-                            <div class="snowflake">🌷</div>
-                            <div class="snowflake">🌼</div>
-                            <div class="snowflake">🌻</div>
-                            <div class="snowflake">🌸</div>
-                            <div class="snowflake">🌺</div>
-                            <div class="snowflake">🌹</div>
-                            <div class="snowflake">🌷</div>
-                            <div class="snowflake">🌼</div>
-                            <div class="snowflake">🌻</div>
-                            <div class="snowflake">🌸</div>
-                            <div class="snowflake">🌺</div>
                         </div>
                         
-                        <div class="price-content">
+                        <div class="price-content text-center">
+                            <h2 class="mb-4 text-white">{{ $firstProduct->title }}</h2>
                             <div class="discount-label">Скидка 60%</div>
                             <div class="mb-2" style="color: #fff;">С 5 по 12 марта</div>
-                            <div class="old-price">1500 ₽</div>
-                            <div class="new-price">600 ₽</div>
-                            <button class="rounded-pill btn btn-lg custom-btn-primary primary-btn-effect" data-bs-toggle="modal" data-bs-target="#orderModal">ЗАКАЗАТЬ СО СКИДКОЙ</button>
+                            <div class="old-price">{{ number_format(1200, 0, '.', ' ') }} ₽</div>
+                            
+                            <div class="new-price mb-4">{{ number_format($firstProduct->price, 0, '.', ' ') }} ₽</div>
+                            <button class="rounded-pill btn btn-lg custom-btn-primary primary-btn-effect" 
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#orderModal" 
+                                    data-product-id="{{ $firstProduct->id }}"
+                                    data-product-price="{{ $firstProduct->price }}">
+                                ЗАКАЗАТЬ
+                            </button>
                         </div>
                     </div>
                 </div>
+                @endif
             </div>
         </div>
     </section>
 
+    <!-- Все продукты в сетке 2x3 -->
+    <section class="pricing py-5" data-aos="fade-up" data-aos-delay="80" data-aos-offset="0">
+        <div class="container">
+            <div class="row justify-content-center">
+                @php
+                    $products = \App\Models\Product::all();
+                @endphp
+                @foreach($products->slice(1) as $product)
+                <div class="col-md-6 mb-4">
+                    <div class="price-block h-100">
+                        <div class="snowflakes" aria-hidden="true">
+                            <div class="snowflake">🌸</div>
+                            <div class="snowflake">🌺</div>
+                            <div class="snowflake">🌹</div>
+                            <div class="snowflake">🌷</div>
+                            <div class="snowflake">🌼</div>
+                            <div class="snowflake">🌻</div>
+                        </div>
+                        
+                        <div class="price-content text-center">
+                            <h3 class="mb-4 text-white">{{ $product->title }}</h3>
+                            <div class="discount-label">Скидка 60%</div>
+                                <div class="mb-2" style="color: #fff;">С 5 по 12 марта</div>
+                                <div class="old-price">{{ number_format($product->price*1.6, 0, '.', ' ') }} ₽</div>
 
-    <!-- Модальное окно для формы заказа -->
+                            <div class="new-price mb-4">{{ number_format($product->price, 0, '.', ' ') }} ₽</div>
+                            <button class="rounded-pill btn btn-lg custom-btn-primary primary-btn-effect" 
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#orderModal" 
+                                    data-product-id="{{ $product->id }}"
+                                    data-product-price="{{ $product->price }}">
+                                ЗАКАЗАТЬ
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
+    <!-- Добавляем скрытое поле для product_id в форму заказа -->
     <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content bg-dark text-white">
@@ -320,6 +365,7 @@
                 <div class="modal-body">
                     <form id="orderForm" method="POST" action="{{ route('orders.store') }}">
                         @csrf
+                        <input type="hidden" name="product_id" id="productId">
                         <div class="mb-3">
                             <label for="email" class="form-label">Email*</label>
                             <input type="email" class="form-control bg-dark text-white border-secondary" id="email" name="email" required>
@@ -353,8 +399,9 @@
                             <label for="birthCity" class="form-label">Место рождения*</label>
                             <input type="text" class="form-control bg-dark text-white border-secondary" id="birthCity" name="birth_city" required>
                         </div>
-                        <!-- Добавляем скрытое поле -->
-                        <input type="hidden" name="g-recaptcha-response" id="recaptchaResponse">
+                        @if(!config('robokassa.test_mode'))
+                            <input type="hidden" name="g-recaptcha-response" id="recaptchaResponse">
+                        @endif
                         
                         <button type="submit" class="btn btn-primary w-100">Заказать</button>
                     </form>
@@ -824,7 +871,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="60.003" height="60.003" viewBox="0 0 60.003 60.003">
                                 <g id="key-customers" transform="translate(-1.994 -2)">
                                     <path id="Path_844" data-name="Path 844"
-                                        d="M51.16,22.61,49,18l-2.16,4.61L42,23.35l3.5,3.58L44.67,32,49,29.61,53.33,32l-.83-5.07L56,23.35Z"
+                                        d="M51.16,22.61,49,18l-2.16,4.61L42,23.35l3.5,3.58L44.67,32,49,29.61,53.33,32l-.83-5.07L56,23.35l-4.84-.74Z"
                                         fill="#f61212" />
                                     <path id="Path_845" data-name="Path 845"
                                         d="M15,18l-2.16,4.61L8,23.35l3.5,3.58L10.67,32,15,29.61,19.33,32l-.83-5.07L22,23.35l-4.84-.74Z"
@@ -1222,14 +1269,32 @@
         document.getElementById('orderForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            grecaptcha.ready(function() {
-                grecaptcha.execute('{{ config("services.recaptcha.site_key") }}', {action: 'submit'})
-                .then(function(token) {
-                    document.getElementById('recaptchaResponse').value = token;
-                    e.target.submit();
+            @if(!config('robokassa.test_mode'))
+                grecaptcha.ready(function() {
+                    grecaptcha.execute('{{ config("services.recaptcha.site_key") }}', {action: 'submit'})
+                    .then(function(token) {
+                        document.getElementById('recaptchaResponse').value = token;
+                        e.target.submit();
+                    });
                 });
-            });
+            @else
+                this.submit();
+            @endif
         });
+    </script>
+
+    <!-- Добавляем JavaScript для обработки выбора продукта -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const orderModal = document.getElementById('orderModal');
+        const productIdInput = document.getElementById('productId');
+        
+        orderModal.addEventListener('show.bs.modal', function(event) {
+            const button = event.relatedTarget;
+            const productId = button.getAttribute('data-product-id');
+            productIdInput.value = productId;
+        });
+    });
     </script>
 </body>
 

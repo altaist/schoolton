@@ -25,7 +25,8 @@ class Order extends Model
         'expires_at',
         'payment_method',
         'payment_fee',
-        'payer_email'
+        'payer_email',
+        'product_id'
     ];
 
     protected $casts = [
@@ -72,6 +73,11 @@ class Order extends Model
     public function payments()
     {
         return $this->hasMany(Payment::class);
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
     }
 
     public function scopeFilterByUserStateOrderable(Builder $query, $userId, $state, $orderableType = null)

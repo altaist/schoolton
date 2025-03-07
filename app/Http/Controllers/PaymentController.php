@@ -81,11 +81,14 @@ class PaymentController extends Controller
                 'status' => 'paid'
             ]);
 
-            // Отправляем email
-            Mail::to($order->email)->send(new OrderPaidNotification($order));
+            // Проверяем тестовый режим перед отправкой письма
+            if (!config('robokassa.test_mode')) {
+                Mail::to($order->email)->send(new OrderPaidNotification($order));
+            }
 
             Log::channel('daily')->info('Payment processed successfully', [
-                'order_id' => $inv_id
+                'order_id' => $inv_id,
+                'email_sent' => !config('robokassa.test_mode')
             ]);
 
             return response("OK$inv_id\n");

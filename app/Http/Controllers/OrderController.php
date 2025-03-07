@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use App\Mail\OrderCreatedNotification;
 use Illuminate\Support\Facades\Mail;
+use App\Models\Product;
 
 class OrderController extends BaseController
 {
@@ -45,31 +46,33 @@ class OrderController extends BaseController
 
     public function store(Request $request)
     {
-        // Проверяем reCAPTCHA v3
-        $recaptcha = $request->input('g-recaptcha-response');
-        
-        $url = 'https://www.google.com/recaptcha/api/siteverify';
-        $data = [
-            'secret' => config('services.recaptcha.secret_key'),
-            'response' => $recaptcha
-        ];
+        // Проверяем reCAPTCHA только если не тестовый режим
+        if (!config('robokassa.test_mode')) {
+            $recaptcha = $request->input('g-recaptcha-response');
+            
+            $url = 'https://www.google.com/recaptcha/api/siteverify';
+            $data = [
+                'secret' => config('services.recaptcha.secret_key'),
+                'response' => $recaptcha
+            ];
 
-        $options = [
-            'http' => [
-                'header' => "Content-type: application/x-www-form-urlencoded\r\n",
-                'method' => 'POST',
-                'content' => http_build_query($data)
-            ]
-        ];
+            $options = [
+                'http' => [
+                    'header' => "Content-type: application/x-www-form-urlencoded\r\n",
+                    'method' => 'POST',
+                    'content' => http_build_query($data)
+                ]
+            ];
 
-        $context = stream_context_create($options);
-        $result = file_get_contents($url, false, $context);
-        $resultJson = json_decode($result);
+            $context = stream_context_create($options);
+            $result = file_get_contents($url, false, $context);
+            $resultJson = json_decode($result);
 
-        if (!$resultJson->success || $resultJson->score < 0.5) {
-            return back()
-                ->withErrors(['captcha' => 'Ошибка проверки reCAPTCHA'])
-                ->withInput();
+            if (!$resultJson->success || $resultJson->score < 0.5) {
+                return back()
+                    ->withErrors(['captcha' => 'Ошибка проверки reCAPTCHA'])
+                    ->withInput();
+            }
         }
 
         Log::info('Received order request', [
@@ -95,6 +98,7 @@ class OrderController extends BaseController
         }
 
         try {
+            $product = Product::findOrFail($request->product_id);
             $expiresAt = now()->addMinutes((int)config('robokassa.wait_time'))->setTimezone('UTC');
             
             $order = Order::create([
@@ -104,7 +108,8 @@ class OrderController extends BaseController
                 'birth_date' => $request->birth_date,
                 'birth_time' => $request->birth_time,
                 'birth_city' => $request->birth_city,
-                'amount' => (float)config('robokassa.order_price'),
+                'product_id' => $request->product_id,
+                'amount' => $product->price,
                 'status' => 'new',
                 'expires_at' => $expiresAt
             ]);
@@ -156,6 +161,7 @@ class OrderController extends BaseController
         }
 
         try {
+            $product = Product::findOrFail($request->product_id);
             $expiresAt = now()->addMinutes((int)config('robokassa.wait_time'))->setTimezone('UTC');
             
             $order = Order::create([
@@ -165,7 +171,8 @@ class OrderController extends BaseController
                 'birth_date' => $request->birth_date,
                 'birth_time' => $request->birth_time,
                 'birth_city' => $request->birth_city,
-                'amount' => (float)config('robokassa.order_price'),
+                'product_id' => $request->product_id,
+                'amount' => $product->price,
                 'status' => 'new',
                 'expires_at' => $expiresAt
             ]);
