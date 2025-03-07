@@ -247,6 +247,10 @@
 
     <!-- Body Part - hero section -->
     <section class="hero">
+        @php
+            $products = \App\Models\Product::all();
+            $firstProduct = $products->first();
+        @endphp
         <div class="container position-relative z-2 my-5">
             <div class="row justify-content-center align-items-center">
                 <div class="col-12 col-lg-6">
@@ -254,7 +258,11 @@
                     <p class="mb-4 theme-text-accent-two text-h4">Закажите прямо сейчас по особой цене</p>
 
                     <div class="group d-flex flex-column flex-sm-row gap-3">
-                        <button class="rounded-pill btn btn-lg custom-btn-primary primary-btn-effect" data-bs-toggle="modal" data-bs-target="#orderModal">ЗАКАЗАТЬ</button>
+                        <button class="rounded-pill btn btn-lg custom-btn-primary primary-btn-effect" data-bs-toggle="modal" data-bs-target="#orderModal" 
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#orderModal" 
+                                    data-product-id="{{ $firstProduct->id }}"
+                                    data-product-price="{{ $firstProduct->price }}"></button>>ЗАКАЗАТЬ</button>
                         <a href="{{ route('download.example') }}" class="rounded-pill btn btn-lg btn-outline-light">ПОСМОТРЕТЬ ПРИМЕР</a>
                     </div>
                 </div>
