@@ -262,7 +262,7 @@
                                     data-bs-toggle="modal" 
                                     data-bs-target="#orderModal" 
                                     data-product-id="{{ $firstProduct->id }}"
-                                    data-product-price="{{ $firstProduct->price }}"></button>>ЗАКАЗАТЬ</button>
+                                    data-product-price="{{ $firstProduct->price }}">ЗАКАЗАТЬ</button>
                         <a href="{{ route('download.example') }}" class="rounded-pill btn btn-lg btn-outline-light">ПОСМОТРЕТЬ ПРИМЕР</a>
                     </div>
                 </div>
