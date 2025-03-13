@@ -291,20 +291,20 @@
                 <div class="col-md-8">
                     <div class="price-block main-price-block">
                         <div class="snowflakes" aria-hidden="true">
-                            <div class="snowflake">🌸</div>
-                            <div class="snowflake">🌺</div>
-                            <div class="snowflake">🌹</div>
-                            <div class="snowflake">🌷</div>
-                            <div class="snowflake">🌼</div>
-                            <div class="snowflake">🌻</div>
+                            <div class="snowflake">✨</div>
+                            <div class="snowflake">🔮</div>
+                            <div class="snowflake">🌙</div>
+                            <div class="snowflake">⭐</div>
+                            <div class="snowflake">🌠</div>
+                            <div class="snowflake">🪄</div>
+                            <div class="snowflake">🧿</div>
+                            <div class="snowflake">🌟</div>
+                            <div class="snowflake">💫</div>
+                            <div class="snowflake">🌌</div>
                         </div>
                         
                         <div class="price-content text-center">
                             <h2 class="mb-4 text-white">{{ $firstProduct->title }}</h2>
-                            <div class="discount-label">Скидка 60%</div>
-                            <div class="mb-2" style="color: #fff;">С 5 по 12 марта</div>
-                            <div class="old-price">{{ number_format(1200, 0, '.', ' ') }} ₽</div>
-                            
                             <div class="new-price mb-4">{{ number_format($firstProduct->price, 0, '.', ' ') }} ₽</div>
                             <button class="rounded-pill btn btn-lg custom-btn-primary primary-btn-effect" 
                                     data-bs-toggle="modal" 
@@ -325,27 +325,24 @@
     <section class="pricing py-5" data-aos="fade-up" data-aos-delay="80" data-aos-offset="0">
         <div class="container">
             <div class="row justify-content-center">
-                @php
-                    $products = \App\Models\Product::all();
-                @endphp
                 @foreach($products->slice(1) as $product)
                 <div class="col-md-6 mb-4">
                     <div class="price-block h-100">
                         <div class="snowflakes" aria-hidden="true">
-                            <div class="snowflake">🌸</div>
-                            <div class="snowflake">🌺</div>
-                            <div class="snowflake">🌹</div>
-                            <div class="snowflake">🌷</div>
-                            <div class="snowflake">🌼</div>
-                            <div class="snowflake">🌻</div>
+                            <div class="snowflake">✨</div>
+                            <div class="snowflake">🔮</div>
+                            <div class="snowflake">🌙</div>
+                            <div class="snowflake">⭐</div>
+                            <div class="snowflake">🌠</div>
+                            <div class="snowflake">🪄</div>
+                            <div class="snowflake">🧿</div>
+                            <div class="snowflake">🌟</div>
+                            <div class="snowflake">💫</div>
+                            <div class="snowflake">🌌</div>
                         </div>
                         
                         <div class="price-content text-center">
                             <h3 class="mb-4 text-white">{{ $product->title }}</h3>
-                            <div class="discount-label">Скидка 60%</div>
-                                <div class="mb-2" style="color: #fff;">С 5 по 12 марта</div>
-                                <div class="old-price">{{ number_format($product->price*1.6, 0, '.', ' ') }} ₽</div>
-
                             <div class="new-price mb-4">{{ number_format($product->price, 0, '.', ' ') }} ₽</div>
                             <button class="rounded-pill btn btn-lg custom-btn-primary primary-btn-effect" 
                                     data-bs-toggle="modal" 
