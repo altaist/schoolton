@@ -12,13 +12,13 @@ class ProductSeeder extends Seeder
         $products = [
             [
                 'title' => 'Разбор натальной карты',
-                'price' => 600.00,
+                'price' => 799.00,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
                 'title' => 'Расчет по картам Таро',
-                'price' => 899.00,
+                'price' => 699.00,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
