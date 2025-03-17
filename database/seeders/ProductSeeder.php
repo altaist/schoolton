@@ -9,6 +9,10 @@ class ProductSeeder extends Seeder
 {
     public function run()
     {
+        // Удаляем все существующие продукты
+        DB::table('products')->truncate();
+        
+        // Создаем новые продукты
         $products = [
             [
                 'title' => 'Разбор натальной карты',
@@ -41,7 +45,8 @@ class ProductSeeder extends Seeder
                 'updated_at' => now()
             ]
         ];
-
+        
+        // Вставляем новые данные
         DB::table('products')->insert($products);
     }
 }
