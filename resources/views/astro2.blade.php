@@ -258,11 +258,15 @@
                     <p class="mb-4 theme-text-accent-two text-h4">Закажите прямо сейчас по особой цене</p>
 
                     <div class="group d-flex flex-column flex-sm-row gap-3">
-                        <button class="rounded-pill btn btn-lg custom-btn-primary primary-btn-effect" data-bs-toggle="modal" data-bs-target="#orderModal" 
+                        <button class="rounded-pill btn btn-lg custom-btn-primary primary-btn-effect" 
+                                @if(!env('DISABLE_ORDERS', false))
                                     data-bs-toggle="modal" 
                                     data-bs-target="#orderModal" 
                                     data-product-id="{{ $firstProduct->id }}"
-                                    data-product-price="{{ $firstProduct->price }}">ЗАКАЗАТЬ</button>
+                                    data-product-price="{{ $firstProduct->price }}"
+                                @else
+                                    onclick="showOrderDisabledAlert()"
+                                @endif>ЗАКАЗАТЬ</button>
                         <a href="{{ route('download.example') }}" class="rounded-pill btn btn-lg btn-outline-light">ПОСМОТРЕТЬ ПРИМЕР</a>
                     </div>
                 </div>
@@ -307,12 +311,14 @@
                             <h2 class="mb-4 text-white">{{ $firstProduct->title }}</h2>
                             <div class="new-price mb-4">{{ number_format($firstProduct->price, 0, '.', ' ') }} ₽</div>
                             <button class="rounded-pill btn btn-lg custom-btn-primary primary-btn-effect" 
-                                    data-bs-toggle="modal" 
-                                    data-bs-target="#orderModal" 
-                                    data-product-id="{{ $firstProduct->id }}"
-                                    data-product-price="{{ $firstProduct->price }}">
-                                ЗАКАЗАТЬ
-                            </button>
+                                    @if(!env('DISABLE_ORDERS', false))
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#orderModal" 
+                                        data-product-id="{{ $firstProduct->id }}"
+                                        data-product-price="{{ $firstProduct->price }}"
+                                    @else
+                                        onclick="showOrderDisabledAlert()"
+                                    @endif>ЗАКАЗАТЬ</button>
                         </div>
                     </div>
                 </div>
@@ -345,12 +351,14 @@
                             <h3 class="mb-4 text-white">{{ $product->title }}</h3>
                             <div class="new-price mb-4">{{ number_format($product->price, 0, '.', ' ') }} ₽</div>
                             <button class="rounded-pill btn btn-lg custom-btn-primary primary-btn-effect" 
-                                    data-bs-toggle="modal" 
-                                    data-bs-target="#orderModal" 
-                                    data-product-id="{{ $product->id }}"
-                                    data-product-price="{{ $product->price }}">
-                                ЗАКАЗАТЬ
-                            </button>
+                                    @if(!env('DISABLE_ORDERS', false))
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#orderModal" 
+                                        data-product-id="{{ $product->id }}"
+                                        data-product-price="{{ $product->price }}"
+                                    @else
+                                        onclick="showOrderDisabledAlert()"
+                                    @endif>ЗАКАЗАТЬ</button>
                         </div>
                     </div>
                 </div>
@@ -368,6 +376,14 @@
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <!-- Сообщение о невозможности заказа -->
+                    <div id="orderDisabledMessage" style="display: none;">
+                        <div class="alert alert-warning">
+                            <h4 class="alert-heading">Заказы временно недоступны</h4>
+                            <p>{{ env('DISABLE_ORDERS_MESSAGE', 'В настоящее время оформление заказов недоступно. Пожалуйста, попробуйте позже.') }}</p>
+                        </div>
+                    </div>
+                    
                     <form id="orderForm" method="POST" action="{{ route('orders.store') }}">
                         @csrf
                         <input type="hidden" name="product_id" id="productId">
@@ -1298,9 +1314,50 @@
             const button = event.relatedTarget;
             const productId = button.getAttribute('data-product-id');
             productIdInput.value = productId;
+            
+            // Проверка возможности заказа
+            @if(env('DISABLE_ORDERS', false))
+                // Скрываем форму заказа
+                document.getElementById('orderForm').style.display = 'none';
+                // Показываем сообщение о невозможности заказа
+                document.getElementById('orderDisabledMessage').style.display = 'block';
+            @else
+                // Показываем форму заказа
+                document.getElementById('orderForm').style.display = 'block';
+                // Скрываем сообщение о невозможности заказа
+                document.getElementById('orderDisabledMessage').style.display = 'none';
+            @endif
         });
     });
     </script>
+
+    <script>
+        function showOrderDisabledAlert() {
+            var orderDisabledModal = new bootstrap.Modal(document.getElementById('orderDisabledModal'));
+            orderDisabledModal.show();
+        }
+    </script>
+
+    <!-- Добавляем отдельное модальное окно для сообщения о недоступности заказов -->
+    <div class="modal fade" id="orderDisabledModal" tabindex="-1" aria-labelledby="orderDisabledModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark text-white">
+                <div class="modal-header border-secondary">
+                    <h5 class="modal-title" id="orderDisabledModalLabel">Заказы временно недоступны</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center mb-4">
+                        <i class="bi bi-exclamation-circle text-warning" style="font-size: 3rem;"></i>
+                    </div>
+                    <p class="lead text-center">{{ env('DISABLE_ORDERS_MESSAGE', 'В настоящее время оформление заказов недоступно. Пожалуйста, попробуйте позже.') }}</p>
+                </div>
+                <div class="modal-footer border-secondary">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
