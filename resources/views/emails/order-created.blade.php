@@ -38,10 +38,10 @@
         
         <p>Ссылка действительна в течение {{ config('robokassa.wait_time') }} минут.</p>
         
-        <p>Если у вас возникнут вопросы, пожалуйста, свяжитесь с нами по адресу info@natalnayakarta.store</p>
+        <p>Если у вас возникнут вопросы, пожалуйста, свяжитесь с нами по адресу info@bestastrolog.ru</p>
         
         <p>С уважением,<br>
-        Команда Natalnayakarta.store</p>
+        Команда BestAstrolog.ru</p>
     </div>
 </body>
 </html>
