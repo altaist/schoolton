@@ -314,12 +314,12 @@
                 <hr class="my-4">
                 <p class="text-muted mb-2">
                     Если у вас возникли вопросы, 
-                    <a href="mailto:info@natalnayakarta.store" class="text-decoration-none">
+                    <a href="mailto:info@bestastrolog.ru" class="text-decoration-none">
                         свяжитесь с нами
                     </a>
                 </p>
                 <p class="text-muted mb-4">
-                    info@natalnayakarta.store
+                    info@bestastrolog.ru
                 </p>
             </div>
         </div>

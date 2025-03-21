@@ -6,102 +6,24 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <title>Создать натальную карту онлайн</title>
-
-    <!-- Yandex.Metrika counter -->
-    <script type="text/javascript" >
-    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-    m[i].l=1*new Date();
-    for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-    k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-
-    ym(99885577, "init", {
-            clickmap:true,
-            trackLinks:true,
-            accurateTrackBounce:true,
-            webvisor:true
-    });
-    </script>
-
-    <!-- Код эксперимента -->
-<script>
-    (function(e, x, pe, r, i, me, nt){
-    e[i]=e[i]||function(){(e[i].a=e[i].a||[]).push(arguments)},
-    me=x.createElement(pe),me.async=1,me.src=r,nt=x.getElementsByTagName(pe)[0],me.addEventListener('error',function(){function cb(t){t=t[t.length-1],'function'==typeof t&&t({flags:{}})};Array.isArray(e[i].a)&&e[i].a.forEach(cb);e[i]=function(){cb(arguments)}}),nt.parentNode.insertBefore(me,nt)})
-    (window, document, 'script', 'https://abt.s3.yandex.net/expjs/latest/exp.js', 'ymab');
     
-    // Функция для получения параметров из URL
-    function getUrlParameter(name) {
-        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-        var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-        var results = regex.exec(location.search);
-        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-    }
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();
+   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 
-    // Проверяем наличие параметра dev_version
-    const devVersion = getUrlParameter('dev_version');
-    
-    // Инициализация с ID метрики
-    ymab('metrika.99885577', 'init', {}, function(data) {
-        console.group('Яндекс.Метрика AB-тест');
-        console.log('Получены данные:', data);
-        console.log('Флаги:', data.flags);
-        
-        const flags = data.flags;
-        const priceWrapper = document.querySelector('.price-wrapper');
-        const pricingSection = document.querySelector('section.pricing');
-        
-        // Получаем значение флага (приоритет у dev_version)
-        let redirFlag;
-        if (devVersion) {
-            redirFlag = devVersion;
-            console.log('Используется версия для разработчика:', devVersion);
-        } else {
-            redirFlag = Array.isArray(flags.redir) ? flags.redir[0] : null;
-            console.log('Используется версия из Метрики:', redirFlag);
-        }
-        
-        console.log('Текущий флаг redir:', redirFlag);
-        console.log('Найден блок price-wrapper:', !!priceWrapper);
-        console.log('Найдена секция pricing:', !!pricingSection);
-        
-        if (redirFlag === '?h=e7d31fc8') {
-            console.log('Активирована версия B (цена в главном блоке)');
-            if (priceWrapper) {
-                priceWrapper.style.display = 'block';
-                console.log('price-wrapper показан');
-            } else {
-                console.error('price-wrapper не найден!');
-            }
-            
-            if (pricingSection) {
-                pricingSection.style.display = 'none';
-                console.log('section.pricing скрыта');
-            } else {
-                console.error('section.pricing не найдена!');
-            }
-        } else if (redirFlag === '?h=a9f42b3d') {
-            console.log('Активирована версия A (отдельная секция с ценой)');
-            if (priceWrapper) {
-                priceWrapper.style.display = 'none';
-                console.log('price-wrapper скрыт');
-            } else {
-                console.error('price-wrapper не найден!');
-            }
-            
-            if (pricingSection) {
-                pricingSection.style.display = 'block';
-                console.log('section.pricing показана');
-            } else {
-                console.error('section.pricing не найдена!');
-            }
-        } else {
-            console.warn('Неизвестное значение флага redir:', redirFlag);
-        }
-        
-        console.groupEnd();
-    });
+   ym(100514379, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        webvisor:true
+   });
 </script>
+<noscript><div><img src="https://mc.yandex.ru/watch/100514379" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
 
     
 
@@ -1206,7 +1128,7 @@
             <div class="row">
                 <div class="col-12 col-md-6 col-lg-4">
                     <h3 class="h5 fw-bold mb-4 mt-5 mt-lg-5">О нас</h3>
-                    <p class="mb-0 font-small pe-lg-5">NatalnayaCarta.store - сервис заказа натальных карт. Заказать натальную карту и получить в течение нескольких часов проще всего с NatalnayaCarta.store </p>
+                    <p class="mb-0 font-small pe-lg-5">BestAstrolog.ru - сервис заказа натальных карт. Заказать натальную карту и получить в течение нескольких часов проще всего с BestAstrolog.ru </p>
                                     </div>
 
                 <div class="col-12 col-md-12 col-lg-4">
