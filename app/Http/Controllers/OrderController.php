@@ -80,6 +80,7 @@ class OrderController extends BaseController
         ]);
 
         $validator = Validator::make($request->all(), [
+            'product_id' => 'required|exists:products,id',
             'email' => 'required|email|max:255',
             'gender' => 'required|in:male,female',
             'birth_date' => 'required|date',
@@ -89,7 +90,8 @@ class OrderController extends BaseController
 
         if ($validator->fails()) {
             Log::error('Order validation failed', [
-                'errors' => $validator->errors()->toArray()
+                'errors' => $validator->errors()->toArray(),
+                'input_data' => $request->except(['g-recaptcha-response', '_token'])
             ]);
             
             return back()

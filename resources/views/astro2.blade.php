@@ -309,7 +309,7 @@
                     <form id="orderForm" method="POST" action="{{ route('orders.store') }}">
                         @csrf
                         <!-- Добавьте скрытое поле product_id -->
-                        <input type="hidden" name="product_id" value="1">
+                        <input type="hidden" name="product_id" id="productId" value="1">
                         <div class="mb-3">
                             <label for="email" class="form-label">Email*</label>
                             <input type="email" class="form-control bg-dark text-white border-secondary" id="email" name="email" required>
