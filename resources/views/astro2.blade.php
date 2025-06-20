@@ -153,7 +153,7 @@
     </style>
 
     <!-- В секции head добавляем скрипт reCAPTCHA v3 -->
-    @if(!config('robokassa.test_mode'))
+    @if(!config('recaptcha.test_mode'))
         <script src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.site_key') }}"></script>
     @endif
 </head>
@@ -308,7 +308,8 @@
                     
                     <form id="orderForm" method="POST" action="{{ route('orders.store') }}">
                         @csrf
-                        <input type="hidden" name="product_id" id="productId">
+                        <!-- Добавьте скрытое поле product_id -->
+                        <input type="hidden" name="product_id" id="productId" value="1">
                         <div class="mb-3">
                             <label for="email" class="form-label">Email*</label>
                             <input type="email" class="form-control bg-dark text-white border-secondary" id="email" name="email" required>
@@ -342,7 +343,7 @@
                             <label for="birthCity" class="form-label">Место рождения*</label>
                             <input type="text" class="form-control bg-dark text-white border-secondary" id="birthCity" name="birth_city" required>
                         </div>
-                        @if(!config('robokassa.test_mode'))
+                        @if(!config('recaptcha.test_mode'))
                             <input type="hidden" name="g-recaptcha-response" id="recaptchaResponse">
                         @endif
                         
@@ -1170,22 +1171,6 @@
         return emailRegex.test(email);
     }
 
-    // Добавляем слушатель для формы
-    document.getElementById('orderForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const emailInput = document.getElementById('email');
-        
-        // Проверка email
-        if (!validateEmail(emailInput.value)) {
-            emailInput.classList.add('is-invalid');
-            return false;
-        }
-        
-        // Если email валиден, отправляем форму
-        emailInput.classList.remove('is-invalid');
-        this.submit();
-    });
 
     // Добавляем слушатель для валидации email при вводе
     document.getElementById('email').addEventListener('input', function() {
@@ -1212,7 +1197,7 @@
         document.getElementById('orderForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            @if(!config('robokassa.test_mode'))
+            @if(!config('recaptcha.test_mode'))
                 grecaptcha.ready(function() {
                     grecaptcha.execute('{{ config("services.recaptcha.site_key") }}', {action: 'submit'})
                     .then(function(token) {
