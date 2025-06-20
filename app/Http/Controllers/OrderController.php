@@ -148,6 +148,7 @@ class OrderController extends BaseController
     public function storeAjax(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'product_id' => 'required|exists:products,id',
             'email' => 'required|email|max:255',
             'gender' => 'required|in:male,female',
             'birth_date' => 'required|date',

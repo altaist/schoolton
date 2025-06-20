@@ -460,7 +460,7 @@
             </div>
             <div class="mt-4 text-center">
               <div class="group">
-                          <button class="rounded-pill btn btn-lg custom-btn-primary primary-btn-effect" data-bs-toggle="modal" data-bs-target="#orderModal">ЗАКАЗАТЬ ЗА 1 МИНУТУ</button>
+                          <button class="rounded-pill btn btn-lg custom-btn-primary primary-btn-effect" data-bs-toggle="modal" data-bs-target="#orderModal" data-product-id="1">ЗАКАЗАТЬ ЗА 1 МИНУТУ</button>
               </div>
             </div>
         </div>
@@ -1114,7 +1114,7 @@
                         <p class="h5 fw-bold theme-text-accent-two mb-0"></p>
                         <div class="group mt-5">
                         <div class="group">
-                        <button class="rounded-pill btn btn-lg custom-btn-primary primary-btn-effect" data-bs-toggle="modal" data-bs-target="#orderModal">ЗАКАЗАТЬ ЗА 1 МИНУТУ</button>
+                        <button class="rounded-pill btn btn-lg custom-btn-primary primary-btn-effect" data-bs-toggle="modal" data-bs-target="#orderModal" data-product-id="1">ЗАКАЗАТЬ ЗА 1 МИНУТУ</button>
                         </div>
                         </div>
                     </div>
@@ -1219,7 +1219,7 @@
         
         orderModal.addEventListener('show.bs.modal', function(event) {
             const button = event.relatedTarget;
-            const productId = button.getAttribute('data-product-id');
+            const productId = button.getAttribute('data-product-id') || '1'; // Fallback на ID=1
             productIdInput.value = productId;
             
             // Проверка возможности заказа
