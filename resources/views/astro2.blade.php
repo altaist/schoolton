@@ -5,6 +5,7 @@
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Создать натальную карту онлайн</title>
     
 <!-- Yandex.Metrika counter -->
@@ -1217,31 +1218,29 @@
                 }
             })
             .then(response => {
-                if (response.ok) {
-                    return response.text();
-                }
-                throw new Error('Network response was not ok');
-            })
-            .then(data => {
-                // Проверяем, является ли ответ редиректом
-                if (data.includes('order.show') || data.includes('/order/')) {
-                    // Если это HTML страница заказа, переходим на неё
-                    window.location.href = '/order/' + extractOrderIdFromResponse(data);
+                if (response.redirected) {
+                    // Если сервер вернул редирект, следуем за ним
+                    window.location.href = response.url;
+                } else if (response.ok) {
+                    // Если ответ успешный, перезагружаем страницу или показываем сообщение
+                    return response.text().then(data => {
+                        // Проверяем, содержит ли ответ URL заказа
+                        var orderMatch = data.match(/\/order\/[a-f0-9\-]+/);
+                        if (orderMatch) {
+                            window.location.href = orderMatch[0];
+                        } else {
+                            // Если не можем определить редирект, перезагружаем
+                            window.location.reload();
+                        }
+                    });
                 } else {
-                    // Если это редирект, следуем ему
-                    window.location.reload();
+                    throw new Error('Network response was not ok');
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
                 alert('Произошла ошибка при отправке заказа');
             });
-        }
-        
-        function extractOrderIdFromResponse(html) {
-            // Попытаемся извлечь ID заказа из ответа
-            var match = html.match(/order\/([a-f0-9\-]+)/);
-            return match ? match[1] : '';
         }
     </script>
 
