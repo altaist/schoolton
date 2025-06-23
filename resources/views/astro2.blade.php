@@ -343,6 +343,7 @@
                             <label for="birthCity" class="form-label">Место рождения*</label>
                             <input type="text" class="form-control bg-dark text-white border-secondary" id="birthCity" name="birth_city" required>
                         </div>
+                        
                         @if(!config('recaptcha.test_mode'))
                             <input type="hidden" name="g-recaptcha-response" id="recaptchaResponse">
                         @endif
@@ -1193,6 +1194,7 @@
         }
     </script>
 
+    <!-- reCAPTCHA v3 обработка формы -->
     <script>
         document.getElementById('orderForm').addEventListener('submit', function(e) {
             e.preventDefault();
