@@ -1188,18 +1188,61 @@
         document.getElementById('orderForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            @if(!config('recaptcha.test_mode'))
+            var testMode = @json(config('recaptcha.test_mode'));
+            var siteKey = @json(config('services.recaptcha.site_key'));
+            
+            if (!testMode) {
                 grecaptcha.ready(function() {
-                    grecaptcha.execute('{{ config("services.recaptcha.site_key") }}', {action: 'submit'})
+                    grecaptcha.execute(siteKey, {action: 'submit'})
                     .then(function(token) {
                         document.getElementById('recaptchaResponse').value = token;
-                        e.target.submit();
+                        // Используем XMLHttpRequest вместо обычной отправки формы
+                        submitFormWithAjax(e.target);
                     });
                 });
-            @else
-                this.submit();
-            @endif
+            } else {
+                // В тестовом режиме отправляем форму напрямую
+                submitFormWithAjax(e.target);
+            }
         });
+        
+        function submitFormWithAjax(form) {
+            var formData = new FormData(form);
+            
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.text();
+                }
+                throw new Error('Network response was not ok');
+            })
+            .then(data => {
+                // Проверяем, является ли ответ редиректом
+                if (data.includes('order.show') || data.includes('/order/')) {
+                    // Если это HTML страница заказа, переходим на неё
+                    window.location.href = '/order/' + extractOrderIdFromResponse(data);
+                } else {
+                    // Если это редирект, следуем ему
+                    window.location.reload();
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Произошла ошибка при отправке заказа');
+            });
+        }
+        
+        function extractOrderIdFromResponse(html) {
+            // Попытаемся извлечь ID заказа из ответа
+            var match = html.match(/order\/([a-f0-9\-]+)/);
+            return match ? match[1] : '';
+        }
     </script>
 
     <!-- Добавляем JavaScript для обработки выбора продукта -->
@@ -1207,6 +1250,7 @@
     document.addEventListener('DOMContentLoaded', function() {
         const orderModal = document.getElementById('orderModal');
         const productIdInput = document.getElementById('productId');
+        var disableOrders = @json(env('DISABLE_ORDERS', false));
         
         orderModal.addEventListener('show.bs.modal', function(event) {
             const button = event.relatedTarget;
@@ -1214,17 +1258,23 @@
             productIdInput.value = productId;
             
             // Проверка возможности заказа
-            @if(env('DISABLE_ORDERS', false))
+            if (disableOrders) {
                 // Скрываем форму заказа
                 document.getElementById('orderForm').style.display = 'none';
                 // Показываем сообщение о невозможности заказа
-                document.getElementById('orderDisabledMessage').style.display = 'block';
-            @else
+                var disabledMessage = document.getElementById('orderDisabledMessage');
+                if (disabledMessage) {
+                    disabledMessage.style.display = 'block';
+                }
+            } else {
                 // Показываем форму заказа
                 document.getElementById('orderForm').style.display = 'block';
                 // Скрываем сообщение о невозможности заказа
-                document.getElementById('orderDisabledMessage').style.display = 'none';
-            @endif
+                var disabledMessage = document.getElementById('orderDisabledMessage');
+                if (disabledMessage) {
+                    disabledMessage.style.display = 'none';
+                }
+            }
         });
     });
     </script>
