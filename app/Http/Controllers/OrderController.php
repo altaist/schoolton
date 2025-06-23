@@ -54,7 +54,7 @@ class OrderController extends BaseController
         ]);
         
         // Проверяем reCAPTCHA только если не тестовый режим
-        if (!config('robokassa.test_mode')) {
+        if (!config('recaptcha.test_mode')) {
             $recaptcha = $request->input('g-recaptcha-response');
             
             $url = 'https://www.google.com/recaptcha/api/siteverify';
