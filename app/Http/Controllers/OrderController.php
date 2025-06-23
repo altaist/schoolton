@@ -46,6 +46,13 @@ class OrderController extends BaseController
 
     public function store(Request $request)
     {
+        Log::info('=== ORDER CONTROLLER STORE METHOD CALLED ===', [
+            'timestamp' => now(),
+            'method' => $request->method(),
+            'url' => $request->fullUrl(),
+            'user_agent' => $request->userAgent()
+        ]);
+        
         // Проверяем reCAPTCHA только если не тестовый режим
         if (!config('robokassa.test_mode')) {
             $recaptcha = $request->input('g-recaptcha-response');

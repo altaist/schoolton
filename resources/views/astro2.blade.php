@@ -1186,29 +1186,65 @@
 
     <!-- reCAPTCHA v3 обработка формы -->
     <script>
-        document.getElementById('orderForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+        console.log('Form script loaded');
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, looking for form...');
+            
+            var form = document.getElementById('orderForm');
+            if (!form) {
+                console.error('Form orderForm not found!');
+                return;
+            }
+            console.log('Form found:', form);
             
             var testMode = @json(config('recaptcha.test_mode'));
             var siteKey = @json(config('services.recaptcha.site_key'));
             
-            if (!testMode) {
-                grecaptcha.ready(function() {
-                    grecaptcha.execute(siteKey, {action: 'submit'})
-                    .then(function(token) {
-                        document.getElementById('recaptchaResponse').value = token;
-                        // Используем XMLHttpRequest вместо обычной отправки формы
-                        submitFormWithAjax(e.target);
+            console.log('Config:', {testMode: testMode, siteKey: siteKey});
+            
+            form.addEventListener('submit', function(e) {
+                console.log('Form submit event triggered');
+                e.preventDefault();
+                
+                if (!testMode) {
+                    console.log('Not test mode, checking grecaptcha...');
+                    if (typeof grecaptcha === 'undefined') {
+                        console.error('grecaptcha is not loaded!');
+                        alert('reCAPTCHA не загружена. Попробуйте обновить страницу.');
+                        return;
+                    }
+                    
+                    grecaptcha.ready(function() {
+                        console.log('grecaptcha ready, executing...');
+                        grecaptcha.execute(siteKey, {action: 'submit'})
+                        .then(function(token) {
+                            console.log('reCAPTCHA token received:', token.substring(0, 20) + '...');
+                            document.getElementById('recaptchaResponse').value = token;
+                            submitFormWithAjax(e.target);
+                        })
+                        .catch(function(error) {
+                            console.error('reCAPTCHA error:', error);
+                            alert('Ошибка reCAPTCHA: ' + error.message);
+                        });
                     });
-                });
-            } else {
-                // В тестовом режиме отправляем форму напрямую
-                submitFormWithAjax(e.target);
-            }
+                } else {
+                    console.log('Test mode, submitting directly');
+                    submitFormWithAjax(e.target);
+                }
+            });
         });
         
         function submitFormWithAjax(form) {
+            console.log('Submitting form via AJAX...');
             var formData = new FormData(form);
+            
+            // Выводим данные формы для отладки
+            for (var pair of formData.entries()) {
+                if (pair[0] !== 'g-recaptcha-response') {
+                    console.log(pair[0] + ': ' + pair[1]);
+                }
+            }
             
             fetch(form.action, {
                 method: 'POST',
@@ -1218,28 +1254,30 @@
                 }
             })
             .then(response => {
+                console.log('Response received:', response.status, response.statusText);
                 if (response.redirected) {
-                    // Если сервер вернул редирект, следуем за ним
+                    console.log('Response is redirected to:', response.url);
                     window.location.href = response.url;
                 } else if (response.ok) {
-                    // Если ответ успешный, перезагружаем страницу или показываем сообщение
+                    console.log('Response is OK, getting text...');
                     return response.text().then(data => {
-                        // Проверяем, содержит ли ответ URL заказа
+                        console.log('Response data length:', data.length);
                         var orderMatch = data.match(/\/order\/[a-f0-9\-]+/);
                         if (orderMatch) {
+                            console.log('Found order URL:', orderMatch[0]);
                             window.location.href = orderMatch[0];
                         } else {
-                            // Если не можем определить редирект, перезагружаем
+                            console.log('No order URL found, reloading page');
                             window.location.reload();
                         }
                     });
                 } else {
-                    throw new Error('Network response was not ok');
+                    throw new Error('Network response was not ok: ' + response.status);
                 }
             })
             .catch(error => {
-                console.error('Error:', error);
-                alert('Произошла ошибка при отправке заказа');
+                console.error('AJAX Error:', error);
+                alert('Произошла ошибка при отправке заказа: ' + error.message);
             });
         }
     </script>
