@@ -100,8 +100,15 @@ class OrderController extends BaseController
         }
 
         try {
+            Log::info('Creating order - step 1: Finding product', ['product_id' => $request->product_id]);
+            
             $product = Product::findOrFail($request->product_id);
+            
+            Log::info('Creating order - step 2: Product found', ['product' => $product->toArray()]);
+            
             $expiresAt = now()->addMinutes((int)config('robokassa.wait_time'))->setTimezone('UTC');
+            
+            Log::info('Creating order - step 3: Calculated expires_at', ['expires_at' => $expiresAt]);
             
             $order = Order::create([
                 'order_id' => (string) Str::uuid(),
@@ -116,12 +123,34 @@ class OrderController extends BaseController
                 'expires_at' => $expiresAt
             ]);
 
-            Mail::to($order->email)->send(new OrderCreatedNotification($order));
+            Log::info('Creating order - step 4: Order created successfully', [
+                'order_id' => $order->id,
+                'uuid' => $order->order_id
+            ]);
+
+            // Пытаемся отправить email, но не прерываем процесс если не получится
+            try {
+                Log::info('Creating order - step 5: Attempting to send email');
+                Mail::to($order->email)->send(new OrderCreatedNotification($order));
+                Log::info('Creating order - step 6: Email sent successfully');
+                $emailSent = true;
+            } catch (\Exception $emailError) {
+                Log::warning('Creating order - step 6: Email sending failed', [
+                    'error' => $emailError->getMessage(),
+                    'order_id' => $order->id
+                ]);
+                $emailSent = false;
+            }
 
             Log::info('Order created successfully', [
                 'order_id' => $order->id,
                 'uuid' => $order->order_id,
-                'email_sent' => true
+                'email_sent' => $emailSent
+            ]);
+
+            Log::info('Creating order - step 7: Redirecting to order page', [
+                'redirect_route' => 'order.show',
+                'order_uuid' => $order->order_id
             ]);
 
             return redirect()->route('order.show', ['orderId' => $order->order_id]);
@@ -129,7 +158,8 @@ class OrderController extends BaseController
         } catch (\Exception $e) {
             Log::error('Order creation error', [
                 'error' => $e->getMessage(),
-                'trace' => $e->getTraceAsString()
+                'trace' => $e->getTraceAsString(),
+                'input_data' => $request->except(['g-recaptcha-response', '_token'])
             ]);
 
             return back()
