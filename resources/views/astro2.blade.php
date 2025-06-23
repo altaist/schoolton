@@ -1183,17 +1183,6 @@
     });
     </script>
 
-    <!-- Перемещаем скрипт reCAPTCHA и инициализацию перед закрывающим тегом body -->
-    <script src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=explicit" async defer></script>
-    <script>
-        function onRecaptchaLoad() {
-            grecaptcha.render('recaptcha-container', {
-                'sitekey': '{{ config('services.recaptcha.site_key') }}',
-                'theme': 'dark'
-            });
-        }
-    </script>
-
     <!-- reCAPTCHA v3 обработка формы -->
     <script>
         document.getElementById('orderForm').addEventListener('submit', function(e) {
